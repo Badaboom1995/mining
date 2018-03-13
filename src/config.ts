@@ -18,3 +18,11 @@ export const AWS_PLATFORM_APPLICATION_ARN = {
   ios: process.env.AWS_PLATFORM_OSX_APPLICATION_ARN || 'arn:aws:sns:us-west-2:279123992655:app/APNS_SANDBOX/CardHolder'
 };
 export const AWS_S3_BUCKET = process.env.AWS_S3_BUCKET || 'cardholder-images';
+
+export const BLOCK_IO_KEY = process.env.BLOCK_IO_KEY || '5014-0ec6-d237-d28d';
+export const BLOCK_IO_SECRET = process.env.BLOCK_IO_SECRET || 'newbabylon';
+export const BLOCK_IO_VERSION = process.env.BLOCK_IO_VERSION || 2;
+
+export const ADVCASH_EMAIL = process.env.ADVCASH_EMAIL || '5014-0ec6-d237-d28d';
+export const ADVCASH_ORGANIZATION = process.env.ADVCASH_ORGANIZATION || 'newbabylon';
+export const ADVCASH_SECRET = process.env.ADVCASH_SECRET || 2;
