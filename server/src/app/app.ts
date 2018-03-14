@@ -6,10 +6,11 @@ import * as path from 'path';
 import * as bodyParser from 'body-parser';
 import * as cookieParser from 'cookie-parser';
 import * as expressDevice from 'express-device';
-
+import * as cors from 'cors';
 import { SESSION_SECRET } from '../config';
 
 const expressApp: express.Application = express();
+expressApp.use(cors());
 expressApp.set('views', path.join(__dirname, 'views'));
 expressApp.set('view engine', 'ejs');
 expressApp.set('layout', '_layout');

@@ -1,4 +1,4 @@
-import { observable } from 'mobx';
+import { observable, action } from 'mobx';
 import { ValidationError } from '../../validation/models/validation-error';
 import { autobind } from 'core-decorators';
 
@@ -40,6 +40,7 @@ export class AuthModel {
 	 * Setter for fields
 	 */
 	@autobind		
+	@action
 	public set ({name, value}) {
 		this[name] = value;
 	}

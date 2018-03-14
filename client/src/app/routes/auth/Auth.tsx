@@ -5,9 +5,10 @@ import { Registration } from './registration/Registration';
 import { SendReset } from './send-reset/SendReset';
 import { ResetPassword } from './reset-password/ResetPassword';
 import { Card } from '../../components/card/Card';
+import { withRouter } from '../../services/index';
 
 
-
+@withRouter
 export class Auth extends React.Component<IAuthProps> {
 	/**
 	 * Renders auth wrapper
