@@ -13,11 +13,11 @@
 			@include size(28px);
 			margin-right: 20px;
 			border-radius: 5px;
-			background: #1d8dc3;
+			background: $blue;
 		}
 		&-title {
 			font-size: 18px;
-			color: #1d8dc3;
+			color: $blue;
 
 		}
 	}

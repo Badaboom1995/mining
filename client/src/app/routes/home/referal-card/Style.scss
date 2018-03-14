@@ -1,0 +1,45 @@
+.referal-card {
+  width: 470px;
+  min-height: 200px;
+  padding: 17px 20px;
+  margin-bottom: 41px;
+  &__title {
+    margin-bottom: 15px;
+    font-size: 22px;
+    font-weight: 400;
+    color: #1e8dc3;
+  }
+  &__link {
+    @extend .flex-centered;
+    width: 309px;
+    height: 40px;
+    margin-right: 17px;
+    font-size: 18px;
+    color: $lightblue;
+    border-radius: 5px;
+    border: 1px solid $blue;
+    background-color: rgba(#f6f9fd, 0.5);
+    &-form {
+      @extend .flex-row;
+      margin-bottom: 20px;
+    }
+  }
+  &__copy-button {
+    height: 40px;
+  }
+  &__stats {
+    @extend .flex-row;
+    justify-content: space-between;
+    padding-top: 15px;
+    color: $blue;
+    border-top: 1px solid $blue;
+  }
+  &__stat {
+    font-size: 15px;
+  }
+  &__separator-title {
+    margin-bottom: 20px;
+    color: #4a4a4a;
+    font-size: 15px;
+  }
+}

@@ -21,7 +21,6 @@ import './styles/main.scss';
 ReactDOM.render(
 	<Provider
 		routing={routingService}
-		settings={settingsService}
 		account={accountService}
 		ui={uiService}
 		auth={authService}

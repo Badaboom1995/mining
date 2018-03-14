@@ -23,7 +23,7 @@
 	}
 	&__icon {
 		@include size(40px);
-		background-color: #1d8dc3;
+		background-color: $blue;
 		border-radius: 5px;
 	}
 }
@@ -37,13 +37,13 @@ $grid-columns: 163px 120px 88px 88px 105px 144px 108px 90px;
 	}
 	&__header {
 		height: 38px;
-		border-bottom: 1px solid #1d8dc3;
+		border-bottom: 1px solid $blue;
 		&>div {
 			@extend .flex-centered;
 			justify-content: flex-start;
 			padding-left: 12px;
 			height: 100%;
-			color: #1d8dc3;
+			color: $blue;
 		}
 	}
 	&__row {
