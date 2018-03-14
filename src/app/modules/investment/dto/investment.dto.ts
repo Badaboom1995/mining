@@ -12,7 +12,11 @@ import {
 
 import { ApiModelProperty } from '@nestjs/swagger';
 
-export class AddInvestitionDto {
+export class CreateInvestmentDto {
+  @IsNotEmpty()
+  @IsEnum(['mining', 'pool'])
+  @ApiModelProperty()
+  type: string;
   @IsNotEmpty()
   @Transform(x => +x)
   @IsNumber()
@@ -20,8 +24,20 @@ export class AddInvestitionDto {
   price: number
 }
 
-export class RemoveInvestitionDto {
+export class GetInvestmentDto {
   @IsNotEmpty()
   @ApiModelProperty()
-  list: string[];
+  id: string;
+}
+
+export class ProcessAdvcashPaymentDto {
+  @IsNotEmpty()
+  @IsEnum(['mining', 'pool'])
+  @ApiModelProperty()
+  type: string;
+  @IsNotEmpty()
+  @Transform(x => +x)
+  @IsNumber()
+  @ApiModelProperty()
+  price: number
 }
