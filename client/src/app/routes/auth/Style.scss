@@ -1,0 +1,31 @@
+
+
+.auth {
+	@extend .flex-centered;
+	min-width: 100vw;
+	min-height: 100vh;
+	background-image: linear-gradient(-41deg, #21b8f5 0%, #00c8d5 100%);
+}
+
+
+.auth-form {
+	width: 430px;
+	padding: 35px 20px;
+	background: #fff;
+	&__title {
+		@extend .flex-centered;
+		margin: 0;
+		margin-bottom: 30px;
+		font-size: 24px;
+		font-weight: 400;
+		
+	}
+}
+
+
+@import './login/Style.scss';
+@import './reset-password/Style.scss';
+@import './send-reset/Style.scss';
+@import './registration/Style.scss';
+
+

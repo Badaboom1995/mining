@@ -1,0 +1,23 @@
+
+
+.send-reset-form {
+	.field {
+		margin-bottom: 10px;
+	}
+	&__footer {
+		display: flex;
+		justify-content: space-between;
+		padding-top: 20px;
+		a {
+			display: block;
+			color: $lightblue;
+			font-size: 12px;
+			&:first-of-type {
+				margin-bottom: 6px;
+			}
+			&:focus {
+				color: $turquoise;
+			}
+		}
+	}
+}

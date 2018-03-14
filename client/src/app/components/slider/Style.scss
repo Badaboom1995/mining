@@ -1,0 +1,20 @@
+
+
+.slider {
+	.rc-slider {
+
+		&-rail, &-track {
+			height: 8px;
+			background: #d3f1fd;
+			border-radius: 6px;
+		}
+		&-handle {
+			margin-top: -3px;
+			background: #21b8f5;
+			border: 3px solid #fff;
+			box-shadow: 0 0 15px 0 rgba(#000, 0.2);
+		}
+	}	
+
+
+}

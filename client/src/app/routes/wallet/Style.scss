@@ -1,0 +1,165 @@
+
+
+
+.wallet {
+	&__content {
+		display: flex;
+	}
+	&__form {
+		margin-right: 37px;
+	}
+}
+
+
+.wallet-invest {
+	width: 470px;
+	min-height: 329px;
+	margin-bottom: 28px;
+	padding: 13px 26px;
+	color: #fff;
+	background-image: linear-gradient(135deg, #6d74ff 0%, #084bea 100%, #c86dd7 100%);
+	&__title {
+		margin-bottom: 24px;
+		font-size: 22px;
+	}
+	&__days {
+		margin-bottom: 20px;
+		font-size: 55px;
+		font-weight: 300;
+		text-align: right;
+	}
+	&__reinvest-caption {
+		margin-bottom: 15px;
+		font-size: 18px;
+	}
+	&__radios {
+		@extend .flex-row;
+		margin-bottom: 20px;
+		.radio {
+			margin-right: 20px;
+		}
+	}
+	&__reinvest-selection {
+		display: flex;
+		align-items: flex-start;
+		margin-bottom: 38px;
+		&-caption {
+			margin-right: 18px;
+			font-size: 18px;
+			font-weight: 400;
+		}
+	}
+}
+
+
+.wallet-withdraw {
+	width: 470px;
+	min-height: 131px;
+}
+
+
+.wallet-stats {
+	width: 470px;
+	min-height: 488px;
+	padding: 17px 34px;
+	&__table-wrapper {
+		max-height: 335px;
+		margin-bottom: 14px;
+		overflow-y: auto;
+	}
+	&__title {
+		margin-bottom: 15px;
+		font-size: 22px;
+		font-weight: 300;
+		color: #1e8dc3;
+	}
+	&__total {
+		padding-top: 10px;
+		font-size: 18px;
+		line-height: 28px;
+		font-weight: 300;
+		color: #1e8dc3;
+		border-top: 1px solid #1e8dc3;
+	}
+	&__earnings {
+
+	}
+	&__sell {
+
+	}
+}
+
+
+
+
+.wallet-stats-table {
+	width: 100%;
+	border-collapse: collapse;
+	&__border-wrapper {
+		width: 402px;
+		min-height: 100%;
+		border: 1px solid #1d8dc3;
+		border-radius: 5px 5px 0 0;
+
+	}
+	&__header {
+		border-radius: 5px;
+		overflow: hidden;
+		th {
+			padding: 10px;
+			text-align: center;
+			color: #1e8dc3;
+			border-bottom: 1px solid #1d8dc3;
+			background-color: rgba(29, 141, 195, 0.1);
+		}
+		tr th:not(:last-of-type) {
+			border-right: 1px solid #1d8dc3;
+		}
+	}
+	&__body {
+		td {
+
+			min-width: 33.3%;
+			padding: 8px 0;
+			font-size: 16px;
+			font-weight: 300;
+			text-align: center;
+			color: #1e8dc3;
+
+		}
+		tr:first-of-type td {
+			padding-top: 20px;
+		}
+		tr:last-of-type td {
+			padding-bottom: 20px;
+		}
+		tr td:not(:last-of-type) {
+			border-right: 1px solid #1d8dc3;
+		}
+	}
+}
+
+
+.wallet-withdraw {
+	padding: 12px 26px;
+	&__title {
+		margin-bottom: 25px;
+		font-size: 22px;
+		font-weight: 400;
+		color: #1e8dc3;
+	}
+	&__field {
+		margin-right: 15px;
+		.field__input {
+			height: 40px;
+			text-align: center;
+		}
+	}
+	&__form {
+		@extend .flex-row;
+		justify-content: space-between;
+	}
+	&__button {
+		height: 40px;
+	}
+}

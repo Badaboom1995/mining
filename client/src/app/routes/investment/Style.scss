@@ -1,0 +1,104 @@
+@import './miner-product/Style.scss';
+@import './info-block/Style.scss';
+.investment {
+	&__title {
+		margin-bottom: 12px;
+	}
+	&__miner-title {
+		margin-bottom: 20px;
+		font-size: 20px;
+		font-weight: 400;
+		color: #1e8dc3;
+	}
+	&__products {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-start;
+		margin-bottom: 30px;
+		.investment-miner-product:not(:nth-of-type(2n)) {
+			margin-right: 35px;
+		}
+	}
+	&__info {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-start;
+		margin-bottom: 35px;
+		.investment-info-block:not(:nth-of-type(3n)) {
+			margin-right: 23px;
+		}
+	}
+	&__values {
+		display: flex;
+		padding: 23px 20px 30px 25px;
+	}
+	&__invest-pool {
+		max-width: 977px;
+	}
+}
+
+.investment-pool-tip {
+	min-height: 141px;
+	padding: 17px 25px;
+	padding-bottom: 25px;
+	font-weight: 400;
+	color: #fff;
+	background-image: linear-gradient(48deg, #4ac0ff 0%, #2d6fd0 100%);
+	&__title {
+		margin-bottom: 15px;
+		font-size: 24px;
+		font-weight: 400;
+		line-height: 30px;
+	}
+	&__text {
+		font-size: 18px;
+		line-height: 1.3;
+	}
+}
+
+.investment-pool-participation {
+	width: 444px;
+	padding: 18px;
+	margin-right: 37px;
+	&__title {
+		margin-bottom: 39px;
+		font-size: 22px;
+		font-weight: 400;
+		text-align: center;
+		color: #1e8dc3;
+	}
+	&__slider-block {
+		margin-bottom: 57px;
+	}
+	&__price {
+		margin: 10px 0;
+		font-size: 30px;
+		font-weight: 300;
+		color: #1e8dc3;
+	}
+	&__button {
+		width: 187px;
+		height: 40px;
+		margin: 0 auto;
+	}
+}
+
+.investment-pool-revenue {
+	width: 451px;
+	padding: 10px 20px 10px 27px;
+	&--monthly {
+		margin-bottom: 20px;
+	}
+	&__title {
+		color: #1e8dc3;
+		font-size: 22px;
+		font-weight: 400;
+	}
+	&__slider-block {}
+	&__price {
+		margin: 10px 0;
+		font-size: 30px;
+		font-weight: 300;
+		color: #1e8dc3;
+	}
+}

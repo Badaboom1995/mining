@@ -1,0 +1,29 @@
+
+
+
+.field {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	&__label {
+
+		margin-bottom: 5px;
+		font-size: 15px;
+		color: #7D7D7D;
+	}
+	&__input {
+		width: auto;
+		height: 35px;
+		padding: 0 15px;
+		font-size: 15px;
+		color: #1E8DC3;
+		background: #F5F5F5;
+		border: 1px solid #DEDEDE;
+		border-radius: 3px;
+		outline: none;
+		transition: 0.4s;
+		&:focus {
+			border-color: $lightblue;
+		}
+	}	
+}

@@ -1,0 +1,18 @@
+.button {
+	@extend .flex-centered;
+	padding: 0 20px;
+	height: 34px;
+	font-size: 15px;
+	color: #fff;
+	background: #21b8f5;
+	transition: 0.4s;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	&:hover {
+		background: #49c9fd;
+	}
+	&:focus {
+		background: #279fd1;
+	}
+}

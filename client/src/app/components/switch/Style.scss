@@ -1,0 +1,36 @@
+
+
+.switch {
+	@extend .flex-row;
+	align-items: flex-start;
+	&__bar {
+		position: relative;
+		width: 40px;
+		height: 19px;
+		background: #D8D8D8;
+		border-radius: 50px;
+		&--on {
+			background: $turquoise;
+		}
+	}
+	&__toggle {
+		position: absolute;
+		left: 1.5px;
+		top: 1.5px;
+		width: 15px;
+		height: 15px;
+		background: #fff;
+		border-radius: 50%;
+		transition: 0.4s;
+		cursor: pointer;
+		&--on {
+			left: calc(100% - 16.5px);
+		}
+	}
+	&__label {
+		margin-left: 10px;
+		font-size: 15px;
+		color: #1E8DC3;
+		cursor: pointer;
+	}
+}

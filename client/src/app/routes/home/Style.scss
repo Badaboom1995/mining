@@ -1,0 +1,189 @@
+.home {
+	&__banners {
+		@extend .flex-row;
+		flex-wrap: wrap;
+		margin-bottom: 30px;
+		color: #fff;
+	}
+	&__referals {
+		@extend .flex-row;
+		.home-referal {
+			&:not(:nth-of-type(2n)) {
+				margin-right: 37px;
+			}
+		}
+	}
+	&__data-row {
+		display: flex;
+		flex-wrap: wrap;
+		.home-data-block:not(:nth-of-type(3n)) {
+			margin-right: 24px;
+		}
+	}
+}
+
+.home-monthly-banner {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 470px;
+	min-height: 140px;
+	margin-right: 36px;
+	padding: 12px 20px;
+	background-image: linear-gradient(-41deg, #74f5ab 0%, #00c8d5 100%);
+	border-radius: 5px;
+	&__title {
+		font-size: 24px;
+	}
+	&__bottom-line {
+		@extend .flex-row;
+		justify-content: space-between;
+		align-items: flex-end;
+	}
+	&__invested {
+		font-size: 18px;
+	}
+	&__revenue {
+		font-size: 50px;
+		font-weight: 300;
+	}
+}
+
+.home-current-coin-banner {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 470px;
+	min-height: 140px;
+	padding: 12px 20px;
+	background-image: linear-gradient(-58deg, #21b8f5 0%, #21d3d5 100%);
+	border-radius: 5px;
+	&__caption {
+		font-size: 22px;
+	}
+	&__price {
+		font-size: 60px;
+	}
+}
+
+.home-referal {
+	width: 470px;
+	min-height: 200px;
+	padding: 17px 20px;
+	margin-bottom: 41px;
+	&__title {
+		margin-bottom: 15px;
+		font-size: 22px;
+		font-weight: 400;
+		color: #1e8dc3;
+	}
+	&__link {
+		@extend .flex-centered;
+		width: 309px;
+		height: 40px;
+		margin-right: 17px;
+		font-size: 18px;
+		color: $lightblue;
+		border-radius: 5px;
+		border: 1px solid #1d8dc3;
+		background-color: rgba(#f6f9fd, 0.5);
+		&-form {
+			@extend .flex-row;
+			margin-bottom: 20px;
+		}
+	}
+	&__copy-button {
+		height: 40px;
+	}
+	&__stats {
+		@extend .flex-row;
+		justify-content: space-between;
+		padding-top: 15px;
+		color: #1d8dc3;
+		border-top: 1px solid #1d8dc3;
+	}
+	&__stat {
+		font-size: 15px;
+	}
+	&__separator-title {
+		margin-bottom: 20px;
+		color: #4a4a4a;
+		font-size: 15px;
+	}
+}
+
+.home-data-block {
+	width: 310px;
+	min-height: 358px;
+	padding: 18px 20px;
+	color: #fff;
+	&--status {
+		background-color: #93c2f1;
+	}
+	&--wallet {
+		background-color: #63ded9;
+	}
+	&--investment {
+		background-color: #2fbefe;
+	}
+	&__header {
+		@extend .flex-row;
+		margin-bottom: 30px;
+		&-icon {
+			@include size(30px);
+			margin-right: 13px;
+			background: #fff;
+			border-radius: 5px;
+		}
+	}
+	&__title {}
+	&__content {
+		min-height: 210px;
+	}
+	&__button {
+		@extend .flex-centered;
+		width: 100%;
+		height: 48px;
+		border: 1px solid #fff;
+		border-radius: 100px;
+		background: rgba(#fff, 0.1);
+		cursor: pointer;
+	}
+}
+
+.home-user-status {
+	&__name {
+		margin-bottom: 5px;
+		font-size: 48px;
+		line-height: 1.4;
+	}
+	&__sub-name {
+		margin-bottom: 48px;
+		font-size: 18px;
+	}
+	&__credits,
+	&__investments {
+		font-size: 18px;
+	}
+	&__investments {
+		margin-top: 4px;
+	}
+}
+
+.home-user-wallet {
+	font-size: 18px;
+	&__balance {
+		margin-bottom: 30px;
+		font-size: 60px;
+	}
+}
+
+.home-user-investment {
+	&__amount {
+		margin-bottom: 29px;
+		font-size: 60px;
+	}
+	&__closed {
+		margin-bottom: 25px;
+	}
+}

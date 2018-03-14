@@ -1,0 +1,136 @@
+.my-team {
+	&__content {
+		padding: 28px 22px;
+		&-title {
+			margin-bottom: 13px;
+			font-size: 22px;
+			font-weight: 400;
+			color: #1e8dc3;
+		}
+	}
+}
+
+.my-team-search {
+	@extend .flex-row;
+	margin-bottom: 31px;
+	&__field {
+		width: 309px;
+		margin-right: 10px;
+		.field__input {
+			height: 40px;
+			text-align: center;
+		}
+	}
+	&__icon {
+		@include size(40px);
+		background-color: #1d8dc3;
+		border-radius: 5px;
+	}
+}
+
+$grid-columns: 163px 120px 88px 88px 105px 144px 108px 90px;
+.my-team-grid {
+	&__header,
+	&__row {
+		display: grid;
+		grid-template-columns: $grid-columns;
+	}
+	&__header {
+		height: 38px;
+		border-bottom: 1px solid #1d8dc3;
+		&>div {
+			@extend .flex-centered;
+			justify-content: flex-start;
+			padding-left: 12px;
+			height: 100%;
+			color: #1d8dc3;
+		}
+	}
+	&__row {
+		height: 38px;
+		font-size: 14px;
+		color: #6a6a6a;
+		transition: 0.4s;
+		&:hover {
+			background-color: rgba(29, 141, 195, 0.1);
+			.my-team-grid-info-popover {
+				display: block;
+			}
+			
+		}
+		&>div {
+			@extend .flex-centered;
+			justify-content: flex-start;
+			padding-left: 12px;
+			height: 100%;
+		}
+	}
+	&__body {
+		padding-top: 10px;
+	}
+	&__status {
+		position: absolute;
+		right: 10px;
+		top: 50%;
+		transform: translateY(-50%);
+		@extend .flex-centered;
+		height: 18px;
+		padding: 0 13px;
+		color: #ffffff;
+		font-size: 12px;
+		&--info {
+			border-radius: 100px;
+			background-color: #3cbdb6;
+		}
+	}
+	&__column {
+		&-name {
+			position: relative;
+		}
+	}
+}
+
+.my-team-grid-info-popover {
+	position: absolute;
+	top: 100%;
+	left: 65%;
+	z-index: 20;
+	display: none;
+	width: 262px;
+	min-height: 250px;
+	padding: 25px 15px;
+	padding-bottom: 0;
+
+	border-radius: 5px;
+	background-color: rgba(255, 255, 255, 0.8);
+	border: 1px solid #50e7b8;
+	&__nick-title {
+		margin-bottom: 5px;
+		font-size: 16px;
+		font-weight: 400;
+		color: #1e8dc3;
+	}
+	&__nick {
+		font-size: 15px;
+		margin-bottom: 30px;
+		color: #1e8dc3;
+	}
+	&__sub-title {
+		margin-bottom: 5px;
+		font-size: 16px;
+		font-weight: 300;
+		color: #4a4a4a;
+	}
+	&__sub-value {
+		margin-bottom: 25px;
+		font-size: 15px;
+		color: #1e8dc3;
+	}
+	&::after {
+		content: 'info';
+		position: absolute;
+		top: 5px;
+		right: 10px;
+		color: #50e7b8;
+	}
+}

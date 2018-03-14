@@ -1,0 +1,55 @@
+
+.investment-miner-product {
+	width: 470px;
+	&__header {
+		padding: 0 20px;
+		padding-top: 20px;
+		padding-bottom: 15px;
+		color: #fff;
+		background-image: linear-gradient(135deg, #3022ad 0%, #7745c1 47%, #c86dd7 100%);
+		&-content {
+			margin-bottom: 20px;
+		}
+		&-row {
+			@extend .flex-row;
+			justify-content: space-between;
+		}
+		&-miner-name {
+			margin-bottom: 8px;
+			font-size: 30px;
+		}
+		&-price {
+			font-size: 60px;
+		}
+		&-miner-price-caption {
+			font-size: 14px;
+		}
+		&-more {
+			font-size: 14px;
+			font-weight: 300;
+			text-decoration: underline;
+			cursor: pointer;
+		}
+		&-buy-button {
+			@extend .flex-centered;
+			width: 130px;
+			height: 35px;
+			font-size: 15px;
+			background: rgba(#fff, 0.2);
+			border-radius: 5px;
+			border: 1px solid #fff;
+			cursor: pointer;
+		}
+		&-bottom-content {
+			align-items: flex-end;
+		}
+	}
+	&__content {
+		padding: 12px 23px;
+		font-size: 14px;
+		color: #4a4a4a;
+		li {
+			margin-bottom: 6px;
+		}
+	}
+}
