@@ -1,134 +1,132 @@
 @import './miner-product/Style.scss';
 @import './info-block/Style.scss';
+@import './investment-modal/Style.scss';
+@import './investment-card/Style.scss';
 .investment {
-	&__title {
-		margin-bottom: 12px;
-	}
-	&__miner-title {
-		margin-bottom: 20px;
-		font-size: 20px;
-		font-weight: 400;
-		color: #1e8dc3;
-	}
-	&__products {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: flex-start;
-		margin-bottom: 30px;
-		.investment-miner-product:not(:nth-of-type(2n)) {
-			margin-right: 35px;
-		}
-	}
-	&__info {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: flex-start;
-		margin-bottom: 35px;
-		.investment-info-block:not(:nth-of-type(3n)) {
-			margin-right: 23px;
-		}
-	}
-	&__values {
-		display: flex;
-		padding: 23px 20px 30px 25px;
-	}
-	&__invest-pool {
-		max-width: 977px;
-	}
-	&__overlay {
-		@extend .flex-centered;
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100vw;
-		height: 100vh;
-		overflow-y: auto;
-		background: rgba(#000, 0.2);
-	}
+  padding-bottom: 30px;
+  &__title {
+    margin-bottom: 12px;
+  }
+  &__miner-title {
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 400;
+    color: #1e8dc3;
+  }
+  &__products {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    .investment-miner-product:not(:nth-of-type(2n)) {
+      margin-right: 35px;
+    }
+  }
+  &__info {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin-bottom: 35px;
+    .investment-info-block:not(:nth-of-type(3n)) {
+      margin-right: 23px;
+    }
+  }
+  &__values {
+    display: flex;
+    padding: 23px 20px 30px 25px;
+  }
+  &__invest-pool {
+    max-width: 977px;
+  }
+  &__overlay {
+    @extend .flex-centered;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow-y: auto;
+    background: rgba(#000, 0.2);
+  }
+  &__investments {
+    display: flex;
+    flex-wrap: wrap;
+    &>* {
+      &:not(:nth-of-type(3n)) {
+        margin-right: 24px;
+      }
+    }
+  }
+  .pool-banner {
+    min-height: 141px;
+    padding: 17px 25px;
+    padding-bottom: 25px;
+    margin-bottom: 30px;
+    font-weight: 400;
+    color: #fff;
+    background-image: linear-gradient(48deg, #4ac0ff 0%, #2d6fd0 100%);
+    &__title {
+      margin-bottom: 15px;
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 30px;
+    }
+    &__text {
+      max-width: 624px;
+      font-size: 14px;
+      line-height: 1.2;
+    }
+    &__button {
+      @extend .flex-centered;
+      width: 195px;
+      height: 35px;
+      margin-left: auto;
+      font-size: 15px;
+      background: rgba(#fff, 0.2);
+      border-radius: 5px;
+      border: 1px solid #fff;
+      cursor: pointer;
+    }
+  }
 }
 
-.investment-pool-tip {
-	min-height: 141px;
-	padding: 17px 25px;
-	padding-bottom: 25px;
-	font-weight: 400;
-	color: #fff;
-	background-image: linear-gradient(48deg, #4ac0ff 0%, #2d6fd0 100%);
-	&__title {
-		margin-bottom: 15px;
-		font-size: 24px;
-		font-weight: 400;
-		line-height: 30px;
-	}
-	&__text {
-		max-width: 624px;
-		font-size: 14px;
-		line-height: 1.2;
-	}
-	&__button {
-		@extend .flex-centered;
-		width: 195px;
-		height: 35px;
-		margin-left: auto;
-		font-size: 15px;
-		background: rgba(#fff, 0.2);
-		border-radius: 5px;
-		border: 1px solid #fff;
-		cursor: pointer;
-	}
+.investment-add-investment {
+  @extend .flex-centered;
+  flex-direction: column;
+  width: 310px;
+  min-height: 280px;
+  color: $lightblue;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 27px;
+  text-align: center;
+  background-color: rgba(#93c2f1, 0.15);
+  cursor: pointer;
+  transition: 0.4s;
+  &:hover {
+    background-color: rgba(#93c2f1, 0.35);
+
+  }
+  &__icon {
+    position: relative;
+    @include size(37px);
+    margin-bottom: 10px;
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      height: 2px;
+      width: 37px;
+      transform: translate(-50%, -50%);
+      background: #fff;
+    }
+    &::after {
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
+  }
+  &__caption {
+    max-width: 201px;
+  }
 }
-
-.investment-pool-participation {
-	width: 444px;
-	padding: 18px;
-	margin-right: 37px;
-	&__title {
-		margin-bottom: 39px;
-		font-size: 22px;
-		font-weight: 400;
-		text-align: center;
-		color: #1e8dc3;
-	}
-	&__slider-block {
-		margin-bottom: 57px;
-	}
-	&__price {
-		margin: 10px 0;
-		font-size: 30px;
-		font-weight: 300;
-		color: #1e8dc3;
-	}
-	&__button {
-		width: 187px;
-		height: 40px;
-		margin: 0 auto;
-	}
-}
-
-.investment-pool-revenue {
-	width: 451px;
-	padding: 10px 20px 10px 27px;
-	&--monthly {
-		margin-bottom: 20px;
-	}
-	&__title {
-		color: #1e8dc3;
-		font-size: 22px;
-		font-weight: 400;
-	}
-	&__slider-block {}
-	&__price {
-		margin: 10px 0;
-		font-size: 30px;
-		font-weight: 300;
-		color: #1e8dc3;
-	}
-}
-
-
-
-
-.investment-popup {
-	background: #fff;
-}
-

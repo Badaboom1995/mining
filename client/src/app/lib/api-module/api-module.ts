@@ -1,6 +1,6 @@
 import { API_URL } from "../../constants";
-import { routingService } from "../../services/index";
 import axios from 'axios';
+import { routingService } from '../../services/routing/routing';
 export class ApiModule {
 	/**
 	 * @protected

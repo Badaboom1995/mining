@@ -1,5 +1,6 @@
 import { Card } from "../../../components/card/Card";
 import { IMinerProductProps } from "./Props";
+import { InfoModal } from './info-modal/InfoModal';
 
 
 
@@ -10,12 +11,13 @@ export class MinerProduct extends React.Component<IMinerProductProps> {
 	 * local state
 	 */
 	public state = {
-		isOpened: false
+		isVisibleModal: false
 	}
 	/**
 	 * Renders miner product
 	 */
 	public render() {
+		const { miner } = this.props;
 		return (
 			<Card className='investment-miner-product' >
 				<div className='investment-miner-product__header' >
@@ -30,24 +32,14 @@ export class MinerProduct extends React.Component<IMinerProductProps> {
 
 					<div className='investment-miner-product__header-row investment-miner-product__header-bottom-content' >
 						<div onClick={() => {
-							this.setState({ isOpened: !this.state.isOpened });
+							this.setState({ isVisibleModal: !this.state.isVisibleModal });
 						}} className='investment-miner-product__header-more' >Подробнее</div>
 						<div className='investment-miner-product__header-buy-button' >Купить</div>
 					</div>
 
 				</div>
 
-				{this.state.isOpened && <div className='investment-miner-product__content' >
-					<ul>
-						<li>1) Перелік усіх деталей з актуальною ціною</li>
-						<li>2) Технічні характеристики</li>
-						<li>3) Скільки вживає електроенергії</li>
-						<li>4) МегаХеш або Мегасоль</li>
-						<li>5) Монета яку може майнити</li>
-						<li>6) Найприбутковіша монета для цієї установки</li>
-					</ul>
-				</div>}
-
+				{this.state.isVisibleModal && <InfoModal onClose={() => this.setState({isVisibleModal: false})} miner={miner} />}
 
 			</Card>
 		)
