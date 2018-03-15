@@ -65,6 +65,8 @@
     "typescript": "^2.6.2"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "codelyzer": "^4.0.2",
     "nodemon": "^1.14.11",
     "ts-node": "^4.1.0",
