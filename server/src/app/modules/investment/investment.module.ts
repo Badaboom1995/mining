@@ -5,7 +5,11 @@ import {
   RequestMethod,
 } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { InvestmentSchema } from './schemas';
+import {
+  InvestmentSchema,
+  ShoppingRequestsSchema,
+  TransactionsSchema,
+} from './schemas';
 import { InvestmentController } from './controllers';
 import { InvestmentService } from './services';
 import { AccountService } from '../account/services';
@@ -13,7 +17,9 @@ import { AccountService } from '../account/services';
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'investment', schema: InvestmentSchema }]),
-],
+    MongooseModule.forFeature([{ name: 'shopping-requests', schema: ShoppingRequestsSchema }]),
+    MongooseModule.forFeature([{ name: 'transactions', schema: TransactionsSchema }]),
+  ],
   controllers: [InvestmentController],
   components: [InvestmentService, AccountService],
 })
