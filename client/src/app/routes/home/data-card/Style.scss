@@ -1,0 +1,39 @@
+.data-card {
+  width: 310px;
+  min-height: 358px;
+  padding: 18px 20px;
+  color: #fff;
+  &--status {
+    background-color: #93c2f1;
+  }
+  &--wallet {
+    background-color: #63ded9;
+  }
+  &--investment {
+    background-color: #2fbefe;
+  }
+  &__header {
+    @extend .flex-row;
+    margin-bottom: 30px;
+    &-icon {
+      @include size(30px);
+      @extend .flex-centered;
+      margin-right: 13px;
+      font-size: 20px;
+      background: #fff;
+      border-radius: 5px;
+    }
+  }
+  &__content {
+    min-height: 210px;
+  }
+  &__button {
+    @extend .flex-centered;
+    width: 100%;
+    height: 48px;
+    border: 1px solid #fff;
+    border-radius: 100px;
+    background: rgba(#fff, 0.1);
+    cursor: pointer;
+  }
+}

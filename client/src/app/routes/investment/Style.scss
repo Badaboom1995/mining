@@ -35,6 +35,16 @@
 	&__invest-pool {
 		max-width: 977px;
 	}
+	&__overlay {
+		@extend .flex-centered;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		overflow-y: auto;
+		background: rgba(#000, 0.2);
+	}
 }
 
 .investment-pool-tip {
@@ -51,8 +61,20 @@
 		line-height: 30px;
 	}
 	&__text {
-		font-size: 18px;
-		line-height: 1.3;
+		max-width: 624px;
+		font-size: 14px;
+		line-height: 1.2;
+	}
+	&__button {
+		@extend .flex-centered;
+		width: 195px;
+		height: 35px;
+		margin-left: auto;
+		font-size: 15px;
+		background: rgba(#fff, 0.2);
+		border-radius: 5px;
+		border: 1px solid #fff;
+		cursor: pointer;
 	}
 }
 
@@ -102,3 +124,11 @@
 		color: #1e8dc3;
 	}
 }
+
+
+
+
+.investment-popup {
+	background: #fff;
+}
+
