@@ -44,7 +44,11 @@ export class AccountModule implements NestModule {
       .forRoutes(
         { path: '/contacts/*', method: RequestMethod.ALL },
         { path: '/notifications/*', method: RequestMethod.ALL },
-        { path: '/investment/*', method: RequestMethod.ALL },
+        { path: '/investment/', method: RequestMethod.ALL },
+        { path: '/investment/list', method: RequestMethod.ALL },
+        { path: '/investment/create', method: RequestMethod.ALL },
+        { path: '/investment/pay/success/return', method: RequestMethod.ALL },
+        { path: '/investment/pay/cancel/return', method: RequestMethod.ALL },
         { path: '/account/profile', method: RequestMethod.ALL },
         { path: '/account/settings', method: RequestMethod.ALL },
         { path: '/account/settings/*', method: RequestMethod.ALL },

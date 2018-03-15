@@ -23,6 +23,7 @@ export class InvestmentController {
         order_id: data.order_id,
         comments: data.comments,
         sign: data.sign,
+        user_id: req.user._id,
       });
     } catch (err) {
       return res.send(new APIError(err));
@@ -46,9 +47,10 @@ export class InvestmentController {
 
   @Post('/pay/notify')
   @ApiOperation({ title: 'Get investment page' })
-  async payNotify(@Req() req, @Res() res, @Body() dto: ProcessAdvcashPaymentDto) {
+  async payNotify(@Req() req, @Res() res) {
     try {
-      await this.investmentService.processAdvcashPayment(dto);
+      await this.investmentService.processAdvcashPaymentDummy();
+      // await this.investmentService.processAdvcashPayment(dto);
       return res.send(new APISuccess());
     } catch (err) {
       return res.send(new APIError(err));

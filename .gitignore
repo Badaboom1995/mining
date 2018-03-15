@@ -23,5 +23,5 @@ npm-debug.log
 # dist
 /dist
 package-lock.json
-
+/server/package-lock.json
 /public/uploads/images

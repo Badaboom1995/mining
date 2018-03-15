@@ -50,6 +50,8 @@ const UserSchema = new Schema(
 
     googleAccount: { type: Object, default: null },
     facebookAccount: { type: Object, default: null },
+
+    balance: { type: Number, default: 0 },
   },
   { timestamps: true },
 );
