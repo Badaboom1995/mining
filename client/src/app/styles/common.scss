@@ -14,10 +14,17 @@
 body {
 	font-family: 'Open Sans', sans-serif;
 }
-.container {
-	width: 1040px;
-	padding: 0 10px;
-	margin: 0 auto;
+
+
+
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 999;
+	width: 100vw;
+	height: 100vh;
+	@extend .flex-centered;
+	overflow-y: auto;
+	background: rgba(#000, 0.2);
 }
-
-

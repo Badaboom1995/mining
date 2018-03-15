@@ -7,8 +7,10 @@ import { Slider } from '../../components/slider/Slider';
 import { Button } from '../../components/button/Button';
 import { withRouter } from '../../services/index';
 import { observer, inject } from "mobx-react";
+import { InvestmentModal } from './investment-modal/InvestmentModal';
+import { InvestmentCard } from "./investment-card/InvestmentCard";
 
-@inject('routing')
+@inject('routing', 'investment')
 @observer
 @withRouter
 export class Investment extends React.Component<IInvestmentProps> {
@@ -16,83 +18,30 @@ export class Investment extends React.Component<IInvestmentProps> {
 	 * Local state
 	 */
 	public state = {
-		currentModal: ''
+		isVisibleInvestmentModal: false
 	};
 	/**
-	 * New investment modal
+	 * Toggle investment modal
 	 */
-	public InvestmentModal = ({ }) => {
-		const { routing } = this.props;
-		return (
-			<div className='investment-popup' >
-				<div className='investment-pool-tip' >
-					<h4 className='investment-pool-tip__title' >Не хочете купувати цілий майнер?</h4>
-					<p className='investment-pool-tip__text' >
-						Якщо ви не маєте можливості, або не хочете купляти цілий майнер - можете   прийняти участь у пулі. 
-						Простими словами скинутися з нами на майнер і ділити прибуток.</p>
-				</div>
-				<div className='investment__values' >
-
-					<Card className='investment-pool-participation' >
-						<div className='investment-pool-participation__title' >Участь в пулі </div>
-						<div className='investment-pool-participation__slider-block' >
-							<div className='investment-pool-participation__price' >$20.00</div>
-							<Slider />
-						</div>
-						<Button onClick={() => routing.push('/investment/methods')} className='investment-pool-participation__button' >Инвестировать</Button>
-					</Card>
-
-					<div className='investment-pool-revenues'  >
-						<Card className='investment-pool-revenue investment-pool-revenue--monthly' >
-							<div className='investment-pool-revenue__title' >Щомісячний прибуток</div>
-							<div className='investment-pool-revenue__slider-block' >
-								<div className='investment-pool-revenue__price' >$566.00</div>
-								<Slider />
-							</div>
-						</Card>
-
-						<Card className='investment-pool-revenue' >
-							<div className='investment-pool-revenue__title'>Щорічний прибуток</div>
-							<div className='investment-pool-revenue__slider-block' >
-								<div className='investment-pool-revenue__price' >$11 566.00</div>
-								<Slider />
-							</div>
-						</Card>
-					</div>
-
-				</div>
-			</div>
-		)
-	}
-	/**
-	 * 
-	 */
-	public InvestmentCard = ({ }) => {
-		return (
-			<Card className='investment-card' >
-
-			</Card>
-		);
-	}
-
+	public toggleInvestmentModal = () => this.setState({ isVisibleInvestmentModal: !this.state.isVisibleInvestmentModal });
 	/**
 	 * render
 	 */
 	public render() {
-
-		const { routing } = this.props;
-
+		const { routing, investment } = this.props;
 		return (
 			<div className='investment' >
-
 
 
 				<h1 className='main-page__content-title investment__title' >Инвестиции</h1>
 				<div className='investment__miner-title' >Ви можете обрати одну з двох найкращих комплектацій майнерів:</div>
 
 				<div className='investment__products' >
-					<MinerProduct />
-					<MinerProduct />
+					{investment.miners.map((miner, index) => {
+						return (
+							<MinerProduct key={index} miner={miner} />
+						);
+					})}
 				</div>
 
 
@@ -100,27 +49,34 @@ export class Investment extends React.Component<IInvestmentProps> {
 
 				<div className='investment__invest-pool' >
 
+					
 
-					<div className='investment-pool-tip' >
-						<h4 className='investment-pool-tip__title' >Не хочете купувати цілий майнер?</h4>
-						<p className='investment-pool-tip__text' >
+
+					<div className='pool-banner' >
+						<h4 className='pool-banner__title' >Не хочете купувати цілий майнер?</h4>
+						<p className='pool-banner__text' >
 							Якщо ви не маєте можливості, або не хочете купляти цілий майнер - можете прийняти участь у пулі. 
 							Простими словами скинутися з нами на майнер і ділити прибуток.</p>
-
-						<div onClick={() => {
-							this.setState({currentModal: 'investment'})
-						}} className='investment-pool-tip__button' >Взяти участь</div>
+						<div onClick={this.toggleInvestmentModal} className='pool-banner__button' >Взяти участь</div>
 					</div>
 
 
 				</div>
 
+				<div className='investment__investments' >
+				  	<Card className='investment-add-investment' onClick={this.toggleInvestmentModal}  >
+						<div className="investment-add-investment__icon"></div>
+						<div className="investment-add-investment__caption">Додати нову інвестицію</div>
+					</Card>
+					{investment.investments.map((item, index) => {
+						return (
+							<InvestmentCard key={index} investment={item}  />
+						);
+					})}
+				</div>
 
-
-				{this.state.currentModal && <div className='investment__overlay'  >
-					{this.state.currentModal == 'investment' && <this.InvestmentModal />}
-				</div>}
-
+				
+				{this.state.isVisibleInvestmentModal && <InvestmentModal onClose={this.toggleInvestmentModal} />}
 			</div>
 		);
 
