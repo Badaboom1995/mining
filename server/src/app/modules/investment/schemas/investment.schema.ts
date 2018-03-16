@@ -5,7 +5,7 @@ export interface Investment extends Document {
   readonly currency: string;
   readonly amount: string;
   readonly miningBuild: string;
-  readonly type: string;
+  readonly investmentType: string;
   payed: boolean;
 }
 
@@ -16,7 +16,7 @@ export const InvestmentSchema = new Schema({
     enum: ['bitcoin', 'advcash'],
     default: 'advcash'
   },
-  type: {
+  investmentType: {
     type: String,
     enum: ['mining', 'pool'],
   },

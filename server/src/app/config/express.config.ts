@@ -9,7 +9,7 @@ import * as expressDevice from 'express-device';
 import * as connect from 'connect-mongo';
 import { connection as MongoConnect } from 'mongoose';
 import * as cors from 'cors';
-import { SESSION_SECRET, MONGODB_URI } from './config';
+import { SESSION_SECRET } from './environments.config';
 
 const MongoStore = connect(expressSession);
 

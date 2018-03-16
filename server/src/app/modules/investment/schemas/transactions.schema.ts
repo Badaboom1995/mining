@@ -8,10 +8,19 @@ export interface Transactions extends Document {
 
 export const TransactionsSchema = new Schema({
   user: String,
-  type: {
+  investmentType: {
     type: String,
-    enum: ['investment', 'withdraw'],
+    enum: ['mining', 'pool'],
+  },
+  transactionType: {
+    type: String,
+    enum: ['investment', 'withdraw', 'bonus']
   },
   amount: Number,
+  merchantAmount: Number,
+  currency: {
+    type: String,
+    enum: ['USD', 'UAH']
+  },
   createdAt: { type: Date, default: Date.now },
 });

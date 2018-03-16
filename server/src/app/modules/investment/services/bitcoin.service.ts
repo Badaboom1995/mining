@@ -3,7 +3,7 @@ import {
   BLOCK_IO_KEY,
   BLOCK_IO_SECRET,
   BLOCK_IO_VERSION,
-} from '../../../config/config';
+} from '../../../config/environments.config';
 
 export default class BitcoinService {
   private bitcoinService: any;

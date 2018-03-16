@@ -21,7 +21,7 @@ import {
   ADVCASH_EMAIL,
   ADVCASH_ORGANIZATION,
   ADVCASH_SECRET,
-} from '../../../config/config';
+} from '../../../config/environments.config';
 
 @Component()
 export class InvestmentService {
@@ -39,8 +39,9 @@ export class InvestmentService {
     try {
       const investment = new this.investmentModel({
         user: userId,
-        type: data.type,
-        price: data.price,
+        amount: data.amount,
+        investmentType: data.investmentType,
+        miningBuild: data.miningBuild,
       });
       await investment.save();
       return Promise.resolve('Investment has been created');
@@ -88,6 +89,56 @@ export class InvestmentService {
     }
   }
 
+  async processAdvcashPaymentDummy(data: ProcessAdvcashPaymentDto) {
+    try {
+      console.log('Start processing dummy Advcash success payment notification');
+      const investment: any = await this.investmentModel.findOne({
+        _id: data.ac_order_id,
+        user: data.user_id,
+        payed: false
+      });
+      if (investment) {
+        const transaction = new this.transactionsModel({
+          amount: data.ac_amount,
+          merchantAmount: data.ac_merchant_amount,
+          investmentType: data.investment_type,
+          currency: data.ac_merchant_currency,
+          status: data.ac_transaction_status,
+          user: data.user_id,
+          transactionType: 'investment'
+        });
+        await transaction.save();
+        if (data.ac_transaction_status === "SUCCESS") {
+          await this.investmentModel.findOneAndUpdate({ _id: data.ac_order_id }, { payed: true });
+        }
+        switch (data.investment_type) {
+          case 'pool': {
+            // take a part in pool
+            break;
+          }
+          case 'mining': {
+            // send a shopping request
+            const request = new this.shoppingRequestsModel({
+              user: data.user_id,
+              miningBuild: investment.miningBuild,
+              transactionId: transaction._id,
+              investmentId: investment._id
+            });
+            await request.save();
+            break;
+          }
+        }
+      } else {
+        return Promise.reject('User or Investment has been not found');
+      }
+    } catch (err) {
+      return Promise.reject(
+        `There was a problem when we try to process payment ===> Details: ${err}`,
+      );
+    }
+  }
+
+
   async processAdvcashPayment(data) {
     try {
       const stt_hash = `${data.ac_transfer}:${data.ac_start_date}:${data.ac_sci_name}:${data.ac_src_wallet}:${data.ac_dest_wallet}:${data.ac_order_id}:${data.ac_amount}:${data.ac_merchant_currency}:${ADVCASH_SECRET}`;
@@ -104,54 +155,6 @@ export class InvestmentService {
         }
       } else {
         return Promise.reject('Wrong hash');
-      }
-    } catch (err) {
-      return Promise.reject(
-        `There was a problem when we try to process payment ===> Details: ${err}`,
-      );
-    }
-  }
-
-  async processAdvcashPaymentDummy(data: ProcessAdvcashPaymentDto) {
-    try {
-      console.log(
-        'Start processing dummy Advcash success payment notification',
-      );
-      const user: any = await Users.findOne({ _id: data.user_id });
-      const investment: any = await this.investmentModel.findOne({
-        _id: data.ac_order_id,
-      });
-      if (user && investment) {
-        const transaction = new this.transactionsModel({
-          amount: data.ac_amount,
-          merchant_amount: data.ac_merchant_amount,
-          currency: data.ac_merchant_currency,
-          start_date: data.ac_start_date,
-          order_id: data.ac_order_id,
-          status: data.ac_transaction_status,
-          user: data.user_id,
-          type: data.investment_type,
-        });
-        await transaction.save();
-        await this.investmentModel.findOneAndUpdate({ _id: data.ac_order_id }, { payed: true });
-        switch (data.investment_type) {
-          case 'pool': {
-            // take a part in pool
-            break;
-          }
-          case 'mining': {
-            // send a shopping request
-            const request = new this.shoppingRequestsModel({
-              user: data.user_id,
-              miningBuild: investment.miningBuild,
-              transactionId: data.ac_order_id,
-            });
-            await request.save();
-            break;
-          }
-        }
-      } else {
-        return Promise.reject('User or Investment has been not found');
       }
     } catch (err) {
       return Promise.reject(

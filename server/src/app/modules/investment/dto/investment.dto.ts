@@ -2,12 +2,10 @@ import { Transform } from 'class-transformer';
 import {
   IsNotEmpty,
   IsNumber,
-  IsEmail,
-  MinLength,
-  MaxLength,
-  Length,
+  ValidateIf,
   IsEnum,
-  IsArray, IsString,
+  IsString,
+  IsEmpty,
 } from 'class-validator';
 
 import { ApiModelProperty } from '@nestjs/swagger';
@@ -16,12 +14,19 @@ export class CreateInvestmentDto {
   @IsNotEmpty()
   @IsEnum(['mining', 'pool'])
   @ApiModelProperty()
-  type: string;
+  investmentType: string;
   @IsNotEmpty()
   @Transform(x => +x)
   @IsNumber()
   @ApiModelProperty()
-  price: number
+  amount: number;
+  @ValidateIf(o => o.investmentType === "mining")
+  @IsNotEmpty()
+  @IsEnum(['1', '2'])
+  @ApiModelProperty()
+  @ValidateIf(o => o.investmentType === "pool")
+  @IsEmpty()
+  miningBuild: string;
 }
 
 export class GetInvestmentDto {
