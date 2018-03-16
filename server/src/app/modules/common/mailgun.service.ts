@@ -9,7 +9,7 @@ import {
   SITE_URL,
   SITENAME_BASE,
   NODE_ENV,
-} from '../../../config';
+} from '../../config/config';
 
 //TODO: Получать html template из файлов
 @Component()

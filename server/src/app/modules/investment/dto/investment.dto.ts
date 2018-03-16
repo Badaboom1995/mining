@@ -42,10 +42,9 @@ export class ProcessAdvcashPaymentDto {
   @ApiModelProperty()
   ac_merchant_amount: number;
   @IsNotEmpty()
-  @Transform(x => +x)
-  @IsNumber()
+  @IsString()
   @ApiModelProperty()
-  ac_merchant_currency: number;
+  ac_merchant_currency: string;
   @IsNotEmpty()
   @ApiModelProperty()
   ac_start_date: string;
@@ -57,10 +56,6 @@ export class ProcessAdvcashPaymentDto {
   @IsString()
   @ApiModelProperty()
   ac_transaction_status: string;
-  @IsNotEmpty()
-  @IsString()
-  @ApiModelProperty()
-  ac_buyer_email: string;
   @IsNotEmpty()
   @IsString()
   @ApiModelProperty()

@@ -13,7 +13,7 @@ import {
   ResetPasswordDto,
   UnlinkDto,
 } from '../dto/account.dto';
-import { JWT_SECRET } from '../../../../config';
+import { JWT_SECRET } from '../../../config/config';
 import {PrivateProfileModel, ProfileModel} from '../../../models/profile-model';
 
 @Component()

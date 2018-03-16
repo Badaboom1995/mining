@@ -49,7 +49,7 @@ export class ApiModule {
 				'Content-Type': options.useFormData ? 'multipart/form-data' : 'application/x-www-form-urlencoded;charset=UTF-8',
 				'Authorization': 'Bearer ' + TOKEN
 			},
-			// withCredentials: true
+			withCredentials: true
 		};
 		return new Promise((resolve, reject) => {
 

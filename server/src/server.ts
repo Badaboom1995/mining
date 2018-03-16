@@ -1,11 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { ApplicationModule } from './app/app.module';
-import * as expressApp from './app/app';
 import { AnyExceptionFilter } from './app/modules/common/filters/any-exception.filter';
 import { HttpValidationExceptionFilter } from './app/modules/common/filters/http-validation.filter';
 import { DatabaseExceptionFilter } from './app/modules/common/filters/database-exceptions.filter';
 import { ValidationPipe } from './app/modules/common/pipe/validation.pipe';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import expressApp from './app/config/express.config';
 
 async function bootstrap() {
   const app = await NestFactory.create(ApplicationModule, expressApp);
