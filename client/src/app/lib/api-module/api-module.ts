@@ -48,6 +48,7 @@ export class ApiModule {
 			headers: {
 				'Content-Type': options.useFormData ? 'multipart/form-data' : 'application/x-www-form-urlencoded;charset=UTF-8',
 			},
+			withCredentials: true
 		};
 		if (TOKEN) {
 			config.headers.Authorization = 'Bearer ' + TOKEN;

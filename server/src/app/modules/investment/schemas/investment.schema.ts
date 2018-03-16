@@ -3,7 +3,7 @@ import { Model, model, Document, Schema } from 'mongoose';
 export interface Investment extends Document {
   readonly user: string;
   readonly currency: string;
-  readonly balance: string;
+  readonly amount: string;
   readonly miningBuild: string;
   readonly type: string;
   payed: boolean;
@@ -24,7 +24,7 @@ export const InvestmentSchema = new Schema({
     type: String,
     enum: ['1', '2'],
   },
-  balance: Number,
+  amount: Number,
   payed: { type: Boolean, default: false },
   address: String,
   createdAt: { type: Date, default: Date.now },

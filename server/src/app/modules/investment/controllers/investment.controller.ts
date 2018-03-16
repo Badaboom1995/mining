@@ -47,9 +47,9 @@ export class InvestmentController {
 
   @Post('/pay/notify')
   @ApiOperation({ title: 'Get investment page' })
-  async payNotify(@Req() req, @Res() res) {
+  async payNotify(@Req() req, @Res() res, @Body() dto: ProcessAdvcashPaymentDto) {
     try {
-      await this.investmentService.processAdvcashPaymentDummy();
+      await this.investmentService.processAdvcashPaymentDummy(dto);
       // await this.investmentService.processAdvcashPayment(dto);
       return res.send(new APISuccess());
     } catch (err) {

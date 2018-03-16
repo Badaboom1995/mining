@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "TS_NODE_PROJECT=\"tsconfig-webpack.json\" cross-env PORT=8288 NODE_ENV=development LOCAL=false DEV=true  webpack-dev-server --config webpack/webpack.server.ts",
+    "dev": "cross-env TS_NODE_PROJECT=\"tsconfig-webpack.json\" PORT=8288 LOCAL=false DEV=true NODE_ENV=development webpack-dev-server --config webpack/webpack.server.ts",
     "dev:local": "TS_NODE_PROJECT=\"tsconfig-webpack.json\" cross-env PORT=8288 NODE_ENV=development LOCAL=true DEV=true  webpack-dev-server --config webpack/webpack.server.ts",
     "build": "TS_NODE_PROJECT=\"tsconfig-webpack.json\" cross-env NODE_ENV=production LOCAL=false DEV_=false webpack --watch --config webpack/webpack.prod.js"
   },

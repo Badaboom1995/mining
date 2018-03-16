@@ -21,7 +21,7 @@ import {
   ADVCASH_EMAIL,
   ADVCASH_ORGANIZATION,
   ADVCASH_SECRET,
-} from '../../../../config';
+} from '../../../config/config';
 
 @Component()
 export class InvestmentService {
@@ -108,21 +108,6 @@ export class InvestmentService {
     } catch (err) {
       return Promise.reject(
         `There was a problem when we try to process payment ===> Details: ${err}`,
-      );
-    }
-  }
-
-  async addShoppingRequest(userId, data) {
-    try {
-      console.log('Start processing dummy Advcash success payment notification');
-      const user: any = await Users.findOne({ _id: userId });
-      if (user) {
-      } else {
-        return Promise.reject('User has been not found');
-      }
-    } catch (err) {
-      return Promise.reject(
-        `There was a problem when we try to add shopping request ===> Details: ${err}`,
       );
     }
   }
