@@ -6,7 +6,6 @@ import { IInvestmentCardProps } from "./Props";
 
 
 
-
 export const InvestmentCard = ({ className, investment , ...props } : IInvestmentCardProps) => (
 	<Card {...props}  className={`investment-card ${className}`} >
 		
