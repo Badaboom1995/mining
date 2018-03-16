@@ -1,13 +1,13 @@
 import { Model, model, Document, Schema } from 'mongoose';
 
 export interface Transactions extends Document {
-  user: string;
+  userId: string;
   type: string;
   amount: string;
 }
 
 export const TransactionsSchema = new Schema({
-  user: String,
+  userId: String,
   investmentType: {
     type: String,
     enum: ['mining', 'pool'],

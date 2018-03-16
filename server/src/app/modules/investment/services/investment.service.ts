@@ -11,7 +11,7 @@ import {
   Transactions,
   ShoppingRequestsSchema,
   ShoppingRequest,
-} from '../schemas';
+} from '../../common/schemas/index';
 import {
   CreateInvestmentDto,
   GetInvestmentDto,
@@ -94,7 +94,7 @@ export class InvestmentService {
       console.log('Start processing dummy Advcash success payment notification');
       const investment: any = await this.investmentModel.findOne({
         _id: data.ac_order_id,
-        user: data.user_id,
+        userId: data.user_id,
         payed: false
       });
       if (investment) {
@@ -104,7 +104,7 @@ export class InvestmentService {
           investmentType: data.investment_type,
           currency: data.ac_merchant_currency,
           status: data.ac_transaction_status,
-          user: data.user_id,
+          userId: data.user_id,
           transactionType: 'investment'
         });
         await transaction.save();
@@ -119,7 +119,7 @@ export class InvestmentService {
           case 'mining': {
             // send a shopping request
             const request = new this.shoppingRequestsModel({
-              user: data.user_id,
+              userId: data.user_id,
               miningBuild: investment.miningBuild,
               transactionId: transaction._id,
               investmentId: investment._id

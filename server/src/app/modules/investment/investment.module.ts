@@ -9,7 +9,7 @@ import {
   InvestmentSchema,
   ShoppingRequestsSchema,
   TransactionsSchema,
-} from './schemas';
+} from '../common/schemas/index';
 import { InvestmentController } from './controllers';
 import { InvestmentService } from './services';
 import { AccountService } from '../account/services';

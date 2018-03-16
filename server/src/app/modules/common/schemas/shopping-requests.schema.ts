@@ -1,7 +1,7 @@
 import { Model, model, Document, Schema } from 'mongoose';
 
 export interface ShoppingRequest extends Document {
-  readonly user: string;
+  readonly userId: string;
   readonly miningBuild: string;
   readonly transactionId: string;
   readonly investmentId: string;
@@ -9,7 +9,7 @@ export interface ShoppingRequest extends Document {
 }
 
 export const ShoppingRequestsSchema = new Schema({
-  user: String,
+  userId: String,
   miningBuild: {
     type: String,
     enum: ['1', '2'],
