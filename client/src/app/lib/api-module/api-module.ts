@@ -41,16 +41,19 @@ export class ApiModule {
 
 		const TOKEN = localStorage.getItem('authToken') || '';
 		const data = options.useFormData ? this.bootstrapBody(params) : ApiModule.encodeToURI(params);
-		const config = {
+		const config : any = {
 			url: this.baseUrl + url,
 			method: options.method || 'post',
 			data,
 			headers: {
 				'Content-Type': options.useFormData ? 'multipart/form-data' : 'application/x-www-form-urlencoded;charset=UTF-8',
-				'Authorization': 'Bearer ' + TOKEN
 			},
 			withCredentials: true
 		};
+		if (TOKEN) {
+			config.headers.Authorization = 'Bearer ' + TOKEN;
+		}
+
 		return new Promise((resolve, reject) => {
 
 			return axios(config).then(async response => {
