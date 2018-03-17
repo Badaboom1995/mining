@@ -5,6 +5,7 @@ import { Auth } from './auth/Auth';
 import { IRootProps } from './Props';
 import { inject, observer } from 'mobx-react';
 import { withRouter } from '../services/index';
+import { Requests } from './requests/Requests';
 
 @withRouter
 @inject('account')
@@ -31,6 +32,7 @@ export class Root extends React.Component<IRootProps> {
 				<Switch>
 					<Route component={Auth} path='/auth' />
 					<Route component={Uikit} path='/uikit' />
+					<Route component={Requests} path='/requests' />
 					<Route component={MainPage} path='/' />
 				</Switch>
 			</div>

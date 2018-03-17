@@ -7,6 +7,7 @@ import { Investment } from '../investment/Investment';
 import { Redirect } from 'react-router';
 import { Wallet } from '../wallet/Wallet';
 import { MyTeam } from '../my-team/MyTeam';
+import { Footer } from '../../components/footer/Footer';
 
 
 
@@ -53,20 +54,7 @@ export class MainPage extends React.Component {
 								<Redirect to='/' />
 							</Switch>
 						</div>
-						<footer className='main-footer main-page__footer' >
-							<div className='main-footer__copyright' >© The Mining Dream</div>
-							<div className='main-footer__social' >
-								<div className='main-footer-social-item' ></div>
-								<div className='main-footer-social-item' ></div>
-								<div className='main-footer-social-item' ></div>
-								<div className='main-footer-social-item' ></div>
-							</div>
-							<div className='main-footer-lang' >
-								<div className='main-footer-lang__item ' >RU</div>
-								<div className='main-footer-lang__item main-footer-lang__item--active' >UA</div>
-								<div className='main-footer-lang__item ' >ENG</div>
-							</div>
-						</footer>
+						<Footer />
 
 
 
