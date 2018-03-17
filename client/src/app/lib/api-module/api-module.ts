@@ -50,9 +50,7 @@ export class ApiModule {
 			},
 			withCredentials: true
 		};
-		if (TOKEN) {
-			config.headers.Authorization = 'Bearer ' + TOKEN;
-		}
+		if (TOKEN) config.headers.Authorization = 'Bearer ' + TOKEN;
 
 		return new Promise((resolve, reject) => {
 

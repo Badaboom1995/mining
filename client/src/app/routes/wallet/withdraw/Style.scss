@@ -1,0 +1,26 @@
+
+.wallet-withdraw {
+	width: 470px;
+	min-height: 131px;
+	padding: 12px 26px;
+	&__title {
+		margin-bottom: 25px;
+		font-size: 22px;
+		font-weight: 400;
+		color: #1e8dc3;
+	}
+	&__field {
+		margin-right: 15px;
+		.field__input {
+			height: 40px;
+			text-align: center;
+		}
+	}
+	&__form {
+		@extend .flex-row;
+		justify-content: space-between;
+	}
+	&__button {
+		height: 40px;
+	}
+}

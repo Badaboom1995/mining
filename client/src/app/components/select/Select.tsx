@@ -32,6 +32,16 @@ export class Select extends React.Component<ISelectProps> {
 					options={options}
 					labelKey={labelKey}
 					valueKey={valueKey}
+					inputRenderer={(inputProps) => {
+						return (
+							<input  {...inputProps} className='Select-input select__input'  />
+						)
+					}}
+					arrowRenderer={({onMouseDown, isOpen} : any) => (
+						<div className='select__arrow-zone' onMouseDown={onMouseDown} >
+							<i className={classNames('icon-arrow-down', 'select__arrow' , { 'select__arrow--opened': isOpen })} ></i>
+						</div>
+					)}
 				/>
 			</div>
 		)
