@@ -7,7 +7,7 @@ import {
 import { NextFunction, Request } from 'express';
 import * as jwt from 'jsonwebtoken';
 import { Users } from '../schemas/user.schema';
-import { JWT_SECRET } from '../../../config/config';
+import { JWT_SECRET } from '../../../config/environments.config';
 
 @Middleware()
 export class IsAuthenticated implements NestMiddleware {

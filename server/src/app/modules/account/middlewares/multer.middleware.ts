@@ -14,7 +14,7 @@ import {
   AWS_SECRET_ACCESS_KEY,
   AWS_REGION,
   AWS_S3_BUCKET,
-} from '../../../config/config';
+} from '../../../config/environments.config';
 
 @Middleware()
 export class ImageUploadMiddleware implements NestMiddleware {

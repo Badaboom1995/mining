@@ -5,7 +5,7 @@ import { AccountModule } from './modules/account/account.module';
 import { ContactsModule } from './modules/contacts/contacts.module';
 import { NotificationsModule } from './modules/notifications/notifications.module';
 import { InvestmentModule } from './modules/investment/investment.module';
-import { MONGODB_URI } from './config/config';
+import { MONGODB_URI } from './config/environments.config';
 
 @Module({
   imports: [

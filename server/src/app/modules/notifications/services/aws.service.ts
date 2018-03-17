@@ -4,7 +4,7 @@ import {
   AWS_SECRET_ACCESS_KEY,
   AWS_REGION,
   AWS_PLATFORM_APPLICATION_ARN,
-} from '../../../config/config';
+} from '../../../config/environments.config';
 
 export default class AWSService {
   SNS: any;

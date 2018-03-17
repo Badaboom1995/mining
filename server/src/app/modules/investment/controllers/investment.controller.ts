@@ -1,6 +1,7 @@
 import { Controller, Post, Body, Req, Res, Get } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiUseTags } from '@nestjs/swagger';
 import {
+  CreateInvestmentDto,
   GetInvestmentDto,
   ProcessAdvcashPaymentDto,
 } from '../dto/investment.dto';
@@ -35,7 +36,7 @@ export class InvestmentController {
   async createInvestment(
     @Req() req,
     @Res() res,
-    @Body() dto: ProcessAdvcashPaymentDto,
+    @Body() dto: CreateInvestmentDto,
   ) {
     try {
       await this.investmentService.createInvestment(req.user._id, dto);
@@ -50,7 +51,6 @@ export class InvestmentController {
   async payNotify(@Req() req, @Res() res, @Body() dto: ProcessAdvcashPaymentDto) {
     try {
       await this.investmentService.processAdvcashPaymentDummy(dto);
-      // await this.investmentService.processAdvcashPayment(dto);
       return res.send(new APISuccess());
     } catch (err) {
       return res.send(new APIError(err));

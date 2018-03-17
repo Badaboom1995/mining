@@ -1,22 +1,22 @@
 import { Model, model, Document, Schema } from 'mongoose';
 
 export interface Investment extends Document {
-  readonly user: string;
+  readonly userId: string;
   readonly currency: string;
   readonly amount: string;
   readonly miningBuild: string;
-  readonly type: string;
+  readonly investmentType: string;
   payed: boolean;
 }
 
 export const InvestmentSchema = new Schema({
-  user: String,
+  userId: String,
   currency: {
     type: String,
     enum: ['bitcoin', 'advcash'],
     default: 'advcash'
   },
-  type: {
+  investmentType: {
     type: String,
     enum: ['mining', 'pool'],
   },
