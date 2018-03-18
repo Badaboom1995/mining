@@ -29,6 +29,9 @@ export class AccountService {
 		try {
 			const response = await api.account.profile();
 			this.account = response.content;
+			if (routingService.history.location.pathname.startsWith('/auth')) {
+				routingService.push('/');
+			}
 		} catch(err) {
 			routingService.push('/auth/login');
 		}

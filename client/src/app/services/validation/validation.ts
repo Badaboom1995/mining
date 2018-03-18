@@ -34,7 +34,7 @@ export class ValidationService {
 	 * @param name validator group name
 	 */
 	@autobind
-	public async validate (name: string = '') : Promise<boolean>  {
+	public validate (name: string = '') : boolean  {
 		const result = this.validators
 			.filter(validator => validator.props.name == name || !name)
 			.map(validator => validator.validate())

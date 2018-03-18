@@ -48,7 +48,8 @@ export class ApiModule {
 			headers: {
 				'Content-Type': options.useFormData ? 'multipart/form-data' : 'application/x-www-form-urlencoded;charset=UTF-8',
 			},
-			withCredentials: true
+			withCredentials: true,
+			validateStatus: (status) => true
 		};
 		// if (TOKEN) config.headers.Authorization = 'Bearer ' + TOKEN;
 
@@ -56,11 +57,17 @@ export class ApiModule {
 
 			return axios(config).then(async response => {
 				this.checkIsAutorized(response);
-				const res = await response.data;
+				const res = response.data || {};
+				
 				if (res.success) return resolve(res);
-				reject(res)
+				reject({
+					success: false,
+					content: res.content || {},
+					message: res.message || ''
+				});
 			}).catch(async response => {
 				this.checkIsAutorized(response);
+				console.log(response.data)
 				reject({
 					success: false,
 					content: {},

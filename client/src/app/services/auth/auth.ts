@@ -44,8 +44,10 @@ export class AuthService {
 	 */
 	@autobind
 	public async logout () {
-
-		routingService.push('/auth/login');
+		try {
+			await api.account.logout();
+			routingService.push('/auth/login');
+		} catch {}
 	}
 
 	/**
@@ -79,7 +81,8 @@ export class AuthService {
 			const response = await api.account.register(registration.email, registration.password);
 			await this.authorize(response.content.token);
 		} catch(error) {
-			registration.errors = error.content || [{ name: 'email', message: error.message,  }];
+			console.log(error)
+			registration.errors = [{ name: 'email', message: error.message,  }];
 		}
 	}
 

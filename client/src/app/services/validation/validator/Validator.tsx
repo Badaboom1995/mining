@@ -51,7 +51,7 @@ export class Validator extends React.Component<IValidatorProps, IValidatorState>
 		isNotContains: (value : any, rule : IValidatorRule ) => value.indexOf(rule.value) == -1,
 		custom: (value : any, rule : IValidatorRule) => rule.value,
 		executeCustom: (value : any, rule : IValidatorRule) => rule.value(),
-		isGreaterOrEqual: (value: any, rule: IValidatorRule) => Number(value) >= Number(rule.value)
+		isGreaterOrEqual: (value: any, rule: IValidatorRule) => Number(value) >= Number(rule.value),
 	}
 	/**
 	 * 

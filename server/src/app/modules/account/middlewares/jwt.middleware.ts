@@ -13,7 +13,8 @@ import { JWT_SECRET } from '../../../config/environments.config';
 export class IsAuthenticated implements NestMiddleware {
   resolve() {
     return async (req: Request, res: Response, next: NextFunction) => {
-      console.log(req.headers.authorization)
+      console.log(req.session)
+      if (req.session) return  next();
       if (
         req.headers.authorization &&
         (req.headers.authorization as string).split(' ')[0] === 'Bearer'

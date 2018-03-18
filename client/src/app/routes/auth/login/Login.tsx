@@ -18,7 +18,6 @@ export class Login extends React.Component<ILoginProps> {
 		
 		const { auth } = this.props;
 		const model = auth.getForm('login');
-		
 
 
 		return (

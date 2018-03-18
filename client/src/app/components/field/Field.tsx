@@ -17,7 +17,6 @@ export class Field extends React.Component<IFieldProps> {
 		onChange: () => {}
 	};
 
-
 	/**
 	 * Change handler
 	 */
@@ -26,17 +25,19 @@ export class Field extends React.Component<IFieldProps> {
 		onChange({ name, value: event.currentTarget.value });
 	}
 
-
 	/**
 	 * Renders field with input and label
 	 */
 	public render() {
-		const { disabled, tabIndex, className, placeholder, label, type, value, ...props } = this.props;
+		const { disabled, tabIndex, error, isError, className, placeholder, label, type, value, ...props } = this.props;
 
 		return (
-			<div className={ classNames('field', className)} >
-				{label && <label className='field__label' >{label}</label>}
-				<input disabled={disabled} tabIndex={tabIndex} className='field__input' placeholder={placeholder} onChange={this.onChange} value={value}  type={type} />
+			<div {...props} className={ classNames('field', className)} >
+				{label && <label onClick={() => (this.refs.input as any).focus()} className='field__label' >{label}</label>}
+				<div className='field__input-box' >
+					<input ref='input' disabled={disabled} tabIndex={tabIndex} className={classNames('field__input', {'field__input--error': isError})} placeholder={placeholder} onChange={this.onChange} value={value}  type={type} />
+					{isError && error && <div className='field__error' >{error}</div>}
+				</div>
 			</div>
 		);
 	}
