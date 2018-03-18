@@ -39,7 +39,7 @@ export class ApiModule {
 	 */
 	protected request = async (url: string, params = {}, options = { method: 'post', useFormData: false }): Promise<any> => {
 
-		const TOKEN = localStorage.getItem('authToken') || '';
+		// const TOKEN = localStorage.getItem('authToken') || '';
 		const data = options.useFormData ? this.bootstrapBody(params) : ApiModule.encodeToURI(params);
 		const config : any = {
 			url: this.baseUrl + url,
@@ -50,7 +50,7 @@ export class ApiModule {
 			},
 			withCredentials: true
 		};
-		if (TOKEN) config.headers.Authorization = 'Bearer ' + TOKEN;
+		// if (TOKEN) config.headers.Authorization = 'Bearer ' + TOKEN;
 
 		return new Promise((resolve, reject) => {
 

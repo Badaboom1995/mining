@@ -5,6 +5,7 @@ import { AuthModel } from './models/auth-model';
 import { routingService } from '../routing/routing';
 import { api } from '../../api/api';
 import { accountService } from '../account/account';
+import { validationService } from '../validation/validation';
 
 
 
@@ -55,6 +56,8 @@ export class AuthService {
 	public async login() {
 		const { login } = this.forms;
 		login.errors = [];
+		if (!validationService.validate()) return;
+
 		try {
 			const response = await api.account.login(login.email, login.password);
 			await this.authorize(response.content.token);
@@ -71,7 +74,7 @@ export class AuthService {
 	public async register() {
 		const { registration } = this.forms;
 		registration.errors = [];
-		console.log(registration)
+		if (!validationService.validate()) return;
 		try {
 			const response = await api.account.register(registration.email, registration.password);
 			await this.authorize(response.content.token);

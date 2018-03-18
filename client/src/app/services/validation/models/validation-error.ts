@@ -2,9 +2,8 @@
 
 
 
-
-
 export class ValidationError {
+
 	/**
 	 * Get error by name from list
 	 */

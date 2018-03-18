@@ -4,6 +4,7 @@ import { Field } from '../../../components/field/Field';
 import { Button } from '../../../components/button/Button';
 import { inject, observer } from 'mobx-react';
 import { withRouter } from '../../../services/index';
+import { Validator } from '../../../services/validation/validator/Validator';
 
 @withRouter
 @inject('auth')
@@ -25,8 +26,12 @@ export class Login extends React.Component<ILoginProps> {
 				auth.login();
 			}} className='login-form' >
 				<div className="auth-form__title">Вход в систему</div>
-				<Field name='email' onChange={model.set}  value={model.email} tabIndex={1} label='Email' />
-				<Field name='password' onChange={model.set}  value={model.password} tabIndex={2} type='password' label='Пароль' />
+				<Validator rules={[{name: 'required'}]} >
+					<Field name='email' onChange={model.set}  value={model.email} tabIndex={1} label='Email' />
+				</Validator>
+				<Validator rules={[{name: 'required'}]} >
+					<Field name='password' onChange={model.set}  value={model.password} tabIndex={2} type='password' label='Пароль' />
+				</Validator>
 				<div className='login-form__footer' >
 					<Button type='submit' tabIndex={3}  >Войти</Button>
 					<div>

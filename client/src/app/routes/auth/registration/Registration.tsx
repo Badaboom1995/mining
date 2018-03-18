@@ -4,6 +4,7 @@ import { Field } from '../../../components/field/Field';
 import { Button } from '../../../components/button/Button';
 import { withRouter } from '../../../services/index';
 import { observer, inject } from 'mobx-react';
+import { Validator } from '../../../services/validation/validator/Validator';
 
 @withRouter
 @inject('auth')
@@ -23,7 +24,9 @@ export class Registration extends React.Component<IRegistrationProps> {
 				auth.register();
 			}} className='registration-form' >
 				<div className='auth-form__title' >Регистрация</div>
-				<Field onChange={model.set}  name='email' value={model.email} tabIndex={1} label='Email' />
+				<Validator rules={[{name: 'required'}, {name: 'email', message: 'Неверный формат'}]} >
+					<Field onChange={model.set}  name='email' value={model.email} tabIndex={1} label='Email' />
+				</Validator>
 				<Field onChange={model.set}  name='password' value={model.password} tabIndex={2} 			 type='password' label='Пароль' />
 				<Field onChange={model.set}  name='retypePassword' value={model.retypePassword} tabIndex={3} type='password' label='Повторите пароль' />
 				<div className='registration-form__footer' >
