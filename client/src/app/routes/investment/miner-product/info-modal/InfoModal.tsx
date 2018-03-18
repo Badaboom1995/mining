@@ -1,16 +1,17 @@
 import { IInfoModalProps } from "./Props";
 import { Card } from "../../../../components/card/Card";
+import { observer, inject } from 'mobx-react';
 
 
 
-
-
+@inject('routing')
+@observer
 export class InfoModal extends React.Component<IInfoModalProps> {
 	/**
 	 * Banner block
 	 */
 	public Banner = () => {
-		const { miner, onClose } = this.props;
+		const { miner, onClose, routing } = this.props;
 		return (
 			<div className='miner-info-modal-banner' >
 				<div className='miner-info-modal-banner__info' >
@@ -20,7 +21,7 @@ export class InfoModal extends React.Component<IInfoModalProps> {
 				<div className='miner-info-modal-banner__price' >
 					${miner.price}
 				</div>
-				<div className='miner-info-modal-banner__button' >Купити</div>
+				<div onClick={routing.push.bind(null, '/investment/methods')} className='miner-info-modal-banner__button' >Купити</div>
 				<div className='miner-info-modal-banner__close' >
 					<i onClick={onClose} className="icon-close-button"></i>
 				</div>

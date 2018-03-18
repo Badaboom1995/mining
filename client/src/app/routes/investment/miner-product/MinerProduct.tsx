@@ -1,8 +1,7 @@
 import { Card } from "../../../components/card/Card";
 import { IMinerProductProps } from "./Props";
 import { InfoModal } from './info-modal/InfoModal';
-
-
+import { observer, inject } from "mobx-react";
 
 
 
@@ -26,7 +25,7 @@ export class MinerProduct extends React.Component<IMinerProductProps> {
 	 * Renders miner product
 	 */
 	public render() {
-		const { miner , prevModal, nextModal} = this.props;
+		const { miner , prevModal, nextModal, routing} = this.props;
 		return (
 			<Card className='investment-miner-product' >
 				<div className='investment-miner-product__header' >
@@ -41,7 +40,9 @@ export class MinerProduct extends React.Component<IMinerProductProps> {
 
 					<div className='investment-miner-product__header-row investment-miner-product__header-bottom-content' >
 						<div onClick={this.toggleModal} className='investment-miner-product__header-more' >Подробнее</div>
-						<div className='investment-miner-product__header-buy-button' >Купить</div>
+						<div className='investment-miner-product__header-buy-button' onClick={() => {
+							routing.push('/investment/methods')
+						}} >Купить</div>
 					</div>
 
 				</div>

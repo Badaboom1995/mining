@@ -94,6 +94,7 @@ export class Investment extends React.Component<IInvestmentProps> {
 								key={index} miner={miner} 
 								prevModal={prevModal}
 								nextModal={nextModal}
+								routing={routing}
 							/>
 						);
 					})}
