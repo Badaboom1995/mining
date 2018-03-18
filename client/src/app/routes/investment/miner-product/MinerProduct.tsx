@@ -13,11 +13,20 @@ export class MinerProduct extends React.Component<IMinerProductProps> {
 	public state = {
 		isVisibleModal: false
 	}
+
+	/**
+	 * Show info modal
+	 */
+	public toggleModal = () => {
+		this.setState({isVisibleModal: !this.state.isVisibleModal});
+	}
+
+
 	/**
 	 * Renders miner product
 	 */
 	public render() {
-		const { miner } = this.props;
+		const { miner , prevModal, nextModal} = this.props;
 		return (
 			<Card className='investment-miner-product' >
 				<div className='investment-miner-product__header' >
@@ -31,15 +40,13 @@ export class MinerProduct extends React.Component<IMinerProductProps> {
 					</div>
 
 					<div className='investment-miner-product__header-row investment-miner-product__header-bottom-content' >
-						<div onClick={() => {
-							this.setState({ isVisibleModal: !this.state.isVisibleModal });
-						}} className='investment-miner-product__header-more' >Подробнее</div>
+						<div onClick={this.toggleModal} className='investment-miner-product__header-more' >Подробнее</div>
 						<div className='investment-miner-product__header-buy-button' >Купить</div>
 					</div>
 
 				</div>
 
-				{this.state.isVisibleModal && <InfoModal onClose={() => this.setState({isVisibleModal: false})} miner={miner} />}
+				{this.state.isVisibleModal && <InfoModal prevModal={prevModal} nextModal={nextModal} onClose={() => this.setState({isVisibleModal: false})} miner={miner} />}
 
 			</Card>
 		)

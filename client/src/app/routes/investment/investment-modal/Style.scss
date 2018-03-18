@@ -8,6 +8,19 @@
     display: flex;
     padding: 39px 46px 29px 46px;
   }
+  &__footer {
+    @extend .flex-row;
+    justify-content: space-between;
+    padding: 0 49px;
+    height: 36px;
+    color: $blue;
+    font-size: 16px;
+    font-weight: 400;
+    background-color: #f5f5f5;
+    div {
+      cursor: pointer;
+    }
+  }
 }
 
 .investment-modal-banner {

@@ -74,7 +74,7 @@ export class InvestmentModal extends React.Component<IInvestmentModalProps> {
 	 */
 	public render() {
 		const { Banner, PeriodRevenueCard, PoolParticipation, props } = this;
-		const { investment } = props;
+		const { investment, prevModal, nextModal } = props;
 		const { investmentParams } = investment;
 
 
@@ -90,7 +90,10 @@ export class InvestmentModal extends React.Component<IInvestmentModalProps> {
 							<PeriodRevenueCard value={investmentParams.perYear} onChange={investmentParams.setPerYear} title='Щорічний' />
 						</div>
 					</div>
-
+					{(prevModal || nextModal) && <div className='investment-modal__footer' >
+						{prevModal && <div onClick={prevModal.onSwitch} className='investment-modal__footer-prev' >{`< ${prevModal.caption}`}</div>}
+						{nextModal && <div onClick={nextModal.onSwitch} className='investment-modal__footer-next' >{`${nextModal.caption} >`}</div>}
+					</div>}
 				</Card>
 			</div>
 		);

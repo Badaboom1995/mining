@@ -79,7 +79,8 @@ export class InfoModal extends React.Component<IInfoModalProps> {
 	 * render
 	 */
 	public render() {
-		const { Banner, Section, SpecGrid } = this;
+		const { Banner, Section, SpecGrid, props } = this;
+		const { prevModal, nextModal } = props;
 		return (
 			<div className='overlay' >
 				<Card className='miner-info-modal' >
@@ -98,6 +99,10 @@ export class InfoModal extends React.Component<IInfoModalProps> {
 						</div>
 
 					</div>
+					{(prevModal || nextModal) && <div className='miner-info-modal__footer' >
+						{prevModal && <div onClick={prevModal.onSwitch} className='miner-info-modal__footer-prev' >{`< ${prevModal.caption}`}</div>}
+						{nextModal && <div onClick={nextModal.onSwitch} className='miner-info-modal__footer-next' >{`${nextModal.caption} >`}</div>}
+					</div>}
 				</Card>
 			</div>
 		);

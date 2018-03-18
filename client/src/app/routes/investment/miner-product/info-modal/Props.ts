@@ -13,4 +13,19 @@ export interface IInfoModalProps {
 	 * Close btn handler
 	 */
 	onClose : any;
+
+		/**
+	 * Prev modal config
+	 */
+	prevModal ? : {
+		caption: string;
+		onSwitch: any;
+	}
+	/**
+	 * Next modal config
+	 */
+	nextModal ? : {
+		caption: string;
+		onSwitch: any;
+	}
 }
