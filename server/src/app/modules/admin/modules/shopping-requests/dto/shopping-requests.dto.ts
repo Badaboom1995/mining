@@ -6,7 +6,7 @@ import {
 
 import { ApiModelProperty } from '@nestjs/swagger';
 
-export class changeStatusShoppingRequest {
+export class changeShoppingRequestStatus {
   @IsNotEmpty()
   @IsString()
   @ApiModelProperty()

@@ -6,7 +6,7 @@ import {
   ShoppingRequest,
 } from '../../../../common/schemas';
 import {
-  changeStatusShoppingRequest,
+  changeShoppingRequestStatus,
 } from '../dto/shopping-requests.dto';
 
 @Component()
@@ -25,7 +25,7 @@ export class ShoppingRequestsService {
     }
   }
 
-  async changeStatusShoppingRequest(dto: changeStatusShoppingRequest) {
+  async changeStatusShoppingRequest(dto: changeShoppingRequestStatus) {
     try {
       const shoppingRequest = await this.shoppingRequestsModel.findOneAndUpdate({_id: dto.id}, { status: dto.status});
       return Promise.resolve(shoppingRequest);
