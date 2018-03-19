@@ -16,4 +16,19 @@ export interface IInvestmentModalProps {
 	 * Routing service
 	 */
 	routing? : RoutingService;
+
+	/**
+	 * Prev modal config
+	 */
+	prevModal ? : {
+		caption: string;
+		onSwitch: any;
+	}
+	/**
+	 * Next modal config
+	 */
+	nextModal ? : {
+		caption: string;
+		onSwitch: any;
+	}
 }

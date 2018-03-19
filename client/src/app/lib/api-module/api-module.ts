@@ -39,7 +39,7 @@ export class ApiModule {
 	 */
 	protected request = async (url: string, params = {}, options = { method: 'post', useFormData: false }): Promise<any> => {
 
-		const TOKEN = localStorage.getItem('authToken') || '';
+		// const TOKEN = localStorage.getItem('authToken') || '';
 		const data = options.useFormData ? this.bootstrapBody(params) : ApiModule.encodeToURI(params);
 		const config : any = {
 			url: this.baseUrl + url,
@@ -48,21 +48,26 @@ export class ApiModule {
 			headers: {
 				'Content-Type': options.useFormData ? 'multipart/form-data' : 'application/x-www-form-urlencoded;charset=UTF-8',
 			},
-			withCredentials: true
+			withCredentials: true,
+			validateStatus: (status) => true
 		};
-		if (TOKEN) {
-			config.headers.Authorization = 'Bearer ' + TOKEN;
-		}
+		// if (TOKEN) config.headers.Authorization = 'Bearer ' + TOKEN;
 
 		return new Promise((resolve, reject) => {
 
 			return axios(config).then(async response => {
 				this.checkIsAutorized(response);
-				const res = await response.data;
+				const res = response.data || {};
+				
 				if (res.success) return resolve(res);
-				reject(res)
+				reject({
+					success: false,
+					content: res.content || {},
+					message: res.message || ''
+				});
 			}).catch(async response => {
 				this.checkIsAutorized(response);
+				console.log(response.data)
 				reject({
 					success: false,
 					content: {},

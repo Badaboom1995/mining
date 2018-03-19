@@ -1,36 +1,13 @@
 import { Card } from "../../components/card/Card";
 import { Field } from "../../components/field/Field";
 import { IMyTeamProps } from "./Props";
+import { TeamGrid } from './team-grid/TeamGrid';
 
 
 
 
 export class MyTeam extends React.Component<IMyTeamProps> {
-	/**
-	 * Data item placeholder
-	 */
-	public dataItem = {
-		name: 'Nick',
-		id: 123456,
-		pp: 0,
-		pv: 0,
-		level: '0/4',
-		earned: 0,
-		invested: 0,
-		vInvested: 0
-	};
-	/**
-	 * Data placeholder
-	 */
-	public data = [
-		this.dataItem,
-		this.dataItem,
-		this.dataItem,
-		this.dataItem,
-		this.dataItem,
-		this.dataItem
-	];
-
+	
 
 	/**
 	 * renders my team page
@@ -47,8 +24,8 @@ export class MyTeam extends React.Component<IMyTeamProps> {
 							<i className='icon-search' ></i>
 						</div>
 					</div>
-
-					<div className='my-team-grid' >
+					<TeamGrid />
+					{/* <div className='my-team-grid' >
 						<div className='my-team-grid__header' >
 							<div className='my-team-grid__column-name' >
 								Ім’я
@@ -99,7 +76,7 @@ export class MyTeam extends React.Component<IMyTeamProps> {
 								)
 							})}
 						</div>
-					</div>
+					</div> */}
 				</Card>
 			</div>
 		);

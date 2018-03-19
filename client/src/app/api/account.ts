@@ -42,4 +42,8 @@ export class AccountApi extends ApiModule {
 	 * @memberof AccountApi
 	 */
 	public changePassword = (oldPassword: string, newPassword: string) => this.request('/account/change-password', {oldPassword, newPassword});
+	/**
+	 * Logout from account
+	 */
+	public logout = () => this.request('/account/logout');
 }

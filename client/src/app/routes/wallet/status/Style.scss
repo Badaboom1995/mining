@@ -1,0 +1,44 @@
+
+.wallet-invest {
+	width: 470px;
+	min-height: 329px;
+	margin-bottom: 28px;
+	padding: 13px 26px;
+	padding-right: 15px;
+	color: #fff;
+	background-image: linear-gradient(135deg, #6d74ff 0%, #084bea 100%, #c86dd7 100%);
+	&__title {
+		margin-bottom: 24px;
+		font-size: 22px;
+	}
+	&__days {
+		margin-bottom: 20px;
+		font-size: 55px;
+		font-weight: 300;
+		text-align: right;
+	}
+	&__reinvest-caption {
+		margin-bottom: 15px;
+		font-size: 18px;
+	}
+	&__radios {
+		@extend .flex-row;
+		margin-bottom: 20px;
+		.radio {
+			margin-right: 20px;
+		}
+	}
+	&__reinvest-selection {
+		display: flex;
+		align-items: flex-start;
+		margin-bottom: 38px;
+		&-caption {
+			margin-right: 18px;
+			font-size: 18px;
+			font-weight: 400;
+		}
+	}
+	&__select {
+		width: 290px;
+	}
+}

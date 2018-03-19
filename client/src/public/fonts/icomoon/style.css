@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?k4ug2o');
-  src:  url('fonts/icomoon.eot?k4ug2o#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?k4ug2o') format('truetype'),
-    url('fonts/icomoon.woff?k4ug2o') format('woff'),
-    url('fonts/icomoon.svg?k4ug2o#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?w345kd');
+  src:  url('fonts/icomoon.eot?w345kd#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?w345kd') format('truetype'),
+    url('fonts/icomoon.woff?w345kd') format('woff'),
+    url('fonts/icomoon.svg?w345kd#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,62 +24,63 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-close-button:before {
-  content: "\e90e";
-  color: #fff;
-}
 .icon-wallet:before {
   content: "\e900";
-  color: #000;
+  color: #63ded9;
 }
 .icon-twitter:before {
   content: "\e901";
-  color: #000;
+  color: #d6d6d6;
 }
 .icon-telegram:before {
   content: "\e902";
-  color: #000;
+  color: #d6d6d6;
 }
 .icon-stats:before {
   content: "\e903";
-  color: #000;
+  color: #2fbefe;
 }
 .icon-search:before {
   content: "\e904";
-  color: #000;
+  color: #1d8dc3;
 }
 .icon-instagram:before {
   content: "\e905";
-  color: #000;
+  color: #d6d6d6;
 }
 .icon-flag:before {
   content: "\e906";
-  color: #000;
+  color: #d0011b;
 }
 .icon-facebook:before {
   content: "\e907";
-  color: #000;
+  color: #d6d6d6;
 }
 .icon-exclamation:before {
   content: "\e908";
-  color: #000;
+  color: #2faff3;
 }
 .icon-done:before {
   content: "\e909";
-  color: #000;
+  color: #8bc34a;
+}
+.icon-close-button:before {
+  content: "\e90a";
+  color: #fff;
 }
 .icon-calendar:before {
-  content: "\e90a";
-  color: #000;
+  content: "\e90b";
+  color: #1d8dc3;
 }
 .icon-bell:before {
-  content: "\e90b";
-  color: #000;
+  content: "\e90c";
+  color: #1d8dc3;
 }
 .icon-award:before {
-  content: "\e90c";
-  color: #000;
+  content: "\e90d";
+  color: #93c2f1;
 }
 .icon-arrow-down:before {
-  content: "\e90d";
+  content: "\e90e";
+  color: #fff;
 }

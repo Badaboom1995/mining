@@ -1,4 +1,5 @@
 import { Miner } from "../../../../services/investment/model/miner";
+import { RoutingService } from "../../../../services/routing/routing";
 
 
 
@@ -13,4 +14,22 @@ export interface IInfoModalProps {
 	 * Close btn handler
 	 */
 	onClose : any;
+	/**
+	 * Routing service
+	 */
+	routing? : RoutingService;
+		/**
+	 * Prev modal config
+	 */
+	prevModal ? : {
+		caption: string;
+		onSwitch: any;
+	}
+	/**
+	 * Next modal config
+	 */
+	nextModal ? : {
+		caption: string;
+		onSwitch: any;
+	}
 }

@@ -24,6 +24,29 @@ export class Investment extends React.Component<IInvestmentProps> {
 	 * Toggle investment modal
 	 */
 	public toggleInvestmentModal = () => this.setState({ isVisibleInvestmentModal: !this.state.isVisibleInvestmentModal });
+
+	/**
+	 * Switch investment modal to miner modal
+	 */
+	public onSwitchFromInvestmentModal = (refName : string) => {
+		const miner : MinerProduct = this.refs[refName] as MinerProduct;
+		this.toggleInvestmentModal();
+		miner.toggleModal();
+	}
+	/**
+	 * Switch from miner info modal to invest modal
+	 */
+	public onSwitchFromMinerToInvest = (index : number) => {
+		(this.refs[`miner${index}`] as MinerProduct).toggleModal();
+		this.setState({ isVisibleInvestmentModal: true });
+	}
+	/**
+	 * Switch between miner modals
+	 */
+	public onSwitchBetweenMinerInfoModals = (from : number, to : number) => {
+		(this.refs[`miner${from}`] as MinerProduct).toggleModal();
+		(this.refs[`miner${to}`] as MinerProduct).toggleModal();
+	}
 	/**
 	 * render
 	 */
@@ -38,8 +61,41 @@ export class Investment extends React.Component<IInvestmentProps> {
 
 				<div className='investment__products' >
 					{investment.miners.map((miner, index) => {
+						let prevModal, nextModal;
+						if (index == 0 ) {
+							prevModal = {
+								caption: 'Участь в пуле',
+								onSwitch: () => this.onSwitchFromMinerToInvest(index)
+							}
+						} else {
+							prevModal = {
+								caption: investment.miners[index - 1].name,
+								onSwitch: () => this.onSwitchBetweenMinerInfoModals(index, index - 1)
+							}
+						}
+						if (index == investment.miners.length - 1) {
+							nextModal = {
+								caption: 'Участь в пуле',
+								onSwitch: () => this.onSwitchFromMinerToInvest(index)
+							}
+						} else {
+							nextModal = {
+								caption: investment.miners[index + 1].name,
+								onSwitch: () => this.onSwitchBetweenMinerInfoModals(index, index  + 1)
+							}
+						}
+
+
+
+
 						return (
-							<MinerProduct key={index} miner={miner} />
+							<MinerProduct 
+								ref={`miner${index}`} 
+								key={index} miner={miner} 
+								prevModal={prevModal}
+								nextModal={nextModal}
+								routing={routing}
+							/>
 						);
 					})}
 				</div>
@@ -76,7 +132,13 @@ export class Investment extends React.Component<IInvestmentProps> {
 				</div>
 
 				
-				{this.state.isVisibleInvestmentModal && <InvestmentModal onClose={this.toggleInvestmentModal} />}
+				{this.state.isVisibleInvestmentModal && 
+					<InvestmentModal 
+						onClose={this.toggleInvestmentModal} 
+						prevModal={{caption: investment.miners[0].name, onSwitch: this.onSwitchFromInvestmentModal.bind(this, 'miner0') }}
+						nextModal={{caption: investment.miners[1].name, onSwitch: this.onSwitchFromInvestmentModal.bind(this, 'miner1') }}
+					/>
+				}
 			</div>
 		);
 

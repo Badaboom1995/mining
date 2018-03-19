@@ -1,0 +1,73 @@
+@import './info-popup/Style.scss';
+.my-team-grid {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  &__header {
+    th {
+      text-align: left;
+      height: 38px;
+      padding-left: 12px;
+      color: $blue;
+	  border-bottom: 1px solid $blue;
+	  &:nth-of-type(1) {
+        width: 163px;
+      }
+      &:nth-of-type(2) {
+        width: 120px;
+      }
+      &:nth-of-type(3) {
+        width: 88px;
+      }
+      &:nth-of-type(4) {
+        width: 88px;
+      }
+      &:nth-of-type(5) {
+        width: 105px;
+      }
+      &:nth-of-type(6) {
+        width: 144px;
+      }
+      &:nth-of-type(7) {
+        width: 108px;
+      }
+      &:nth-of-type(8) {
+        width: 90px;
+      }
+    }
+  }
+  &__body {
+    tr {
+      font-size: 14px;
+      color: #6a6a6a;
+      transition: 0.4s;
+      &:hover {
+		background-color: rgba(29, 141, 195, 0.1);
+		.my-team-grid-info-popover {
+			display: block;
+		}
+      }
+      td {
+		  position: relative;
+        padding: 11.5px 0;
+        padding-left: 12px;
+        height: 100%;
+      }
+    }
+  }
+  &__status {
+		position: absolute;
+		right: 10px;
+		top: 50%;
+		transform: translateY(-50%);
+		@extend .flex-centered;
+		height: 18px;
+		padding: 0 13px;
+		color: #ffffff;
+		font-size: 12px;
+		&--info {
+			border-radius: 100px;
+			background-color: #3cbdb6;
+		}
+	}
+}

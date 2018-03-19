@@ -40,5 +40,12 @@ export interface IFieldProps {
 	 * Is field disabled
 	 */
 	disabled? : boolean;
-
+	/**
+	 * Is erorr in field
+	 */
+	isError? : boolean;
+	/**
+	 * Error content
+	 */
+	error? : any;
 }

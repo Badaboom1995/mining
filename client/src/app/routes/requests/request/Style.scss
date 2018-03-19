@@ -1,0 +1,28 @@
+
+
+.request-item {
+	@extend .request-grid-columns;
+	padding: 15px 20px;
+	font-size: 14px;
+	font-weight: 300;
+	color: #777777;
+	background: #fff;
+	&__trust {
+		@extend .flex-row;
+		.icon-flag {
+			margin-right: 14px;
+		}
+	}
+
+	&__status {
+		@extend .flex-row;
+		&-indicator {
+			@include size(8px);
+			margin-right: 9px;
+			background-color: #8bc34a;
+			border-radius: 50%;
+
+		}
+	}
+	
+}

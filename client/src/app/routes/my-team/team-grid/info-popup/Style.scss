@@ -1,0 +1,45 @@
+
+.my-team-grid-info-popover {
+	position: absolute;
+	top: 100%;
+	left: 65%;
+	z-index: 20;
+	display: none;
+	width: 262px;
+	min-height: 250px;
+	padding: 25px 15px;
+	padding-bottom: 0;
+
+	border-radius: 5px;
+	background-color: rgba(255, 255, 255, 0.8);
+	border: 1px solid #50e7b8;
+	&__nick-title {
+		margin-bottom: 5px;
+		font-size: 16px;
+		font-weight: 400;
+		color: $blue;
+	}
+	&__nick {
+		font-size: 15px;
+		margin-bottom: 30px;
+		color: $blue;
+	}
+	&__sub-title {
+		margin-bottom: 5px;
+		font-size: 16px;
+		font-weight: 300;
+		color: #4a4a4a;
+	}
+	&__sub-value {
+		margin-bottom: 25px;
+		font-size: 15px;
+		color: $blue;
+	}
+	&::after {
+		content: 'info';
+		position: absolute;
+		top: 5px;
+		right: 10px;
+		color: #50e7b8;
+	}
+}

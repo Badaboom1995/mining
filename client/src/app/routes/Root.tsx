@@ -5,6 +5,7 @@ import { Auth } from './auth/Auth';
 import { IRootProps } from './Props';
 import { inject, observer } from 'mobx-react';
 import { withRouter } from '../services/index';
+import { Requests } from './requests/Requests';
 
 @withRouter
 @inject('account')
@@ -14,8 +15,8 @@ export class Root extends React.Component<IRootProps> {
 	 * Get profile to check is logged
 	 */
 	public componentDidMount() {
-		// const { account } = this.props;
-		// account.get();
+		const { account } = this.props;
+		account.get();
 	}
 
 	/**
@@ -24,13 +25,14 @@ export class Root extends React.Component<IRootProps> {
 	public render() {
 		const { account } = this.props;
 
-		// if (!account.isAppLoaded) return null;
+		if (!account.isAppLoaded) return null;
 
 		return (
 			<div>
 				<Switch>
 					<Route component={Auth} path='/auth' />
 					<Route component={Uikit} path='/uikit' />
+					<Route component={Requests} path='/requests' />
 					<Route component={MainPage} path='/' />
 				</Switch>
 			</div>

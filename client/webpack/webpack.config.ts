@@ -35,8 +35,10 @@ export class WebpackConfig {
 						)
 					}
 				}),
+				WebpackConfig.uglifyJsPlugin(),
 				new Visualizer()
 			);
+			
 		}
 
 		if (isServer) {
@@ -122,7 +124,9 @@ export class WebpackConfig {
 	}
 
 
-
+	/**
+	 * Ugllify js plugin for prod
+	 */
 	private static uglifyJsPlugin = () => (
 		new webpack.optimize.UglifyJsPlugin({
 			output: {

@@ -3,6 +3,7 @@ import { authService } from './auth/auth';
 import { investmentService } from './investment/investment';
 import { routingService } from './routing/routing';
 import { uiService } from './ui/ui';
+import { validationService } from './validation/validation';
 
 
 
@@ -17,4 +18,5 @@ export const services = {
 	investment: investmentService,
 	routing: routingService,
 	ui: uiService,
+	validation: validationService
 };

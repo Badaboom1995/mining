@@ -195,7 +195,7 @@ export class AccountController {
     }
   }
 
-  @Get('logout')
+  @Post('logout')
   @ApiBearerAuth()
   @ApiOperation({ title: 'Logout user for site' })
   @ApiResponse({
@@ -254,4 +254,5 @@ export class AccountController {
       res.send(new APIError(err));
     }
   }
+
 }

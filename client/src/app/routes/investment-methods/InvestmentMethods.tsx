@@ -30,16 +30,16 @@ export class InvestmentMethods extends React.Component<IInvestmentMethodsProps> 
 		const {InvestmentMethod} = this;
 		return (
 			<div className='investment-methods' >
-				<h1 className='main-page__content-title' >Инвестиции</h1>
+				<h1 className='main-page__content-title' >Оплата</h1>
 				<div className='investment-methods__list' >
 					<InvestmentMethod 
-						title='Инвестировать через Advcash'
+						title='Оплата через Advcash'
 						currency='USD'
 						balance='22.8'
 						onSelect={() => {}}
 					/>
 					<InvestmentMethod 
-						title='Инвестировать через block.io'
+						title='Оплата через block.io'
 						currency='BTC'
 						balance='0.072313'
 						onSelect={() => {}}
