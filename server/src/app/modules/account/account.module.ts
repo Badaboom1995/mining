@@ -17,9 +17,8 @@ import {
 } from './passport';
 import { SecretKey } from './passport/secretKeys';
 import { AccountService } from './services';
-import { IsAuthenticated } from './middlewares';
 import { MailgunService } from '../common/mailgun.service';
-import { ImageUploadMiddleware } from './middlewares';
+import { ImageUploadMiddleware, EnsureLoggedInMiddleware} from './middlewares';
 
 @Module({
   controllers: [AccountController],
@@ -30,17 +29,18 @@ import { ImageUploadMiddleware } from './middlewares';
     FacebookStrategyConnect,
     LocalLoginStrategy,
     LocalRegisterStrategy,
-    IsAuthenticated,
+    EnsureLoggedInMiddleware,
     SecretKey,
     AccountService,
     MailgunService,
+    EnsureLoggedInMiddleware,
   ],
 })
 export class AccountModule implements NestModule {
   public configure(consumer: MiddlewaresConsumer) {
-    // JWT verification
+    // isAuthorized Middleware
     consumer
-      .apply(IsAuthenticated)
+      .apply(EnsureLoggedInMiddleware)
       .forRoutes(
         { path: '/contacts/*', method: RequestMethod.ALL },
         { path: '/notifications/*', method: RequestMethod.ALL },

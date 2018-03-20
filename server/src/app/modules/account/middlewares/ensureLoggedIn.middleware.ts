@@ -1,4 +1,4 @@
-import { Middleware, NestMiddleware, ExpressMiddleware } from '@nestjs/common';
+import { Middleware, NestMiddleware, ExpressMiddleware, HttpStatus, HttpException } from '@nestjs/common';
 import { NextFunction, Request, Response } from 'express';
 
 @Middleware()
@@ -9,7 +9,10 @@ export class EnsureLoggedInMiddleware implements NestMiddleware {
         if (req.session) {
           req.session.returnTo = req.path;
         }
-        res.redirect('/account/login');
+        throw new HttpException(
+          { success: false, message: 'Unauthorized' },
+          HttpStatus.UNAUTHORIZED,
+        );
       }
       next();
     };
