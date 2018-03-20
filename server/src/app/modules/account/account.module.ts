@@ -158,6 +158,8 @@ export class AccountModule implements NestModule {
       .apply(
         passport.authenticate('local-register', {
           successRedirect: '/account/callback',
+        }, (req) => {
+          return req.user;
         }),
       )
       .forRoutes({ path: '/account/register', method: RequestMethod.POST });

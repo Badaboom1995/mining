@@ -11,17 +11,27 @@ export class LocalLoginStrategy extends Strategy {
       {
         usernameField: 'email',
         passwordField: 'password',
+        passReqToCallback: true,
+        
       },
-      async (email, password, done) => await this.logIn(email, password, done),
+      async (req, email, password, done) => {         
+        await this.logIn(email, password, done)
+          req.login({}, (err) => {
+            console.log('DONE');
+          });
+      }
     );
 
     passport.use('local-login', this);
 
     passport.serializeUser((user: any, done) => {
+      console.log(user, 'SERIALIZE');
       done(null, user._id);
     });
 
     passport.deserializeUser(async (_id, done) => {
+      console.log(_id, 'DESERIALIZE');
+      
       try {
         const user = await Users.findOne({_id});
         if (user) {
