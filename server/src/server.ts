@@ -6,6 +6,7 @@ import { DatabaseExceptionFilter } from './app/modules/common/filters/database-e
 import { ValidationPipe } from './app/modules/common/pipe/validation.pipe';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import expressApp from './app/config/express.config';
+import { RolesGuard } from "./app/modules/common/guards";
 
 async function bootstrap() {
   const app = await NestFactory.create(ApplicationModule, expressApp);

@@ -50,7 +50,12 @@ const UserSchema = new Schema(
     facebookAccount: { type: Object, default: null },
 
     balance: { type: Number, default: 0 },
-    address: { type: Object, default: null }
+    address: { type: Object, default: null },
+    roles: {
+      type: String,
+      enum: ['user', 'manager', 'admin'],
+      default: 'user',
+    },
   },
   { timestamps: true },
 );

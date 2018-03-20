@@ -1,12 +1,23 @@
-import { Controller, Post, Body, Req, Res, Get } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Req,
+  Res,
+  Get,
+  UseGuards,
+} from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiUseTags } from '@nestjs/swagger';
 import { changeUserAddressDto } from '../dto/users.dto';
 import { UsersListService } from '../services';
 import { APISuccess, APIError } from '../../../../../helpers';
 import { AccountService } from '../../../../account/services/account.service';
+import { Roles } from '../../../../common/decorators';
+import { RolesGuard } from '../../../../common/guards';
 
 @ApiUseTags('admin/users')
 @Controller('/')
+@UseGuards(RolesGuard)
 export class UsersListController {
   constructor(
     private readonly accountService: AccountService,
@@ -14,6 +25,7 @@ export class UsersListController {
   ) {}
 
   @Post('/list')
+  @Roles('admin')
   @ApiBearerAuth()
   @ApiOperation({ title: 'Get Users list' })
   async findAllUsers(@Req() req, @Res() res) {
@@ -26,6 +38,7 @@ export class UsersListController {
   }
 
   @Post('/edit')
+  @Roles('admin')
   @ApiOperation({ title: 'Change user miner address' })
   async changeUserAddress(
     @Req() req,
