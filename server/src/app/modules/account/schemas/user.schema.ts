@@ -52,6 +52,7 @@ const UserSchema = new Schema(
     facebookAccount: { type: Object, default: null },
 
     balance: { type: Number, default: 0 },
+    address: { type: Object, default: null }
   },
   { timestamps: true },
 );

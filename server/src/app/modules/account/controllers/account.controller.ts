@@ -119,10 +119,7 @@ export class AccountController {
   async resetPassword(@Req() req, @Res() res, @Query('token') token: string) {
     try {
       await this.accountService.findUserByResetToken(token);
-      return res.render('account/reset-password', {
-        title: 'Reset password',
-        token,
-      });
+      return res.send(new APISuccess());
     } catch (err) {
       return res.send(new APIError(err));
     }

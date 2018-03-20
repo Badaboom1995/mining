@@ -264,4 +264,13 @@ export class AccountService {
       return Promise.reject('Unhadled error');
     }
   }
+
+  async findAllUsers() {
+    try {
+      const list = await Users.find();
+      return Promise.resolve(list);
+    } catch (err) {
+      return Promise.reject("Can't get users list");
+    }
+  }
 }
