@@ -51,7 +51,6 @@ export class AccountController {
       'Return JWT token if user is using desktop or redirect to DeepLinking if current device is mobile',
   })
   async callback(@Req() req, @Res() res) {
-    console.log('req', req.session, req.isAuthenticated());
     const isOAuth = req.query.oauth;
     const data = await this.accountService.createToken(
       req.user._id,
