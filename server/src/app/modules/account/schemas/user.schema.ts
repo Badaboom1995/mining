@@ -1,7 +1,6 @@
 import { User } from '../interfaces/user.interface';
 import { Document, Schema, Error, Model, model } from 'mongoose';
 import * as bcrypt from 'bcrypt-nodejs';
-import * as crypto from 'crypto';
 import * as Promise from 'bluebird';
 
 const bcryptAsync: any = Promise.promisifyAll(bcrypt);
@@ -9,7 +8,6 @@ const bcryptAsync: any = Promise.promisifyAll(bcrypt);
 export interface IUserModel extends User, Document {
   comparePassword?: (candidatePassword: string) => boolean;
   generateHash?: (password: string) => string;
-  gravatar?: (size: number) => string;
   deviceInstance?: any;
   firstName?: string;
   lastName?: string;
@@ -82,20 +80,6 @@ UserSchema.methods.comparePassword = function(candidatePassword: string) {
   } catch (err) {
     throw err;
   }
-};
-
-UserSchema.methods.gravatar = function(size: number) {
-  if (!size) {
-    size = 200;
-  }
-  if (!this.email) {
-    return `https://gravatar.com/avatar/?s=${size}&d=retro`;
-  }
-  const md5 = crypto
-    .createHash('md5')
-    .update(this.email)
-    .digest('hex');
-  return `https://gravatar.com/avatar/${md5}?s=${size}&d=retro`;
 };
 
 export const Users: Model<IUserModel> = model<IUserModel>('users', UserSchema);
