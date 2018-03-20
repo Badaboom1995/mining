@@ -12,7 +12,7 @@ export class ZecApi extends CurrencyApi {
 	 * @returns {Promise<ICurrencyTransaction[]>} 
 	 * @memberof ZenApi
 	 */
-	public async getTransactions(date : Date, transactionType = 'minerReward'): Promise<ICurrencyTransaction[]> {
+	public async getTransactions(date : Date, transactionType : string = ''): Promise<ICurrencyTransaction[]> {
 		const transactions : ICurrencyTransaction[] = await this.getTransactionsFromDateToNow(date);
 		const minerRewardTransactions = transactions.filter(transaction => {
 			if (transactionType) return transaction.type == transactionType;
@@ -37,8 +37,7 @@ export class ZecApi extends CurrencyApi {
 		let times = 0;
 		do {	
 			const part = await this.getAccountRcv(offset);
-			console.log('PART : ', part.length)
-			if (!part.length) break;
+			if (part && !part.length) break;
 			part.map(({ timestamp, value, type, index }) => {
 				const transactionTime = timestamp * 1000;
 				// if transaction goes before passede date stop iteration
@@ -72,7 +71,9 @@ export class ZecApi extends CurrencyApi {
 		try {
 			const { data } = await axios.get(`https://api.zcha.in/v2/mainnet/accounts/${this.address}/recv?limit=${limit}&offset=${offset}`);
 			return data;
-		} catch(error) { }
+		} catch(error) { 
+			return [];
+		}
 	}
 
 

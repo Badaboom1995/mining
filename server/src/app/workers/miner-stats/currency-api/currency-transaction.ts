@@ -9,7 +9,7 @@ export interface ICurrencyTransaction {
 	 * @type {string}
 	 * @memberof ICurrencyTransaction
 	 */
-	type : string;
+	type? : string;
 	/**
 	 * Transaction value
 	 */
