@@ -1,9 +1,12 @@
-import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
-
+import { Module} from '@nestjs/common';
+import { AdminController } from "./controllers";
 
 @Module({
-  imports: [
+  imports: [],
+  controllers: [
+    AdminController
   ],
+  components: []
 })
+
 export class AdminModule {}

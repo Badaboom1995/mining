@@ -8,7 +8,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import {
   ShoppingRequestsSchema,
 } from '../../../common/schemas';
-import { ShoppingRequests } from './controllers';
+import { ShoppingRequestsController } from './controllers';
 import { ShoppingRequestsService } from './services';
 import { AccountService } from '../../../account/services';
 
@@ -16,7 +16,7 @@ import { AccountService } from '../../../account/services';
   imports: [
     MongooseModule.forFeature([{ name: 'shopping-requests', schema: ShoppingRequestsSchema }]),
   ],
-  controllers: [ShoppingRequests],
+  controllers: [ShoppingRequestsController],
   components: [ShoppingRequestsService, AccountService],
 })
 
