@@ -20,3 +20,16 @@ export class changeUserAddressDto {
   @ApiModelProperty()
   zcash: string;
 }
+
+export class changeUserRoleDto {
+  @IsNotEmpty()
+  @IsString()
+  @ApiModelProperty()
+  user: string;
+  @IsNotEmpty()
+  @IsString()
+  @IsEnum(['user', 'manager', 'admin'])
+  @ApiModelProperty()
+  role: string;
+}
+

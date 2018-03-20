@@ -4,14 +4,13 @@ import {
   Body,
   Req,
   Res,
-  Get,
   UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiUseTags } from '@nestjs/swagger';
-import { changeUserAddressDto } from '../dto/users.dto';
+import { changeUserAddressDto, changeUserRoleDto } from '../dto/users.dto';
 import { UsersListService } from '../services';
 import { APISuccess, APIError } from '../../../../../helpers';
-import { AccountService } from '../../../../account/services/account.service';
+import { AccountService } from '../../../../account/services';
 import { Roles } from '../../../../common/decorators';
 import { RolesGuard } from '../../../../common/guards';
 
@@ -37,8 +36,8 @@ export class UsersListController {
     }
   }
 
-  @Post('/edit')
-  @Roles('admin')
+  @Post('/address')
+  @Roles('manager')
   @ApiOperation({ title: 'Change user miner address' })
   async changeUserAddress(
     @Req() req,
@@ -47,6 +46,22 @@ export class UsersListController {
   ) {
     try {
       await this.userListService.changeUserAddress(dto);
+      return res.send(new APISuccess());
+    } catch (err) {
+      return res.send(new APIError(err));
+    }
+  }
+
+  @Post('/role')
+  @Roles('admin')
+  @ApiOperation({ title: 'Change user role' })
+  async changeUserRole(
+    @Req() req,
+    @Res() res,
+    @Body() dto: changeUserRoleDto,
+  ) {
+    try {
+      await this.userListService.changeUserRole(dto);
       return res.send(new APISuccess());
     } catch (err) {
       return res.send(new APIError(err));
