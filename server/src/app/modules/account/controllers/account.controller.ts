@@ -36,25 +36,14 @@ export class AccountController {
     private readonly mailService: MailgunService,
   ) {}
 
-  @Get('login')
-  @ApiOperation({ title: 'Render login page' })
-  getLogin(@Req() req, @Res() res) {
-    res.render('account/login', {
-      title: 'Login',
-    });
-  }
-
-  @Get('support')
-  @ApiOperation({ title: 'Render support page' })
-  renderSupportPage(@Req() req, @Res() res) {
-    res.render('support/index', {
-      title: 'Support',
-    });
-  }
-
   @Post('login')
   @ApiOperation({ title: 'Login user' })
   Login(@Req() req, @Res() res, @Body() LoginUserDto: LoginUserDto) {}
+
+  @Post('register')
+  @ApiOperation({ title: 'Register new user using local-strategy' })
+  Register(@Req() req, @Res() res, @Body() LoginUserDto: LoginUserDto) {}
+
 
   @Get('/callback')
   @ApiOperation({
@@ -146,18 +135,6 @@ export class AccountController {
     }
   }
 
-  @Get('register')
-  @ApiOperation({ title: 'Render register page' })
-  getRegister(@Req() req, @Res() res) {
-    res.render('account/register', {
-      title: 'Register',
-    });
-  }
-
-  @Post('register')
-  @ApiOperation({ title: 'Register new user using local-strategy' })
-  Register(@Req() req, @Res() res, @Body() LoginUserDto: LoginUserDto) {}
-
   @Post('settings')
   @ApiBearerAuth()
   @ApiOperation({ title: 'Update user data' })
@@ -169,7 +146,7 @@ export class AccountController {
     try {
       await this.accountService.updateProfile(req.user._id, UserDto);
       return res.send(
-        new APISuccess(false, 'The user data has been successfully updated'),
+        new APISuccess(null, 'The user data has been successfully updated'),
       );
     } catch (err) {
       return res.send(new APIError(err));
@@ -179,7 +156,6 @@ export class AccountController {
   @Post('settings/avatar')
   @ApiBearerAuth()
   @ApiOperation({ title: 'Upload new user avatar' })
-  //TODO: Add Swagger API description
   async updateProfileAvatar(@Req() req, @Res() res) {
     try {
       await this.accountService.updateProfileAvatar(
@@ -199,10 +175,10 @@ export class AccountController {
     status: 201,
     description: 'User has been logged out by the server.',
   })
-  logout(@Req() req, @Res() res) {
-    req.logout();
+  async logout(@Req() req, @Res() res) {
+    await req.logout();
     return res.send(
-      new APISuccess(false, 'User has been logged out by the server.'),
+      new APISuccess(null, 'User has been logged out by the server.'),
     );
   }
 
@@ -226,7 +202,7 @@ export class AccountController {
   @ApiOperation({ title: 'Unlink oAuth account [type: facebook or google]' })
   async unLinkAccount(@Req() req, @Res() res, @Body() UnlinkDto: UnlinkDto) {
     try {
-      const user = await this.accountService.unLinkAccount(
+      await this.accountService.unLinkAccount(
         UnlinkDto,
         req.user._id,
       );
@@ -251,5 +227,4 @@ export class AccountController {
       res.send(new APIError(err));
     }
   }
-
 }
