@@ -1,6 +1,6 @@
 import { Model, model, Document, Schema } from 'mongoose';
 
-export interface ShoppingRequest extends Document {
+export interface IShoppingRequest extends Document {
   readonly userId: string;
   readonly miningBuild: string;
   readonly transactionId: string;

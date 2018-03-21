@@ -11,8 +11,7 @@ export interface IUserModel extends User, Document {
   deviceInstance?: any;
   firstName?: string;
   lastName?: string;
-
-
+  balance?: string;
 }
 
 const UserSchema = new Schema(
@@ -44,7 +43,7 @@ const UserSchema = new Schema(
       enum: ['local', 'facebook', 'google'],
       default: '',
     },
-    reciveNotifications: { type: Boolean, default: false },
+    receiveNotifications: { type: Boolean, default: false },
 
     deviceInstance: { type: Object, default: null },
 
@@ -52,14 +51,29 @@ const UserSchema = new Schema(
     facebookAccount: { type: Object, default: null },
 
     address: { type: Object, default: null },
-  
-    
+
+
     balance: {
       eth: {
         type: Number,
         default: 0
       },
-      zec: {
+      zcash: {
+        type: Number,
+        default: 0
+      },
+      usd: {
+        type: Number,
+        default: 0
+      }
+    },
+
+    earned: {
+      eth: {
+        type: Number,
+        default: 0
+      },
+      zcash: {
         type: Number,
         default: 0
       },

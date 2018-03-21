@@ -6,11 +6,11 @@ import { AccountService } from '../../account/services';
 import { Users } from '../../account/schemas/user.schema';
 import {
   InvestmentSchema,
-  Investment,
+  IInvestment,
   TransactionsSchema,
-  Transactions,
+  ITransactions,
   ShoppingRequestsSchema,
-  ShoppingRequest,
+  IShoppingRequest,
 } from '../../common/schemas/index';
 import {
   CreateInvestmentDto,
@@ -27,11 +27,11 @@ import {
 export class InvestmentService {
   constructor(
     @InjectModel(InvestmentSchema)
-    private readonly investmentModel: Model<Investment>,
+    private readonly investmentModel: Model<IInvestment>,
     @InjectModel(TransactionsSchema)
-    private readonly transactionsModel: Model<Transactions>,
+    private readonly transactionsModel: Model<ITransactions>,
     @InjectModel(ShoppingRequestsSchema)
-    private readonly shoppingRequestsModel: Model<ShoppingRequest>,
+    private readonly shoppingRequestsModel: Model<IShoppingRequest>,
     private readonly accountService: AccountService,
   ) {}
 

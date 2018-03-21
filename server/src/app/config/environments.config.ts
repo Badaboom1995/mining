@@ -26,3 +26,5 @@ export const BLOCK_IO_VERSION = process.env.BLOCK_IO_VERSION || 2;
 export const ADVCASH_EMAIL = process.env.ADVCASH_EMAIL || '5014-0ec6-d237-d28d';
 export const ADVCASH_ORGANIZATION = process.env.ADVCASH_ORGANIZATION || 'newbabylon';
 export const ADVCASH_SECRET = process.env.ADVCASH_SECRET || 2;
+
+export const ETH_APIKEY = process.env.ETH_APIKEY || 'NA23E58FGS35PG5UV2IZI3DKGVWFSXW5GV';

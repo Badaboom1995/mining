@@ -52,7 +52,7 @@ export class ProfileModel {
     user.firstName = _user.firstName;
     user.secondName = _user.secondName;
     user.lastName = _user.lastName;
-    user.reciveNotifications = _user.reciveNotifications;
+    user.receiveNotifications = _user.receiveNotifications;
     user.invitedBy = _user.invitedBy;
     user.registrationType = _user.registrationType;
     user.contactEmail = _user.contactEmail;

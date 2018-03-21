@@ -1,8 +1,9 @@
 import { Model, model, Document, Schema } from 'mongoose';
 
-export interface Transactions extends Document {
+export interface ITransactions extends Document {
   userId: string;
-  type: string;
+  transactionType: string;
+  currency: string;
   amount: string;
 }
 
@@ -14,13 +15,18 @@ export const TransactionsSchema = new Schema({
   },
   transactionType: {
     type: String,
-    enum: ['investment', 'withdraw', 'bonus']
+    enum: ['investment', 'withdraw', 'miner-reward', 'bonus']
   },
   amount: Number,
   merchantAmount: Number,
   currency: {
     type: String,
-    enum: ['USD', 'UAH']
+    enum: ['USD', 'UAH', 'ZCASH', 'ETH']
   },
   createdAt: { type: Date, default: Date.now },
 });
+
+export const Transactions: Model<ITransactions> = model<ITransactions>(
+  'transactions',
+  TransactionsSchema,
+);

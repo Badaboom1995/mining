@@ -79,7 +79,7 @@ export class AccountService {
             firstName: data.firstName,
             secondName: data.secondName,
             lastName: data.lastName,
-            reciveNotifications: data.reciveNotifications,
+            receiveNotifications: data.receiveNotifications,
             contactEmail: data.contactEmail
           },
         },

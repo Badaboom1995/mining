@@ -1,6 +1,6 @@
 import { Model, model, Document, Schema } from 'mongoose';
 
-export interface Investment extends Document {
+export interface IInvestment extends Document {
   readonly userId: string;
   readonly currency: string;
   readonly amount: string;
@@ -8,6 +8,8 @@ export interface Investment extends Document {
   readonly investmentType: string;
   payed: boolean;
   address: string;
+  addressType: string;
+  lastTransactionId: string;
 }
 
 export const InvestmentSchema = new Schema({
@@ -15,7 +17,7 @@ export const InvestmentSchema = new Schema({
   currency: {
     type: String,
     enum: ['bitcoin', 'advcash'],
-    default: 'advcash'
+    default: 'advcash',
   },
   investmentType: {
     type: String,
@@ -26,13 +28,16 @@ export const InvestmentSchema = new Schema({
     enum: ['1', '2'],
   },
   lastTransactionId: {
-    type: String
+    type: String,
   },
   amount: Number,
   payed: { type: Boolean, default: false },
   address: String,
+  addressType: { type: String, enum: ['eth', 'zcash'] },
   createdAt: { type: Date, default: Date.now },
 });
 
-
-export const Investments: Model<Investment> = model<Investment>('investments', InvestmentSchema);
+export const Investments: Model<IInvestment> = model<IInvestment>(
+  'investments',
+  InvestmentSchema,
+);

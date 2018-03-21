@@ -3,7 +3,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import {
   ShoppingRequestsSchema,
-  ShoppingRequest,
+  IShoppingRequest,
 } from '../../../../common/schemas';
 import {
   changeShoppingRequestStatus,
@@ -13,7 +13,7 @@ import {
 export class ShoppingRequestsService {
   constructor(
     @InjectModel(ShoppingRequestsSchema)
-    private readonly shoppingRequestsModel: Model<ShoppingRequest>,
+    private readonly shoppingRequestsModel: Model<IShoppingRequest>,
   ) {}
 
   async findAllShoppingRequests() {
