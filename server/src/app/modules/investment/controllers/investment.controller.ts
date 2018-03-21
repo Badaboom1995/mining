@@ -13,25 +13,8 @@ import { APISuccess, APIError } from '../../../helpers';
 export class InvestmentController {
   constructor(private readonly investmentService: InvestmentService) {}
 
-  @Post('/')
-  @ApiOperation({ title: 'Get investment buy id' })
-  async getLogin(@Req() req, @Res() res, @Body() dto: GetInvestmentDto) {
-    try {
-      const investment = await this.investmentService.getInvestment(req.user._id, dto);
-      const data = await this.investmentService.createAdvcashInvoice(investment);
-      return res.render('investment/index', {
-        title: 'Login',
-        order_id: data.order_id,
-        comments: data.comments,
-        sign: data.sign,
-        user_id: req.user._id,
-      });
-    } catch (err) {
-      return res.send(new APIError(err));
-    }
-  }
-
   @Post('/create')
+  @ApiBearerAuth()
   @ApiOperation({ title: 'Create investment' })
   async createInvestment(
     @Req() req,
@@ -40,17 +23,6 @@ export class InvestmentController {
   ) {
     try {
       await this.investmentService.createInvestment(req.user._id, dto);
-      return res.send(new APISuccess());
-    } catch (err) {
-      return res.send(new APIError(err));
-    }
-  }
-
-  @Post('/pay/notify')
-  @ApiOperation({ title: 'Get investment page' })
-  async payNotify(@Req() req, @Res() res, @Body() dto: ProcessAdvcashPaymentDto) {
-    try {
-      await this.investmentService.processAdvcashPaymentDummy(dto);
       return res.send(new APISuccess());
     } catch (err) {
       return res.send(new APIError(err));
@@ -70,6 +42,36 @@ export class InvestmentController {
       return res.send(new APIError(err));
     }
   }
+
+  @Post('/advcash')
+  @ApiBearerAuth()
+  @ApiOperation({ title: 'Get sign hash for advcash' })
+  async getLogin(@Req() req, @Res() res, @Body() dto: GetInvestmentDto) {
+    try {
+      const investment = await this.investmentService.getInvestment(req.user._id, dto);
+      const data = await this.investmentService.createAdvcashInvoice(investment);
+      return res.send(new APISuccess({
+        order_id: data.order_id,
+        comments: data.comments,
+        sign: data.sign,
+        user_id: req.user._id,
+      }));
+    } catch (err) {
+      return res.send(new APIError(err));
+    }
+  }
+
+  @Post('/pay/notify')
+  @ApiOperation({ title: 'Process success Advcash request' })
+  async payNotify(@Req() req, @Res() res, @Body() dto: ProcessAdvcashPaymentDto) {
+    try {
+      await this.investmentService.processAdvcashPaymentDummy(dto);
+      return res.send(new APISuccess());
+    } catch (err) {
+      return res.send(new APIError(err));
+    }
+  }
+
 
   @Get('/pay/success/return')
   @ApiOperation({ title: 'Render success transaction page' })
