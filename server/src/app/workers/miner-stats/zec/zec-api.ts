@@ -91,5 +91,21 @@ export class ZecApi extends CurrencyApi {
 		} catch (error) { }
 		
 	}
+
+	/**
+	 * get last address recv
+	 * @memberof ZecApi
+	 */
+	public async getLastTransaction() : Promise<ICurrencyTransaction> {
+		const transactions = await this.getAccountRcv(0, 1);
+		const transaction = transactions[0];
+		if (!transaction) return null;
+		return {
+			value: transaction.value,
+			type: transaction.type,
+			timestamp: transaction.timestamp,
+			index: transaction.index
+		}
+	}
 	
 }

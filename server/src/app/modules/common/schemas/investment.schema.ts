@@ -7,6 +7,7 @@ export interface Investment extends Document {
   readonly miningBuild: string;
   readonly investmentType: string;
   payed: boolean;
+  address: string;
 }
 
 export const InvestmentSchema = new Schema({
@@ -24,8 +25,14 @@ export const InvestmentSchema = new Schema({
     type: String,
     enum: ['1', '2'],
   },
+  lastTransactionId: {
+    type: String
+  },
   amount: Number,
   payed: { type: Boolean, default: false },
   address: String,
   createdAt: { type: Date, default: Date.now },
 });
+
+
+export const Investments: Model<Investment> = model<Investment>('investments', InvestmentSchema);

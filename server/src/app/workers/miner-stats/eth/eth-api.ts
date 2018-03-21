@@ -12,10 +12,7 @@ export class EthApi extends CurrencyApi {
 	 * @private
 	 * @memberof EthApi
 	 */
-	private apiKey = 'NA23E58FGS35PG5UV2IZI3DKGVWFSXW5GV';
-
-
-	
+	private apiKey = 'NA23E58FGS35PG5UV2IZI3DKGVWFSXW5GV';	
 	/**
 	 * Get eth transaction for address from passed date
 	 * @param {Date} date 
@@ -24,6 +21,13 @@ export class EthApi extends CurrencyApi {
 	 */
 	public async getTransactions(date: Date): Promise<ICurrencyTransaction[]> {
 		const transactions = await this.getAddressTransactionsFromDateToNow(date);
+		const sortedByTimeTransactions = this.sortTransactionsByTimestamp(transactions);
+		return sortedByTimeTransactions;
+	}
+	/**
+	 * Sort transactions by timestamp field
+	 */
+	private sortTransactionsByTimestamp (transactions) {
 		const sortedByTimeTransactions = transactions.sort((a,b) => {
 			if (a.timestamp > b.timestamp)  return 1;
 			if (a.timestamp < b.timestamp)  return -1;
@@ -65,11 +69,9 @@ export class EthApi extends CurrencyApi {
 	private async getAdressTransactions({ endblock = 'last', sort = 'asc' }) : Promise<{status: any, message: string, result: any[]}> {
 		try {
 			const { data } = await axios.get(`http://api.etherscan.io/api?module=account&action=txlist&address=${this.address}&startblock=0&endblock=${endblock}&sort=${sort}&apikey=${this.apiKey}`)
-
 			return data;
 		} catch(error) {  }
 	}
-
 	/**
 	 * Wei units to eth
 	 * @private
@@ -79,4 +81,19 @@ export class EthApi extends CurrencyApi {
 		return Math.floor(Math.round(parseFloat(value as string) / 1000000000000000000 * 10000) / 10000);
 	}
 
+	/**
+	 * Get last transaction by eth address
+	 * @memberof EthApi
+	 */
+	public async getLastTransaction() : Promise<ICurrencyTransaction> {
+		let transactions = await this.getAdressTransactions({});
+		let currencyTransactions = this.sortTransactionsByTimestamp(transactions.result.filter(item => item.to == this.address).map(({value, transactionIndex, timeStamp}) => ({
+			type: '',
+			value: this.weiToEth(value),
+			index: transactionIndex,
+			timestamp: timeStamp
+		})));
+
+		return currencyTransactions[currencyTransactions.length - 1] || null; 
+	}
 }

@@ -11,6 +11,8 @@ export interface IUserModel extends User, Document {
   deviceInstance?: any;
   firstName?: string;
   lastName?: string;
+
+
 }
 
 const UserSchema = new Schema(
@@ -49,8 +51,24 @@ const UserSchema = new Schema(
     googleAccount: { type: Object, default: null },
     facebookAccount: { type: Object, default: null },
 
-    balance: { type: Number, default: 0 },
     address: { type: Object, default: null },
+  
+    
+    balance: {
+      eth: {
+        type: Number,
+        default: 0
+      },
+      zec: {
+        type: Number,
+        default: 0
+      },
+      usd: {
+        type: Number,
+        default: 0
+      }
+    },
+
     roles: {
       type: String,
       enum: ['user', 'manager', 'admin'],
