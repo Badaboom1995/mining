@@ -14,4 +14,8 @@ export abstract class CurrencyApi {
 	 * Must return currency transaction list
 	 */
 	public abstract async getTransactions(date : Date) : Promise<ICurrencyTransaction[]>;
+	/**
+	 * Get last transaction from address
+	 */
+	public abstract async getLastTransaction() : Promise<ICurrencyTransaction>;
 }
