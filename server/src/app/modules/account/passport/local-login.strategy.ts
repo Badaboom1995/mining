@@ -1,39 +1,37 @@
-import { Component, Inject, HttpException, HttpStatus } from '@nestjs/common';
-import { Users, IUserModel } from '../schemas/user.schema';
+import { Component, HttpException, HttpStatus, Inject } from '@nestjs/common';
+import { Repository } from "typeorm";
+import { InjectRepository } from "@nestjs/typeorm";
 import * as passport from 'passport';
 import { Strategy } from 'passport-local';
-import { AccountService } from '../services/account.service';
+import { User } from "../../../entity/user.entity";
 
 @Component()
 export class LocalLoginStrategy extends Strategy {
-  constructor(private readonly accountService: AccountService) {
+  constructor(@InjectRepository(User) private userRepository : Repository<User>) {
     super(
       {
         usernameField: 'email',
         passwordField: 'password',
         passReqToCallback: true,
-        
+
       },
-      async (req, email, password, done) => {         
-        await this.logIn(email, password, done)
-          req.login({}, (err) => {
-            console.log('DONE');
-          });
+      async (req, email, password, done) => {
+        await this.logIn(email, password, done);
       }
     );
 
     passport.use('local-login', this);
 
-    passport.serializeUser((user: any, done) => {
+    passport.serializeUser((user : any, done) => {
       console.log(user, 'SERIALIZE');
       done(null, user._id);
     });
 
-    passport.deserializeUser(async (_id, done) => {
-      console.log(_id, 'DESERIALIZE');
-      
+    passport.deserializeUser(async (id, done) => {
+      console.log(id, 'DESERIALIZE');
+
       try {
-        const user = await Users.findOne({_id});
+        const user : User = await this.userRepository.findOneById({ id });
         if (user) {
           return done(null, user);
         }
@@ -44,22 +42,19 @@ export class LocalLoginStrategy extends Strategy {
   }
 
   async logIn(email, password, done) {
-    const user: IUserModel = await this.accountService.findByEmail(email);
+    const user : User = await this.userRepository.findOne({ email });
     if (!user) {
       return done(
-        new HttpException(
-          { success: false, message: 'Invalid credentials' },
+        new HttpException('Invalid credentials',
           HttpStatus.UNAUTHORIZED,
         ),
         false,
       );
     }
-
-    const isMatch: boolean = await user.comparePassword(password);
+    const isMatch : boolean = await user.comparePassword(password);
     if (!isMatch) {
       return done(
-        new HttpException(
-          { success: false, message: 'Invalid credentials' },
+        new HttpException( 'Invalid credentials',
           HttpStatus.UNAUTHORIZED,
         ),
         false,

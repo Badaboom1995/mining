@@ -11,7 +11,7 @@ import {
   ITransactions,
   ShoppingRequestsSchema,
   IShoppingRequest,
-} from '../../common/schemas/index';
+} from '../../../services/schemas/index';
 import {
   CreateInvestmentDto,
   GetInvestmentDto,

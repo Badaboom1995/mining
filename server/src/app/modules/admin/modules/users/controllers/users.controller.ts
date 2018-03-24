@@ -11,8 +11,8 @@ import { changeUserAddressDto, changeUserRoleDto } from '../dto/users.dto';
 import { UsersListService } from '../services';
 import { APISuccess, APIError } from '../../../../../helpers';
 import { AccountService } from '../../../../account/services';
-import { Roles } from '../../../../common/decorators';
-import { RolesGuard } from '../../../../common/guards';
+import { Roles } from '../../../../../services/decorators';
+import { RolesGuard } from '../../../../../services/guards';
 
 @ApiUseTags('admin/users')
 @Controller('/')

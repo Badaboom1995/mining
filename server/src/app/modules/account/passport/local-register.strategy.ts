@@ -1,14 +1,14 @@
-import { Component, Inject, HttpException, HttpStatus } from '@nestjs/common';
-import { Users, IUserModel } from '../schemas/user.schema';
-
+import { Component, Inject } from '@nestjs/common';
+import { Repository } from "typeorm";
+import { InjectRepository } from "@nestjs/typeorm";
 import * as passport from 'passport';
 import { Strategy } from 'passport-local';
-import { AccountService } from '../services/account.service';
-import { LoginUserDto } from '../dto/account.dto';
+import { AccountService } from '../services';
+import { User } from "../../../entity/user.entity";
 
 @Component()
 export class LocalRegisterStrategy extends Strategy {
-  constructor(private readonly accountService: AccountService) {
+  constructor(@InjectRepository(User) private userRepository : Repository<User>, private readonly accountService: AccountService) {
     super(
       {
         usernameField: 'email',
@@ -24,9 +24,9 @@ export class LocalRegisterStrategy extends Strategy {
       done(null, user._id);
     });
 
-    passport.deserializeUser(async (_id, done) => {
+    passport.deserializeUser(async (id, done) => {
       try {
-        const user = await Users.findOne({ _id });
+        const user : User = await this.userRepository.findOneById(id);
         if (user) {
           return done(null, user);
         }

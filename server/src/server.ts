@@ -1,15 +1,16 @@
 import { NestFactory } from '@nestjs/core';
 import { ApplicationModule } from './app/app.module';
-import { AnyExceptionFilter } from './app/modules/common/filters/any-exception.filter';
-import { HttpValidationExceptionFilter } from './app/modules/common/filters/http-validation.filter';
-import { DatabaseExceptionFilter } from './app/modules/common/filters/database-exceptions.filter';
-import { ValidationPipe } from './app/modules/common/pipe/validation.pipe';
+import { AnyExceptionFilter } from './app/services/filters/any-exception.filter';
+import { HttpValidationExceptionFilter } from './app/services/filters/http-validation.filter';
+import { DatabaseExceptionFilter } from './app/services/filters/database-exceptions.filter';
+import { ValidationPipe } from './app/services/pipe/validation.pipe';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import expressApp from './app/config/express.config';
-import { RolesGuard } from "./app/modules/common/guards";
+import { RolesGuard } from "./app/services/guards";
+import { NestApplicationOptions } from "@nestjs/common/interfaces/nest-application-options.interface";
 
 async function bootstrap() {
-  const app = await NestFactory.create(ApplicationModule, expressApp);
+  const app = await NestFactory.create(ApplicationModule, <NestApplicationOptions>expressApp);
   const options = new DocumentBuilder()
     .setTitle('Cardholder')
     .setDescription('The cardholder API description')

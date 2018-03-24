@@ -5,8 +5,8 @@ import {
 } from '../dto/shopping-requests.dto';
 import { ShoppingRequestsService } from '../services';
 import { APISuccess, APIError } from '../../../../../helpers';
-import { Roles } from "../../../../common/decorators";
-import { RolesGuard } from "../../../../common/guards";
+import { Roles } from "../../../../../services/decorators";
+import { RolesGuard } from "../../../../../services/guards";
 
 @ApiUseTags('admin/shopping-requests')
 @Controller('/')
@@ -15,7 +15,6 @@ export class ShoppingRequestsController {
   constructor(private readonly shoppingRequestsService: ShoppingRequestsService) {}
 
   @Post('/list')
-  @Roles('admin')
   @ApiBearerAuth()
   @ApiOperation({ title: 'Get ShoppingRequestsController list' })
   async findAllShoppingRequests(@Req() req, @Res() res) {
@@ -36,6 +35,16 @@ export class ShoppingRequestsController {
       return res.send(new APISuccess());
     } catch (err) {
       return res.send(new APIError(err));
+    }
+  }
+
+  @Post('/create')
+  async createTransaction(@Req() req, @Body() data) {
+    try {
+      await this.shoppingRequestsService.createShoppingRequests(data);
+      return new APISuccess();
+    } catch (err) {
+      return new APIError('Ti pidor', err);
     }
   }
 }

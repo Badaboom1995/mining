@@ -1,64 +1,82 @@
 import { EthApi, ZcashApi } from './currency-api/currencies';
 import { MONGODB_URI } from '../../config/environments.config';
 import { Users } from '../../modules/account/schemas/user.schema';
-import { Investments } from '../../modules/common/schemas';
+import { Investments } from '../../services/schemas';
 import { BalanceManager } from "./balance-manager/balance-manager";
-import { MinersList } from "../../modules/common/schemas/miners.schema";
+import { MinersList } from "../../services/schemas/miners.schema";
+import { getRepository} from "typeorm";
+import { Miner } from "../../entity/miner.entity";
+import { User, UserBalance, UserEarnings } from "../../entity/user.entity";
+import { Transaction } from "../../entity/transaction.entity";
+
 
 const agenda = new (require('agenda'))({
   db: {
     address: MONGODB_URI,
-  },
+  }
 });
 
 
-agenda.define('update users balance', async () => {
-  const users = await Users.find();
-  users.map(async user => {
-    const investments = await Investments.find({ userId: user._id });
-    investments.map(async investment => {
-      const balanceManager = new BalanceManager(user, investment);
-      const transactions = await balanceManager.getTransactions();
-      const balanceDelta = balanceManager.getBalanceDelta(transactions);
-      if (balanceDelta) await balanceManager.changeBalance(balanceDelta, user, investment);
-    });
+/**
+ * Update user balance
+ * Iterate through all miners
+ * Get all miner related users and update their balances according how much money they invested into miner fundraising
+ */
+agenda.define('Update user balances', async () => {
+  const minerRepository = await getRepository(Miner);
+  const userRepository = await getRepository(User);
+  const balanceRepository = await getRepository(UserBalance);
+  const userEarningsRepository = await getRepository(UserEarnings);
+  const transactionRepository = await  getRepository(Transaction);
+  const miners = await minerRepository.find({
+    relations: ['users'],
   });
-});
 
-agenda.define('get miners balances', async () => {
-  const miners = await MinersList.find();
-  miners.map(async miners => {
-    const balanceManager = new BalanceManager(miners, investment);
+  await Promise.all(miners.map(async miner => {
+    const balanceManager = new BalanceManager(miner);
     const transactions = await balanceManager.getTransactions();
-    const balanceDelta = balanceManager.getBalanceDelta(transactions);
-    if (balanceDelta) await balanceManager.changeBalance(balanceDelta, miners, investment);
-  });
+    const minerUsers = miner.users;
+    const users = await userRepository.find({
+      relations : ['balance', 'earnings'],
+      where: {
+        id: minerUsers.map(item => item.userId)
+      }
+    });
+    users.map(async user => {
+      const minerUser = minerUsers.find(one => one.userId == user.id);
+      const balanceDelta = Number(balanceManager.getBalanceDelta(transactions, minerUser.percent));
+      if (balanceDelta) {
+        const transaction = Object.assign(new Transaction(), {
+            amount: balanceDelta,
+            currency: miner.currency,
+            transactionType: 'miner-reward',
+            userId: user.id
+        });
+        const oldBalance =  Number(user.balance[ miner.currency ]);
+        const oldEarnings = Number(user.earnings[ miner.currency ]);
+        await Promise.all([
+          balanceRepository.updateById(user.balance.id, {
+            [ miner.currency ]: oldBalance + balanceDelta
+          }),
+          userEarningsRepository.updateById(user.earnings.id, {
+            [ miner.currency ]: oldEarnings + balanceDelta
+          }),
+          transactionRepository.save(transaction)
+        ]);
+      }
+    });
+  }));
+
+
 });
 
 
-
-/*
-  agenda.on('ready', () => {
-  agenda.every('3 minutes', 'update users balance');
+agenda.on('ready', () => {
+  agenda.every('12 hours', 'Update user balances');
   agenda.start();
 });
-*/
 
 
-// const zcashApi = new ZcashApi('t1MA6amzZUk2yUdptk7RXMTw59K4nF1JDkQ');
 
-//
-// const zecApi = new ZecApi('t1cZqETvYG25MfZpaMT6buYipPbVhmt21js');
-// const ethApi = new EthApi('0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae');
-//
-// zcashApi.getTransactions('c55a5574d4803175364bdb09dd074674547672c0bbb5485a18554ca6bf1111ed').then(transactions => {
-//   console.log(transactions);
-//   console.log('===========');
-//   console.log(`Transactions count is : ${transactions.length}`);
-// });
-//
-// ethApi.getTransactions('0x7784c7b823aad665e667e47227d4aa585728e01661496054adbe1ce643d62973').then(transactions => {
-//   console.log(transactions);
-//   console.log('===========');
-//   console.log(`Transactions count is : ${transactions.length}`);
-// });
+
+

@@ -20,12 +20,11 @@ import {
   ForgetPasswordDto,
   ResetPasswordDto,
   LoginUserDto,
-  UnlinkDto,
   ChangePasswordDto,
 } from '../dto/account.dto';
 import { AccountService } from '../services';
 import { APISuccess, APIError } from '../../../helpers';
-import { MailgunService } from '../../common/mailgun.service';
+import { MailgunService } from '../../../services/mailgun.service';
 import { ProfileModel } from '../../../models/profile-model';
 
 @ApiUseTags('account')
@@ -50,19 +49,8 @@ export class AccountController {
     title:
       'Return JWT token if user is using desktop or redirect to DeepLinking if current device is mobile',
   })
-  async callback(@Req() req, @Res() res) {
-    const isOAuth = req.query.oauth;
-    const data = await this.accountService.createToken(
-      req.user._id,
-      req.user.email,
-    );
-    if (isOAuth) {
-      return res
-        .status(HttpStatus.OK)
-        .redirect(`cardholder://oauth?token=${data.token}`);
-    } else {
-      res.send(new APISuccess(data, null));
-    }
+  async callback(@Req() req) {
+    return new APISuccess({}, 'Authorization success');
   }
 
   @Get('/connect/callback')
@@ -83,17 +71,14 @@ export class AccountController {
   })
   async forgotPassword(
     @Req() req,
-    @Res() res,
     @Body() forgetPasswordDto: ForgetPasswordDto,
   ) {
     try {
       const token = await this.accountService.forgotPassword(forgetPasswordDto);
       await this.mailService.sendPasswordResetEmail(forgetPasswordDto, token);
-      return res.send(
-        new APISuccess(null, 'Success we are send you reset password message!'),
-      );
+      return new APISuccess(null, 'Success we are send you reset password message!');
     } catch (err) {
-      return res.send(new APIError(err));
+      return new APIError(err);
     }
   }
 
@@ -104,12 +89,12 @@ export class AccountController {
     description: 'reset password token',
     required: true,
   })
-  async resetPassword(@Req() req, @Res() res, @Query('token') token: string) {
+  async resetPassword(@Req() req, @Query('token') token: string) {
     try {
       await this.accountService.findUserByResetToken(token);
-      return res.send(new APISuccess());
+      return new APISuccess();
     } catch (err) {
-      return res.send(new APIError(err));
+      return new APIError(err);
     }
   }
 
@@ -121,16 +106,13 @@ export class AccountController {
   })
   async setNewPassword(
     @Req() req,
-    @Res() res,
     @Body() resetPasswordDto: ResetPasswordDto,
   ) {
     try {
       await this.accountService.resetPassword(resetPasswordDto);
-      return res.send(
-        new APISuccess(null, 'Success we are change you password!'),
-      );
+      return new APISuccess(null, 'Success we are change you password!');
     } catch (err) {
-      return res.send(new APIError(err));
+      return new APIError(err);
     }
   }
 
@@ -141,29 +123,27 @@ export class AccountController {
     status: 201,
     description: 'The user data has been successfully updated.',
   })
-  async updateProfile(@Req() req, @Res() res, @Body() UserDto: UserDto) {
+  async updateProfile(@Req() req, @Body() UserDto: UserDto) {
     try {
       await this.accountService.updateProfile(req.user._id, UserDto);
-      return res.send(
-        new APISuccess(null, 'The user data has been successfully updated'),
-      );
+      return new APISuccess(null, 'The user data has been successfully updated');
     } catch (err) {
-      return res.send(new APIError(err));
+      return new APIError(err);
     }
   }
 
   @Post('settings/avatar')
   @ApiBearerAuth()
   @ApiOperation({ title: 'Upload new user avatar' })
-  async updateProfileAvatar(@Req() req, @Res() res) {
+  async updateProfileAvatar(@Req() req) {
     try {
       await this.accountService.updateProfileAvatar(
         req.user._id,
         req.file.location,
       );
-      return res.send(new APISuccess());
+      return new APISuccess();
     } catch (err) {
-      return res.send(new APIError(err));
+      return new APIError(err);
     }
   }
 
@@ -174,40 +154,27 @@ export class AccountController {
     status: 201,
     description: 'User has been logged out by the server.',
   })
-  async logout(@Req() req, @Res() res) {
-    await req.logout();
-    return res.send(
-      new APISuccess(null, 'User has been logged out by the server.'),
-    );
+  async logout(@Req() req) {
+    try {
+      await req.logout();
+      return new APISuccess(null, 'User has been logged out by the server.');
+    } catch {
+      return new APIError('Cant logout')
+    }
   }
 
   @Post('profile')
   @ApiBearerAuth()
   @ApiOperation({ title: 'Get user profile data' })
-  async getProfile(@Req() req, @Res() res, @Body('id') profileId: string) {
+  async getProfile(@Req() req, @Body('id') profileId: string) {
     try {
       const id =
         profileId == 'undefined' || !profileId ? req.user._id : profileId;
       const user = await this.accountService.findById(id);
       const profileModel = new ProfileModel(user);
-      return res.send(new APISuccess(profileModel));
+      return new APISuccess(profileModel);
     } catch (err) {
-      res.send(new APIError(err.message));
-    }
-  }
-
-  @Post('unlink')
-  @ApiBearerAuth()
-  @ApiOperation({ title: 'Unlink oAuth account [type: facebook or google]' })
-  async unLinkAccount(@Req() req, @Res() res, @Body() UnlinkDto: UnlinkDto) {
-    try {
-      await this.accountService.unLinkAccount(
-        UnlinkDto,
-        req.user._id,
-      );
-      return res.send(new APISuccess());
-    } catch (err) {
-      res.send(new APIError(err.message));
+      return new APIError(err.message);
     }
   }
 
@@ -216,14 +183,13 @@ export class AccountController {
   @ApiOperation({ title: 'Change user password' })
   async changePassword(
     @Req() req,
-    @Res() res,
     @Body() ChangePasswordDto: ChangePasswordDto,
   ) {
     try {
       await this.accountService.changePassword(ChangePasswordDto, req.user._id);
-      return res.send(new APISuccess());
+      return new APISuccess();
     } catch (err) {
-      res.send(new APIError(err));
+      return new APIError(err);
     }
   }
 }

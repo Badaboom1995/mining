@@ -17,6 +17,7 @@
     "@nestjs/mongoose": "^3.0.1",
     "@nestjs/swagger": "^1.1.4",
     "@nestjs/testing": "^4.6.6",
+    "@nestjs/typeorm": "^2.0.0",
     "@nestjs/websockets": "^4.6.6",
     "@types/agenda": "^1.0.2",
     "@types/bcrypt-nodejs": "0.0.30",
@@ -34,7 +35,7 @@
     "@types/passport-local": "^1.0.32",
     "agenda": "^1.0.3",
     "aws-sdk": "^2.197.0",
-    "bcrypt-nodejs": "^0.0.3",
+    "bcryptjs": "^2.4.3",
     "block_io": "^1.0.9-2",
     "class-transformer": "^0.1.9",
     "connect-mongo": "^2.0.1",
@@ -65,6 +66,7 @@
     "reflect-metadata": "^0.1.12",
     "request": "^2.83.0",
     "rxjs": "^5.5.6",
+    "typeorm": "^0.1.16",
     "typescript": "^2.6.2"
   },
   "devDependencies": {

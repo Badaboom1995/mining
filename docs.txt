@@ -1,0 +1,51 @@
+
+
+MinerTypes {
+  price
+  description
+  mhash
+}
+
+
+Miner {
+  id
+  address
+  addressType
+  minerType
+  earned {
+    eth
+    zcash
+  }
+  lastTransactionId
+  createdAt
+  status
+  payed
+  users: [{
+      usersId
+      amount
+      percent
+  }]
+}
+
+User {
+  ...fields
+}
+
+
+User -> Вклад
+
+Miner(status = 'sbor', payed = 500, users = [User])
+
+
+                                1) -> Раcпределить сумму инвестиции на несколько майнеров (-> Найти складчину которую нужно закрыть -> Закрыть ее -> Для оставшихся средств найти тоже место (Если нет создать новую складчину)
+0) Вклад $500 -> Выбор типа майнера -> Изменения payed, и добавления пользователя в список users в Miner -> После того как юзер зашел в список своих инвестиций Miner.find({ users: {$elemMatch: {userId: req.user._id}})
+                                2) -> Достать список складчин соотвествующий твоей инвестиции -> Eсли нет нужной складчины создать новую
+
+
+User {
+  ...User
+
+}
+
+
+

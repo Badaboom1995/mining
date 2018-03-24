@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { CurrencyApi } from '../currency-api';
 import { ICurrencyTransaction } from '../models/currency-transaction';
-import {sortByField} from "../../../../utils/sort-by-field";
+import {sortByField} from "../../../../../utils/sort-by-field";
 
 
 export class ZcashApi extends CurrencyApi {

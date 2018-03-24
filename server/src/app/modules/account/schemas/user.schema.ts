@@ -1,9 +1,6 @@
 import { User } from '../interfaces/user.interface';
 import { Document, Schema, Error, Model, model } from 'mongoose';
-import * as bcrypt from 'bcrypt-nodejs';
-import * as Promise from 'bluebird';
-
-const bcryptAsync: any = Promise.promisifyAll(bcrypt);
+import * as bcrypt from 'bcryptjs';
 
 export interface IUserModel extends User, Document {
   comparePassword?: (candidatePassword: string) => boolean;
@@ -113,7 +110,7 @@ UserSchema.pre('save', function save(next) {
 
 UserSchema.methods.comparePassword = function(candidatePassword: string) {
   try {
-    return bcryptAsync.compareAsync(candidatePassword, this.password);
+    return bcrypt.compare(candidatePassword, this.password);
   } catch (err) {
     throw err;
   }

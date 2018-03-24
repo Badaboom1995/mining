@@ -2,7 +2,7 @@ import axios from 'axios';
 import { CurrencyApi } from '../currency-api';
 import { ICurrencyTransaction } from '../models/currency-transaction';
 import { ETH_APIKEY } from "../../../../config/environments.config";
-import { sortByField } from "../../../../utils/sort-by-field";
+import { sortByField } from "../../../../../utils/sort-by-field";
 import { raw } from "body-parser";
 
 

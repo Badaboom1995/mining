@@ -1,91 +1,55 @@
-import { sign } from 'jsonwebtoken';
-import { Component, HttpException, HttpStatus, Inject } from '@nestjs/common';
+import { Component, Inject } from '@nestjs/common';
 import { randomBytes } from 'crypto';
-import * as bcrypt from 'bcrypt-nodejs';
-import * as Promisify from 'bluebird';
-
-const bcryptAsync: any = Promisify.promisifyAll(bcrypt);
-import { Users, IUserModel } from '../schemas/user.schema';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { User } from '../../../entity/user.entity';
 import {
   ChangePasswordDto,
   ForgetPasswordDto,
   LoginUserDto,
   ResetPasswordDto,
-  UnlinkDto,
 } from '../dto/account.dto';
-import { JWT_SECRET } from '../../../config/environments.config';
-import {PrivateProfileModel, ProfileModel} from '../../../models/profile-model';
+import { APIError } from "../../../helpers";
+
 
 @Component()
 export class AccountService {
-  async createToken(_id: number | string, email: string) {
-    const expiresIn = '48h';
-    const secretOrKey = JWT_SECRET;
-    const user = { _id, email };
-    const token = await sign(user, secretOrKey, { expiresIn });
-    return {
-      expiresIn,
-      token,
-    };
-  }
-
-  async localRegister(payload: LoginUserDto, done): Promise<any> {
+  constructor(@InjectRepository(User) private userRepository : Repository<User>) {}
+  /***
+   * Local registration with user save if email not used
+   * @param {string} email
+   * @param {string} password
+   * @param done
+   * @returns {Promise<any>}
+   */
+  public async localRegister({ email, password } : LoginUserDto, done) : Promise<any> {
     try {
-      let user = await this.findByEmail(payload.email);
-      if (!user) {
-        const newUser: IUserModel = new Users({
-          email: payload.email,
-          password: payload.password,
-          registrationType: 'local',
-        });
-
-        await newUser.save();
-        return done(null, newUser);
-      } else {
+      const user = await this.userRepository.findOne({ email });
+      if (user) {
         return done(
-          new HttpException(
-            { success: false, message: 'User already exists' },
-            HttpStatus.UNAUTHORIZED,
-          ),
-          false,
+          new APIError('User already exists')
         );
       }
+      const newUser = User.create(email, password, 'local');
+      await this.userRepository.save(newUser);
+      return done(null, newUser);
     } catch (err) {
       return done(
-        new HttpException(
-          { success: false, message: 'Registration error' },
-          HttpStatus.UNAUTHORIZED,
-        ),
-        false,
+        new APIError('Registration error')
       );
     }
   }
 
-  async updateProfile(id: string, data: any): Promise<void> {
+  /**
+   * Update user profile (if user exists ) with new data
+   * @param {string} id
+   * @param data
+   * @returns {Promise<void>}
+   */
+  public async updateProfile(id : string, data : any) : Promise<void> {
     try {
-      const user: any = await Users.findOne({ _id: id });
-      if (!user) {
-        return Promise.reject('User has been not found');
-      }
-      await Users.findByIdAndUpdate(
-        { _id: id },
-        {
-          $set: {
-            skype: data.skype,
-            companyUrl: data.companyUrl,
-            companyName: data.companyName,
-            position: data.position,
-            phone: data.phone,
-            firstName: data.firstName,
-            secondName: data.secondName,
-            lastName: data.lastName,
-            receiveNotifications: data.receiveNotifications,
-            contactEmail: data.contactEmail
-          },
-        },
-        { upsert: true },
-      );
-      return Promise.resolve();
+      const user : any = await this.findById( id );
+      return await user.updateById({ id }, data);
     } catch (err) {
       return Promise.reject(
         'There was a problem when we try to save user data after registation',
@@ -93,48 +57,37 @@ export class AccountService {
     }
   }
 
-  async updateProfileAvatar(id: string, photo: string): Promise<IUserModel> {
+  /**
+   * Update user avatar with new url
+   * @param {string} id
+   * @param {string} photo
+   * @returns {Promise<any>}
+   */
+  public async updateProfileAvatar(id : string, photo : string) {
     try {
-      console.log('photo', photo);
-      const user: any = await Users.findOne({ _id: id });
-      if (!user) {
-        return Promise.reject('User has been not found');
-      }
-      const update = await Users.findByIdAndUpdate(
-        { _id: id },
-        {
-          $set: {
-            photo,
-          },
-        },
-        { upsert: true },
-      );
-      return Promise.resolve(update);
+      const user : any = await this.findById( id );
+      return await user.updateById(id, { photo });
     } catch (err) {
       return Promise.reject(
         `${err} There was a problem when we try to save user image`,
       );
     }
   }
-  async forgotPassword(data: ForgetPasswordDto): Promise<string> {
+
+
+  public async forgotPassword(data : ForgetPasswordDto) : Promise<string> {
     try {
       const { email } = data;
-      const user: any = await Users.findOne({ email: email });
-      if (!user) {
-        return Promise.reject('User has been not found');
-      }
+      await this.findByEmail(email);
       const generateToken = await randomBytes(20).toString('hex');
-      await Users.findOneAndUpdate(
-        { email: email },
+      await this.userRepository.update(
+        { email },
         {
-          $set: {
-            passwordResetToken: generateToken,
-            passwordResetExpires: Date.now() + 3600000,
-          },
+          passwordResetToken: generateToken,
+          passwordResetExpires: Date.now() + 3600000,
         },
-        { upsert: true },
       );
-      return Promise.resolve(generateToken);
+      return generateToken;
     } catch (err) {
       return Promise.reject(
         `There was a problem when we try to reset password`,
@@ -142,21 +95,39 @@ export class AccountService {
     }
   }
 
-  async findUserByResetToken(token: string): Promise<any> {
+  /**
+   * Find user by reset token if token exists and not expired
+   * @param {string} token
+   * @returns {Promise<any>}
+   */
+  public async findUserByResetToken(token : string) : Promise<any> {
     try {
       if (!token) {
         return Promise.reject('Missing reset password token');
       }
-      const user: any = await Users.findOne({
+      const user : any = await this.userRepository.findOne({
         passwordResetToken: token,
-        passwordResetExpires: { $gt: Date.now() },
+        passwordResetExpires: Date.now()
       });
       if (!user) {
-        return Promise.reject(
-          'Password reset token is invalid or has expired.',
-        );
+        return Promise.reject('Password reset token is invalid or has expired.',);
       }
-      return Promise.resolve(user);
+      return user;
+    } catch (err) {
+      return Promise.reject('There was a problem when we try to reset password');
+    }
+  }
+
+  /**
+   * Change password if reset token exists
+   * @param {ResetPasswordDto} data
+   * @returns {Promise<void>}
+   */
+  public async resetPassword(data : ResetPasswordDto) : Promise<void> {
+    try {
+      if (!data.password) return Promise.reject('No password');
+      const user : User = await this.findUserByResetToken(data.token);
+      await user.resetPassword(data.password);
     } catch (err) {
       return Promise.reject(
         'There was a problem when we try to reset password',
@@ -164,111 +135,61 @@ export class AccountService {
     }
   }
 
-  async resetPassword(data: ResetPasswordDto): Promise<void> {
+  /**
+   * Change user password
+   * @param {ChangePasswordDto} data
+   * @param id
+   * @returns {Promise<void>}
+   */
+  async changePassword(data : ChangePasswordDto, id) : Promise<void> {
     try {
-      if (!data.password) {
-        return Promise.reject('Missing new password');
-      }
-      let user = await this.findUserByResetToken(data.token);
-      user.password = data.password;
-      user.passwordResetToken = undefined;
-      user.passwordResetExpires = undefined;
-      await user.save();
-      return Promise.resolve();
-    } catch (err) {
-      return Promise.reject(
-        'There was a problem when we try to reset password',
-      );
-    }
-  }
-
-  async unLinkAccount(data: UnlinkDto, id): Promise<void> {
-    try {
-      const { type } = data;
-      const user: any = await Users.findOne({ _id: id });
-      if (!user) {
-        return Promise.reject('User has been not found');
-      }
-      if (user.registrationType === type) {
-        return Promise.reject('You cant remove your main authorization type');
-      }
-      const template = `${type}Account`;
-      await Users.findOneAndUpdate(
-        { _id: id },
-        {
-          $set: {
-            [template]: undefined,
-          },
-        },
-        { upsert: true },
-      );
-      return Promise.resolve();
-    } catch (err) {
-      return Promise.reject(
-        `There was a problem when we try to unlink account`,
-      );
-    }
-  }
-
-  async changePassword(data: ChangePasswordDto, id) {
-    try {
-      let user = await Users.findOne({ _id: id });
-      const isValid = await bcryptAsync.compareAsync(
-        data.oldPassword,
-        user.password,
-      );
+      const user = await this.findById(id);
+      const isValid = await user.comparePassword(data.oldPassword);
       if (!isValid) return Promise.reject('Wrong password');
-      user.password = data.newPassword;
-      await user.save();
-      return Promise.resolve();
+      await user.encryptPassword(data.newPassword);
     } catch (err) {
       return Promise.reject(err);
     }
   }
 
-  async findByEmail(email: string): Promise<IUserModel> {
-    return await Users.findOne({ email: email.toLowerCase() });
-  }
 
-  async findById(id: string): Promise<IUserModel> {
+  /**
+   * Get user by email
+   * @param {string} email
+   * @returns {Promise<User | undefined>}
+   */
+  public async findByEmail(email : string) : Promise<User>{
     try {
-      let user: any = await Users.findOne(
-        { _id: id },
-        {
-          password: 0,
-          passwordResetToken: 0,
-          passwordResetExpires: 0,
-          'googleAccount.token': 0,
-          'facebookAccount.token': 0,
-          registrationComplete: 0,
-          __v: 0,
-          updatedAt: 0
-        },
-      );
-      if (user) {
-        const contactsCount = user.contacts.length;
-        const lastContactsId = user.contacts.slice(0,4);
-        const lastContactsData = Promise.all(
-          lastContactsId.map(async e => {
-            const contact = await Users.findOne({_id: e});
-            return new PrivateProfileModel(contact).user;
-          }),
-        );
-        user.contactsCount = contactsCount;
-        user.lastContacts = await lastContactsData;
-        return Promise.resolve(user);
-      } else {
-        return Promise.reject('User not found');
-      }
+      const user : User = await this.userRepository.findOne({ email: email.toLowerCase() });
+      if (!user) return Promise.reject('User not found');
+      return user;
     } catch (err) {
-      return Promise.reject('Unhadled error');
+      return Promise.reject('Unhandled error');
     }
   }
 
-  async findAllUsers() {
+  /**
+   * Get user by id
+   * @param {string} id
+   * @returns {Promise<any>}
+   */
+  public async findById(id : string) : Promise<User> {
     try {
-      const list = await Users.find();
-      return Promise.resolve(list);
+      const user : User = await this.userRepository.findOneById(id);
+      if (!user) return Promise.reject('User not found');
+      return user;
+    } catch (err) {
+      return Promise.reject('Unhandled error');
+    }
+  }
+
+  /**
+   * Return all users
+   * @returns {Promise<User[]>}
+   */
+  public async findAllUsers() : Promise<User[]> {
+    try {
+      return await this.userRepository.find();
     } catch (err) {
       return Promise.reject("Can't get users list");
     }
