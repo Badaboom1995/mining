@@ -14,7 +14,8 @@ import { APIError } from '../helpers';
 
 @Entity('user-balance')
 export class UserBalance {
-  public constructor(userId: string) {
+
+  public constructor(@Column() public userId: string) {
     // this.userId = userId;
   }
 

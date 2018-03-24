@@ -1,4 +1,4 @@
-import { Component, Inject } from '@nestjs/common';
+import { Component, HttpException, HttpStatus, Inject } from '@nestjs/common';
 import { randomBytes } from 'crypto';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -27,7 +27,10 @@ export class AccountService {
       const user = await this.userRepository.findOne({ email });
       if (user) {
         return done(
-          new APIError('User already exists')
+          new HttpException('User already exists',
+            HttpStatus.UNAUTHORIZED,
+          ),
+          false,
         );
       }
       const newUser = User.create(email, password, 'local');
@@ -35,7 +38,10 @@ export class AccountService {
       return done(null, newUser);
     } catch (err) {
       return done(
-        new APIError('Registration error')
+        new HttpException('There was a problem when we try to register new user',
+          HttpStatus.UNAUTHORIZED,
+        ),
+        false,
       );
     }
   }
@@ -52,7 +58,7 @@ export class AccountService {
       return await user.updateById({ id }, data);
     } catch (err) {
       return Promise.reject(
-        'There was a problem when we try to save user data after registation',
+        'There was a problem when we try to save user data after registration',
       );
     }
   }

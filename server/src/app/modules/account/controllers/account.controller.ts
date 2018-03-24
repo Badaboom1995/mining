@@ -50,7 +50,7 @@ export class AccountController {
       'Return JWT token if user is using desktop or redirect to DeepLinking if current device is mobile',
   })
   async callback(@Req() req) {
-    return new APISuccess({}, 'Authorization success');
+    return new APISuccess();
   }
 
   @Get('/connect/callback')
