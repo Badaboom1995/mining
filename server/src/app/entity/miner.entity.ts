@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, JoinColumn, ObjectIdColumn, OneToMany, OneToOne } from "typeorm";
+import { Column,CreateDateColumn, Entity, ManyToOne, JoinColumn, ObjectIdColumn, OneToMany, OneToOne } from "typeorm";
 import { MinerType } from "./miner-type.entity";
 import { MinerUser } from "./miner-user.entity";
 
@@ -36,8 +36,8 @@ export class Miner {
    * Miner type
    */
   @OneToOne(type => MinerType, minerType => minerType.id)
-  @Column()
-  public type : string;
+  @JoinColumn()
+  public type : MinerType;
   /**
    * Last checked transactions id
    */
@@ -46,7 +46,7 @@ export class Miner {
   /**
    * Entity creation date
    */
-  @Column()
+  @CreateDateColumn()
   public createdAt : Date;
   /**
    * Miner current status to determine is miner rising money for start or online and mine currency
@@ -66,6 +66,6 @@ export class Miner {
    */
   @OneToMany(type => MinerUser, user => user.id)
   @JoinColumn()
-  public users : MinerUser[] = [];
+  public users : MinerUser[];
 }
 

@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@nestjs/common@^4.6.6":
+"@nestjs/common@^4.5.0", "@nestjs/common@^4.6.6":
   version "4.6.6"
   resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-4.6.6.tgz#c1043647a05824a4d950f12743fb4e1107bf60cc"
   dependencies:
@@ -58,6 +58,14 @@
   dependencies:
     iterare "0.0.8"
     socket.io "^2.0.3"
+
+"@types/@nestjs/typeorm":
+  version "2.0.0"
+  resolved "https://codeload.github.com/nestjs/typeorm/tar.gz/8ba96ae05e008ed75c4a013637ec866a9197a7d6"
+  dependencies:
+    "@nestjs/common" "^4.5.0"
+    typeorm "^0.1.9"
+    typescript "^2.4.2"
 
 "@types/agenda@^1.0.2":
   version "1.0.2"
@@ -5037,7 +5045,24 @@ typeorm@^0.1.16:
     yargonaut "^1.1.2"
     yargs "^9.0.1"
 
-typescript@^2.6.2:
+typeorm@^0.1.9:
+  version "0.1.18"
+  resolved "https://registry.yarnpkg.com/typeorm/-/typeorm-0.1.18.tgz#94ad9574845dc6877da853115ef36dcb47100412"
+  dependencies:
+    app-root-path "^2.0.1"
+    chalk "^2.0.1"
+    cli-highlight "^1.1.4"
+    debug "^3.1.0"
+    dotenv "^4.0.0"
+    glob "^7.1.2"
+    js-yaml "^3.8.4"
+    mkdirp "^0.5.1"
+    reflect-metadata "^0.1.10"
+    xml2js "^0.4.17"
+    yargonaut "^1.1.2"
+    yargs "^9.0.1"
+
+typescript@^2.4.2, typescript@^2.6.2:
   version "2.7.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.7.2.tgz#2d615a1ef4aee4f574425cdff7026edf81919836"
 
