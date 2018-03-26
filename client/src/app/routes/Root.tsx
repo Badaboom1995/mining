@@ -6,6 +6,7 @@ import { IRootProps } from './Props';
 import { inject, observer } from 'mobx-react';
 import { withRouter } from '../services/index';
 import { Requests } from './requests/Requests';
+import { Landing } from './landing/Landing';
 
 @withRouter
 @inject('account')
@@ -30,6 +31,7 @@ export class Root extends React.Component<IRootProps> {
 		return (
 			<div>
 				<Switch>
+					<Route component={Landing} path='/landing' />
 					<Route component={Auth} path='/auth' />
 					<Route component={Uikit} path='/uikit' />
 					<Route component={Requests} path='/requests' />

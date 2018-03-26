@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1432px" height="1308px" viewBox="0 0 1432 1308" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>BG</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M447.509553,117.768595 L1138.62563,117.765445 C1193.8541,117.765225 1238.62581,162.536572 1238.62603,217.765047 C1238.62603,217.765179 1238.62603,217.765312 1238.62603,217.765445 L1238.62563,959.962574 C1238.62563,993.707829 1221.60639,1025.1771 1193.36606,1043.6494 L569.782927,1451.54167 C523.563969,1481.77398 461.587974,1468.81423 431.355668,1422.59528 C421.802242,1407.99006 416.237475,1391.13892 415.21445,1373.7167 L347.681906,223.630453 C344.444491,168.496946 386.514586,121.177965 441.648093,117.94055 C443.599812,117.825946 445.554472,117.768603 447.509553,117.768595 Z" id="path-1"></path>
+        <filter x="-8.4%" y="-5.4%" width="116.7%" height="111.0%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="24.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.000341653021   0 0 0 0 0.0129102838   0 0 0 0 0.0247395833  0 0 0 1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="CM_main_1440" transform="translate(-8.000000, -105.000000)">
+            <g id="BG" transform="translate(-33.000000, 109.000000)">
+                <g transform="translate(793.066281, 792.817649) rotate(-315.000000) translate(-793.066281, -792.817649) ">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#102132" fill-rule="evenodd" xlink:href="#path-1"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
