@@ -8,13 +8,24 @@ import {
   InsertEvent,
   BeforeInsert,
 } from 'typeorm';
+import {
+  IsNotEmpty,
+  IsEmail,
+  MinLength,
+  MaxLength,
+  Length,
+  IsEnum,
+  IsDate,
+  IsBoolean,
+  IsString,
+} from 'class-validator';
 import * as bcrypt from 'bcryptjs';
 
 import { APIError } from '../helpers';
+import { ApiModelProperty } from '@nestjs/swagger';
 
 @Entity('user-balance')
 export class UserBalance {
-
   public constructor(@Column() public userId: string) {
     // this.userId = userId;
   }
@@ -42,16 +53,15 @@ export class UserEarnings {
   @Column() public zcash: number;
 }
 
-
 @Entity('users')
 export class User {
   @ObjectIdColumn() public id: string;
 
+  @Column() public nickname: string;
+
   @Column() public firstName: string;
 
   @Column() public secondName: string;
-
-  @Column() public lastName: string;
 
   @Column() public skype: string;
 
@@ -67,8 +77,6 @@ export class User {
 
   @Column() public invitedBy: string;
 
-  @Column() public contactEmail: string;
-
   @Column() public password: string;
 
   @Column() public passwordResetToken: string;
@@ -76,6 +84,33 @@ export class User {
   @Column() public passwordResetExpires: Date;
 
   @Column() public referrals: string[];
+
+
+  @Column() public bitcoin: string;
+
+  @Column() public advcash: string;
+
+  @Column() public privat24: string;
+
+  @Column() public eth: string;
+
+  @Column() public visa: string;
+
+
+  @Column() public reciveNotificationOnNewPartner: boolean;
+
+  @Column() public reciveNotificationOnNewTeamPartner: boolean;
+
+  @Column() public reciveNotificationOnNewPartnerInvestment: boolean;
+
+  @Column() public reciveNotificationOnNewTeamPartnerInvestment: boolean;
+
+  @Column() public reciveNotificationsEveryWeek: boolean;
+
+  @Column() public reciveNotificationsEveryMonth: boolean;
+
+  @Column()
+  public contactEmail: string;
 
   @Column({
     unique: true,
@@ -100,7 +135,7 @@ export class User {
 
   @Column({
     enum: ['user', 'manager', 'admin'],
-    default: 'user'
+    default: 'user',
   })
   public roles: string;
 
@@ -115,7 +150,6 @@ export class User {
   @OneToOne(type => UserEarnings, type => type.id)
   public earnings: UserEarnings;
 
-
   /**
    * Initialize user with email, pass, regtype
    * @param {string} email
@@ -123,7 +157,11 @@ export class User {
    * @param {string} registrationType
    * @returns {User}
    */
-  public static create (email : string, password : string, registrationType : string) : User {
+  public static create(
+    email: string,
+    password: string,
+    registrationType: string,
+  ): User {
     const user = new User();
     user.email = email;
     user.password = password;
@@ -138,8 +176,7 @@ export class User {
    */
   public async encryptPassword(password) {
     const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(password, salt);
-    return hash;
+    return await bcrypt.hash(password, salt);
   }
 
   /**
@@ -160,7 +197,7 @@ export class User {
    */
   public async comparePassword(newPassword: string) {
     try {
-      return await bcrypt.compareSync(newPassword, this.password)
+      return await bcrypt.compareSync(newPassword, this.password);
     } catch (error) {
       return error;
     }

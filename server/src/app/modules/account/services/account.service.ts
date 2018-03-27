@@ -7,7 +7,7 @@ import {
   ChangePasswordDto,
   ForgetPasswordDto,
   LoginUserDto,
-  ResetPasswordDto,
+  ResetPasswordDto, UpdateProfileDto,
 } from '../dto/account.dto';
 import { APIError } from "../../../helpers";
 
@@ -52,10 +52,11 @@ export class AccountService {
    * @param data
    * @returns {Promise<void>}
    */
-  public async updateProfile(id : string, data : any) : Promise<void> {
+  public async updateProfile(id : string, data : UpdateProfileDto) : Promise<void> {
     try {
       const user : any = await this.findById( id );
-      return await user.updateById({ id }, data);
+      const newData = Object.assign(user, data);
+      return await this.userRepository.save(newData);
     } catch (err) {
       return Promise.reject(
         'There was a problem when we try to save user data after registration',

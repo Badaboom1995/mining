@@ -20,7 +20,7 @@ import {
   ForgetPasswordDto,
   ResetPasswordDto,
   LoginUserDto,
-  ChangePasswordDto,
+  ChangePasswordDto, UpdateProfileDto,
 } from '../dto/account.dto';
 import { AccountService } from '../services';
 import { APISuccess, APIError } from '../../../helpers';
@@ -119,9 +119,9 @@ export class AccountController {
     status: 201,
     description: 'The user data has been successfully updated.',
   })
-  async updateProfile(@Req() req, @Body() UserDto: UserDto) {
+  async updateProfile(@Req() req, @Body() dto: UpdateProfileDto) {
     try {
-      await this.accountService.updateProfile(req.user._id, UserDto);
+      await this.accountService.updateProfile(req.user.id, dto);
       return new APISuccess(null, 'The user data has been successfully updated');
     } catch (err) {
       return new APIError(err);
