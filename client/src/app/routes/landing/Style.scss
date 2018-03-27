@@ -37,15 +37,9 @@
         color: #fff;
         font-size: 14px;
     }
-    // &::before{
-    //     content: '';
-    //     z-index: 0;
-    //     position: absolute;
-    //     width: 100%;
-    //     height: 200px;
-       
-    //     top: 0;
-    // }
+    &--footer{
+        padding-bottom: 50px;
+    }
 }
 
 .landing-logo{
@@ -66,6 +60,7 @@
     font-weight: lighter;
     font-size: 14px;
     box-sizing: border-box;
+    display: inline-block;
     &--empty{
         background-color: transparent;
         border: 1px solid #fff;
@@ -73,12 +68,13 @@
     }
     &--big{
         font-size: 16px;
-        font-weight: bold;
-        display: inline-block;
+        font-weight: bold;  
         text-transform: uppercase;
-        padding: 15px 65px;
+        padding: 15px 25px;
+        text-align: center;
         min-width: 300px;
         box-shadow: 0 2px 4px 0 #63D4D4;
+        vertical-align: middle;
     }
 }
 
@@ -125,7 +121,6 @@
         font-size: 45px;
         font-weight: lighter;
         color: #fff;
-        margin-right:-30px;
         margin-bottom: 58px;
     }
     &__info{
@@ -138,6 +133,28 @@
     &__steps{
         width: 50%;
         margin-right: 40px;
+        position: relative;
+        &::before{
+            content: '';
+            position: absolute;
+            right: -20px;
+            top: 40px;
+            height: 180px;
+            width: 3px;
+            background-image: url(../../public/icons/land/separateLine.png);
+            background-repeat: no-repeat;
+            background-position: 0 0;
+        }
+        &::after{
+            content: '';
+            position: absolute;
+            right: -23px;
+            top: 12px;
+            width: 10px;
+            height: 10px;
+            background-color: #45ADAA;
+            border-radius: 50%;
+        }
     }
     &__steps-item{
         width: 520px;
@@ -240,6 +257,7 @@
     width: 1140px;
     margin: 0 auto;
     margin-bottom: 125px;
+    position: relative;
     &__title{
         margin-left: 30px;
         font-size: 45px;
@@ -280,18 +298,41 @@
         padding-bottom: 14px;
         padding-top: 125px;
         text-align: center;
-        background-color: rgba($color: #fff, $alpha: 0.1)
+        background-color: rgba($color: #fff, $alpha: 0.1);
+        &--active{
+            box-shadow: 0 1px 17px 1px #45ADAA;
+        }
     }
-    &__radio-button--type:nth-child(1){
-        margin-right: 75px;
+    &__radio-button--type{
+        background-image: url(../../public/icons/land/chip.svg);
+        background-repeat: no-repeat;
+        background-position: 38px 30px;
+        background-size: 80px 80px;
+        &:nth-child(1){
+            margin-right: 75px;
+        } 
     }
     &__radio-button--stars{
         width: 150px;
         margin-right: 12px;
         font-size: 16px;
+        background-repeat: no-repeat;
+        text-transform: uppercase;
         &:nth-child(3){
             margin-right: 0;
         }
+    }
+    &__radio-button--one-star{
+        background-image: url(../../public/icons/land/rating1.svg);
+        background-position: 40px 80px;
+    }
+    &__radio-button--two-stars{
+        background-image: url(../../public/icons/land/rating2.svg);
+        background-position: 40px 50px;
+    }
+    &__radio-button--three-stars{
+        background-image: url(../../public/icons/land/rating3.svg);
+        background-position: 35px 22px;
     }
     &__tabs{
         color: #fff;
@@ -343,7 +384,7 @@
         font-weight: lighter;
         color: #FFFFFF;
         &--active{
-             border: 1px solid #45ADAA;
+            border: 1px solid #45ADAA;
             background-color: rgba($color: #fff, $alpha: 0.1);
             box-shadow: 0 1px 5px 1px #45ADAA;
         }
@@ -363,17 +404,65 @@
             color: #45ADAA;
         }
     }
+    &::before{
+        content: '';
+        position: absolute;
+        width: 1140px;
+        height: 1px;
+        top: 48%;
+        background-color: #fff;
+    }
+    &::after{
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 125px;
+        height: 555px;
+        width: 1px;
+        background-color: #fff;
+    }
 }
 
 
 .benefits{
     width: 1140px;
     margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px;
+    position: relative;
+   
+    &::before{
+        content: '';
+        position: absolute;
+        display: inline-block;
+        background-image: url(../../public/icons/land/benefits-square.png);
+        background-position: 0 0;
+        right: -270px;
+        top: -300px;
+        background-repeat: no-repeat;
+        width: 260px;
+        height: 600px;
+    }
+    &::after{
+        content: '';
+        position: absolute;
+        display: inline-block;
+        background-image: url(../../public/icons/land/footer-square.png);
+        // right: -308px;
+        top: 0px;
+        background-repeat: no-repeat;
+        width: 1160px;
+        height: 1600px;
+        z-index: -1;
+    }
     &__title{
         margin-left: 30px;
         margin-bottom: 20px;
         font-size: 45px;
-        margin-bottom: 60px;
+        margin-bottom: 30px;
         width: 100%;
         text-align: center;
         color: #fff;
@@ -390,17 +479,35 @@
     &__cards{
         display: flex;
         flex-wrap: wrap;
+        margin-bottom: 50px;
     }
     &__item{
+        position: relative;
         display: inline-block;
         border-top:8px solid #45ADAA;
         padding:0 30px;
         padding-top: 70px;
         padding-bottom: 70px;
-        width: 29.3%;
-        margin: 2%;
+        width: 32%;
+        margin-right: 2%;
         background-color: rgba($color: #FFFFFF, $alpha: 0.1);
         box-sizing: border-box;
+        &:nth-child(1){
+            background-image: url(../../public/icons/land/clock.svg);
+            background-repeat: no-repeat;
+            background-position: 270px 55px;
+        }
+        &:nth-child(2){
+            background-image: url(../../public/icons/land/circuit.svg);
+            background-repeat: no-repeat;
+            background-position: 270px 55px;
+        }
+        &:nth-child(3){
+            margin-right: 0;
+            background-image: url(../../public/icons/land/cloud.svg);
+            background-repeat: no-repeat;
+            background-position: 270px 55px;
+        }
     }
     &__item-title{
         font-size: 22px;
@@ -410,13 +517,159 @@
         margin-bottom: 50px;
         text-align: left;
     }
+    &__item-title--short{
+        width: 200px;
+    }
     &__list{
         padding-left: 20px;
     }
-    &__list-item{
-        margin-bottom: 10px;
+    &__item-list{
+        padding-left: 12px;
         font-size: 15px;
+        line-height: 22px;
         font-weight: lighter;
         color: #fff;
     }
+    &__list-item{
+        margin-bottom: 20px;
+       
+    }
+    &__item-more{
+        position: absolute;
+        bottom: 35px;
+        left: 150px;
+        cursor: pointer;
+        width: 55px;
+        height: 25px;
+        background-repeat: no-repeat;
+        border: none;
+        background-image: url(../../public/icons/land/arrow.svg);
+        background-color: transparent;
+       
+    }
 }
+
+.call-to-action{
+    padding: 70px;
+    background-image: url(../../public/icons/land/CTAback.png);
+    background-position: 50px -300px;
+    margin-bottom: 135px;
+    text-align: center;
+    &__wrapper{
+        width: 1140px;
+        margin: 0 auto;
+    }
+    &__text{
+        font-size: 30px;
+        line-height: 45px;
+        font-weight: lighter;
+        color: #fff;
+        width: 630px;
+        display: inline-block;
+        vertical-align: middle;
+        text-align: left;
+    }
+    &__link{
+        font-size: 18px;
+        color: #45ADAA;
+        text-decoration: underline;
+        display: block;
+        margin-top: 20px;
+    }
+    .title{
+        width: 1140px;
+        margin: 0 auto;
+    }
+}
+
+.title{
+    &__main-title{
+        margin-bottom: 20px;
+        font-size: 45px;
+        margin-bottom: 30px;
+        width: 100%;
+        text-align: center;
+        color: #fff;
+        font-weight: lighter;
+    }
+    &__subtitle{
+        font-size: 22px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #45ADAA;
+        text-align: center;
+        margin-bottom: 60px;
+    }
+}
+
+.reviews{
+    width: 1140px;
+    margin: 0 auto;
+    margin-bottom: 100px;
+    color: #fff;
+    &__list-item{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+    }
+    &__item-photo{
+        margin-bottom: 20px;
+        width: 85px;
+        height: 85px;
+        border-radius: 50%;
+        background-color: #ccc;
+        &::before{
+            content: '';
+            position: absolute;
+            left: 120px;
+            top: 50px;
+            background-color: #45ADAA;
+            width:370px;
+            height: 1px;
+        }
+        &::after{
+            content: '';
+            position: absolute;
+            right: 120px;
+            top: 50px;
+            background-color: #45ADAA;
+            width:370px;
+            height: 1px;
+        }
+        
+    }
+    &__item-text{
+        text-align: center;
+        width: 900px;
+        margin: 0 auto;
+        font-size: 18px;
+        line-height: 22px;
+        font-weight: lighter;
+        margin-bottom: 30px;
+    }
+    &__item-author{
+        font-size: 18px;
+        color: #45ADAA;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+    &__slider-control{
+        position: absolute;
+        display: inline-block;
+        width: 55px;
+        height: 25px;
+        background-image: url(../../public/icons/land/arrow.svg);
+        top: 40px;
+    }
+    &__slider-control--prev {
+        left: 0;
+        transform:rotate(90deg);
+    }
+    &__slider-control--next {
+        right: 0;
+        transform:rotate(-90deg);
+    }
+}
+
+
