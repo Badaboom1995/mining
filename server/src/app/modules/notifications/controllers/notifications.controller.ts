@@ -17,7 +17,7 @@ export class NotificationsController {
   async getNotificationsList(@Req() req, @Res() res) {
     try {
       const data = await this.notificationsService.getNotificationsList(
-        req.user._id,
+        req.user.id,
       );
       return res.send(new APISuccess(data));
     } catch (err) {
@@ -57,7 +57,7 @@ export class NotificationsController {
   ) {
     try {
       await this.notificationsService.connectDevice(
-        req.user._id,
+        req.user.id,
         ConnectDeviceDto
       );
       return res.send(new APISuccess());
@@ -78,7 +78,7 @@ export class NotificationsController {
   ) {
     try {
       await this.notificationsService.insertNotification(
-        req.user._id,
+        req.user.id,
         SendNotificationDto
       );
       return res.send(new APISuccess());

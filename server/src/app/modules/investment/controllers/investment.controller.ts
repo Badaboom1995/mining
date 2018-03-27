@@ -22,7 +22,7 @@ export class InvestmentController {
     @Body() dto: CreateInvestmentDto,
   ) {
     try {
-      await this.investmentService.createInvestment(req.user._id, dto);
+      await this.investmentService.createInvestment(req.user.id, dto);
       return res.send(new APISuccess());
     } catch (err) {
       return res.send(new APIError(err));
@@ -35,7 +35,7 @@ export class InvestmentController {
   async getInvestmentsList(@Req() req, @Res() res) {
     try {
       const data = await this.investmentService.getInvestmentsList(
-        req.user._id,
+        req.user.id,
       );
       return res.send(new APISuccess(data));
     } catch (err) {
@@ -48,13 +48,13 @@ export class InvestmentController {
   @ApiOperation({ title: 'Get sign hash for advcash' })
   async getLogin(@Req() req, @Res() res, @Body() dto: GetInvestmentDto) {
     try {
-      const investment = await this.investmentService.getInvestment(req.user._id, dto);
+      const investment = await this.investmentService.getInvestment(req.user.id, dto);
       const data = await this.investmentService.createAdvcashInvoice(investment);
       return res.send(new APISuccess({
         order_id: data.order_id,
         comments: data.comments,
         sign: data.sign,
-        user_id: req.user._id,
+        user_id: req.user.id,
       }));
     } catch (err) {
       return res.send(new APIError(err));

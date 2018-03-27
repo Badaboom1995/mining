@@ -32,7 +32,7 @@ export class GoogleStrategyConnect extends OAuth2Strategy {
   async logIn(req, profile, accessToken, done) {
     try {
       const user = await Users.findOneAndUpdate(
-        { _id: req.user._id },
+        { _id: req.user.id },
         {
           googleAccount: {
             id: profile.id,

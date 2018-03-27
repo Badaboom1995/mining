@@ -44,7 +44,7 @@ export class FacebookStrategyConnect extends Strategy {
     try {
       if (req.user) {
         const user = await Users.findOneAndUpdate(
-          { _id: req.user._id },
+          { _id: req.user.id },
           {
             facebookAccount: {
               id: profile.id,

@@ -43,7 +43,6 @@ export class AccountController {
   @ApiOperation({ title: 'Register new user using local-strategy' })
   Register(@Req() req, @Res() res, @Body() LoginUserDto: LoginUserDto) {}
 
-
   @Get('/callback')
   @ApiOperation({
     title:
@@ -104,10 +103,7 @@ export class AccountController {
     status: 201,
     description: 'Success we are change you password!',
   })
-  async setNewPassword(
-    @Req() req,
-    @Body() resetPasswordDto: ResetPasswordDto,
-  ) {
+  async setNewPassword(@Req() req, @Body() resetPasswordDto: ResetPasswordDto) {
     try {
       await this.accountService.resetPassword(resetPasswordDto);
       return new APISuccess(null, 'Success we are change you password!');
@@ -138,7 +134,7 @@ export class AccountController {
   async updateProfileAvatar(@Req() req) {
     try {
       await this.accountService.updateProfileAvatar(
-        req.user._id,
+        req.user.id,
         req.file.location,
       );
       return new APISuccess();
@@ -159,7 +155,7 @@ export class AccountController {
       await req.logout();
       return new APISuccess(null, 'User has been logged out by the server.');
     } catch {
-      return new APIError('Cant logout')
+      return new APIError('Cant logout');
     }
   }
 
@@ -169,7 +165,7 @@ export class AccountController {
   async getProfile(@Req() req, @Body('id') profileId: string) {
     try {
       const id =
-        profileId == 'undefined' || !profileId ? req.user._id : profileId;
+        profileId == 'undefined' || !profileId ? req.user.id : profileId;
       const user = await this.accountService.findById(id);
       const profileModel = new ProfileModel(user);
       return new APISuccess(profileModel);
@@ -186,7 +182,7 @@ export class AccountController {
     @Body() ChangePasswordDto: ChangePasswordDto,
   ) {
     try {
-      await this.accountService.changePassword(ChangePasswordDto, req.user._id);
+      await this.accountService.changePassword(ChangePasswordDto, req.user.id);
       return new APISuccess();
     } catch (err) {
       return new APIError(err);

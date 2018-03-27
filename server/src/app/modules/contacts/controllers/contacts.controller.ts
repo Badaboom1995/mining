@@ -22,8 +22,8 @@ export class ContactsController {
     @Body() AddContactDto: AddContactDto,
   ) {
     try {
-      await this.contactsService.addContact(req.user._id, AddContactDto);
-      await this.notificationsService.insertNotification(req.user._id, AddContactDto);
+      await this.contactsService.addContact(req.user.id, AddContactDto);
+      await this.notificationsService.insertNotification(req.user.id, AddContactDto);
       return res.send(new APISuccess());
     } catch (err) {
       return res.send(new APIError(err));
@@ -41,7 +41,7 @@ export class ContactsController {
     try {
       await this.contactsService.removeFromContacts(
         RemoveFromContactsDto,
-        req.user._id,
+        req.user.id,
       );
       return res.send(new APISuccess());
     } catch (err) {
@@ -66,7 +66,7 @@ export class ContactsController {
   @ApiOperation({ title: 'Get contacts list' })
   async getContactsList(@Req() req, @Res() res) {
     try {
-      const data = await this.contactsService.getContactsList(req.user._id);
+      const data = await this.contactsService.getContactsList(req.user.id);
       return res.send(new APISuccess(data));
     } catch (err) {
       return res.send(new APIError(err));
