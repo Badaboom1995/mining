@@ -157,7 +157,7 @@ export class AccountController {
     } catch {
       return new APIError('Cant logout');
     }
-  }
+  };
 
   @Post('profile')
   @ApiBearerAuth()
@@ -167,10 +167,9 @@ export class AccountController {
       const id =
         profileId == 'undefined' || !profileId ? req.user.id : profileId;
       const user = await this.accountService.findById(id);
-      const profileModel = new ProfileModel(user);
-      return new APISuccess(profileModel);
+      return user;
     } catch (err) {
-      return new APIError(err.message);
+      return new APIError(err);
     }
   }
 

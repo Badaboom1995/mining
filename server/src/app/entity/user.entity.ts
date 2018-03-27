@@ -139,7 +139,7 @@ export class User {
   public async encryptPassword(password) {
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
-    this.password = hash
+    return hash;
   }
 
   /**

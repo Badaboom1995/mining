@@ -152,7 +152,8 @@ export class AccountService {
       const user = await this.findById(id);
       const isValid = await user.comparePassword(data.oldPassword);
       if (!isValid) return Promise.reject('Wrong password');
-      await user.encryptPassword(data.newPassword);
+      user.password = await user.encryptPassword(data.newPassword);
+      await this.userRepository.save(user);
     } catch (err) {
       return Promise.reject(err);
     }
