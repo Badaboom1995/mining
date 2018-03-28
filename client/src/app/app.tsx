@@ -15,7 +15,7 @@ const render = (Component, services) => {
 		<Provider
 			{...services}
 		>
-			<Router history={services.routingService.history} >
+			<Router history={services.routing.history} >
 				<Component />
 			</Router>
 		</Provider>,
