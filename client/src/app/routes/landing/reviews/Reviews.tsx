@@ -5,7 +5,7 @@ import { IReviewsProps } from './Props';
 export class Reviews extends React.Component<IReviewsProps> {
 	public render() {
 		return (
-			<div className='landing'>
+			<div className='landing landing--referal'>
                     <header className='landing-header'>
                         <div className='landing__container landing__container-flex'>
                             <a href='#' className='landing-logo'>Landing logo</a>

@@ -5,7 +5,7 @@ import { IQuestionsProps } from './Props';
 export class Questions extends React.Component<IQuestionsProps> {
 	public render() {
 		return (
-			<div className='landing'>
+			<div className='landing landing--referal'>
                     <header className='landing-header'>
                         <div className='landing__container landing__container-flex'>
                             <a href='#' className='landing-logo'>Landing logo</a>
