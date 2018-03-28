@@ -110,11 +110,12 @@ export class WebpackConfig {
 		};
 
 		let use = [
+			'style-loader',
 			cssLoader,
 			autoprefixer,
 			'sass-loader',
-			'style-loader'
 		];
+
 		if (isProd) {
 			use = ExtractTextPlugin['extract']({
 				fallback: 'style-loader',
@@ -126,6 +127,7 @@ export class WebpackConfig {
 			});
 		}
 
+		console.log(use);
 
 		return {
 			test: /\.(css|scss)$/,
