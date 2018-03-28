@@ -1,4 +1,4 @@
-import { accountService, AccountService } from '../services/account/account';
+import { accountService, AccountService } from '../services/account/account.service';
 
 
 

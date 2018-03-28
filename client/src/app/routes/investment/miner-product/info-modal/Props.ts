@@ -1,5 +1,5 @@
 import { Miner } from "../../../../services/investment/model/miner";
-import { RoutingService } from "../../../../services/routing/routing";
+import { RoutingService } from "../../../../services/routing/routing.service";
 
 
 

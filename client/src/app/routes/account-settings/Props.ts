@@ -1,4 +1,4 @@
-import { AccountService } from "../../services/account/account";
+import { AccountService } from "../../services/account/account.service";
 
 
 export interface IAccountSettingsProps {

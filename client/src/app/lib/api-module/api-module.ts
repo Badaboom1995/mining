@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_URL } from '../../constants';
-import { routingService } from '../../services/routing/routing';
+import { routingService } from '../../services/routing/routing.service';
 
 export class ApiModule {
 	/**

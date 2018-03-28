@@ -2,7 +2,7 @@ import { observable, action } from 'mobx';
 import { ProfileModel } from "./models/profile-model";
 import { api } from "../../api/api";
 import { autobind } from "core-decorators";
-import { routingService } from '../routing/routing';
+import { routingService } from '../routing/routing.service';
 
 
 

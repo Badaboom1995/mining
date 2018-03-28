@@ -2,10 +2,10 @@ import { AuthForms } from './models/auth-forms';
 import { observable, action } from 'mobx';
 import { autobind } from 'core-decorators';
 import { AuthModel } from './models/auth-model';
-import { routingService } from '../routing/routing';
+import { routingService } from '../routing/routing.service';
 import { api } from '../../api/api';
-import { accountService } from '../account/account';
-import { validationService } from '../validation/validation';
+import { accountService } from '../account/account.service';
+import { validationService } from '../validation/validation.service';
 import { extractQueryParam } from '../../utils/extract-query-param';
 
 
