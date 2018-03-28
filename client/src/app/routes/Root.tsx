@@ -4,7 +4,7 @@ import { Uikit } from './uikit/Uikit';
 import { Auth } from './auth/Auth';
 import { IRootProps } from './Props';
 import { inject, observer } from 'mobx-react';
-import { withRouter } from '../services/index';
+import { withRouter } from '../services';
 import { Requests } from './requests/Requests';
 import { Landing } from './landing/Landing';
 

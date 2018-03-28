@@ -1,6 +1,7 @@
-import { API_URL } from "../../constants";
 import axios from 'axios';
+import { API_URL } from '../../constants';
 import { routingService } from '../../services/routing/routing';
+
 export class ApiModule {
 	/**
 	 * @protected
@@ -8,13 +9,13 @@ export class ApiModule {
 	 */
 	protected baseUrl = API_URL;
 
-
 	/**
 	 * Encode object ot URI
 	 */
-	public static encodeToURI = (target) => Object.keys(target)
-		.map(key => encodeURIComponent(key) + '=' + encodeURIComponent(target[key]))
-		.join('&');
+	public static encodeToURI = target =>
+		Object.keys(target)
+			.map(key => encodeURIComponent(key) + '=' + encodeURIComponent(target[key]))
+			.join('&');
 
 	/**
 	 * Check is authorized and redirect if not
@@ -37,21 +38,27 @@ export class ApiModule {
 	 * Send request with params
 	 * @memberof ApiModule
 	 */
-	protected request = async (url: string, params = {}, options = { method: 'post', useFormData: false }): Promise<any> => {
-
+	protected request = async (
+		url: string,
+		params = {},
+		options = { method: 'post', useFormData: false },
+	): Promise<any> => {
 		// const TOKEN = localStorage.getItem('authToken') || '';
-		const data = options.useFormData ? this.bootstrapBody(params) : ApiModule.encodeToURI(params);
-		const config : any = {
+		const data = options.useFormData
+			? this.bootstrapBody(params)
+			: ApiModule.encodeToURI(params);
+		const config: any = {
 			url: this.baseUrl + url,
 			method: options.method || 'post',
 			data,
 			headers: {
-				'Content-Type': options.useFormData ? 'multipart/form-data' : 'application/x-www-form-urlencoded;charset=UTF-8',
+				'Content-Type': options.useFormData
+					? 'multipart/form-data'
+					: 'application/x-www-form-urlencoded;charset=UTF-8',
 			},
 			withCredentials: true,
-			validateStatus: (status) => true
+			validateStatus: status => true,
 		};
-		// if (TOKEN) config.headers.Authorization = 'Bearer ' + TOKEN;
 
 		return new Promise((resolve, reject) => {
 
@@ -59,7 +66,7 @@ export class ApiModule {
 				this.checkIsAutorized(response);
 				const res = response.data || {};
 				if (res.success) return resolve(res);
-				const rejectResult : any = {
+				const rejectResult: any = {
 					success: false,
 					content: res.content || {},
 					message: res.message || ''
@@ -70,10 +77,6 @@ export class ApiModule {
 				console.log('FATAL REQUEST ERROR', error);
 			});
 		});
-	}
 
+	};
 }
-
-
-
-

@@ -1,20 +1,21 @@
 import { Component, HttpException, HttpStatus, Inject } from '@nestjs/common';
-import { randomBytes } from 'crypto';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { randomBytes } from 'crypto';
 import { User } from '../../../entity/user.entity';
 import {
   ChangePasswordDto,
   ForgetPasswordDto,
   LoginUserDto,
-  ResetPasswordDto, UpdateProfileDto,
+  ResetPasswordDto,
+  UpdateProfileDto,
 } from '../dto/account.dto';
-import { APIError } from "../../../helpers";
-
+import { APIError } from '../../../helpers';
 
 @Component()
 export class AccountService {
   constructor(@InjectRepository(User) private userRepository : Repository<User>) {}
+
   /***
    * Local registration with user save if email not used
    * @param {string} email
@@ -27,9 +28,7 @@ export class AccountService {
       const user = await this.userRepository.findOne({ email });
       if (user) {
         return done(
-          new HttpException('User already exists',
-            HttpStatus.UNAUTHORIZED,
-          ),
+          new HttpException('User already exists', HttpStatus.UNAUTHORIZED),
           false,
         );
       }
@@ -38,7 +37,8 @@ export class AccountService {
       return done(null, newUser);
     } catch (err) {
       return done(
-        new HttpException('There was a problem when we try to register new user',
+        new HttpException(
+          'There was a problem when we try to register new user',
           HttpStatus.UNAUTHORIZED,
         ),
         false,
@@ -52,11 +52,11 @@ export class AccountService {
    * @param data
    * @returns {Promise<void>}
    */
-  public async updateProfile(id : string, data : UpdateProfileDto) : Promise<void> {
+  public async updateProfile(id : string, data : UpdateProfileDto) : Promise<any> {
     try {
-      const user : any = await this.findById( id );
+      const user = await this.findById(id);
       const newData = Object.assign(user, data);
-      return await this.userRepository.save(newData);
+      await this.userRepository.save(newData);
     } catch (err) {
       return Promise.reject(
         'There was a problem when we try to save user data after registration',
@@ -70,30 +70,26 @@ export class AccountService {
    * @param {string} photo
    * @returns {Promise<any>}
    */
-  public async updateProfileAvatar(id : string, photo : string) {
+  public async updateProfileAvatar(id : string, photo : string) : Promise<void> {
     try {
-      const user : any = await this.findById( id );
-      return await user.updateById(id, { photo });
+      const user = await this.findById(id);
+      user.photo = photo;
+      await this.userRepository.save(user);
     } catch (err) {
       return Promise.reject(
-        `${err} There was a problem when we try to save user image`,
+        `There was a problem when we try to save user image`,
       );
     }
   }
 
-
   public async forgotPassword(data : ForgetPasswordDto) : Promise<string> {
     try {
       const { email } = data;
-      await this.findByEmail(email);
+      const user = await this.findByEmail(email);
       const generateToken = await randomBytes(20).toString('hex');
-      await this.userRepository.update(
-        { email },
-        {
-          passwordResetToken: generateToken,
-          passwordResetExpires: Date.now() + 3600000,
-        },
-      );
+      user.passwordResetToken = generateToken;
+      user.passwordResetExpires = Date.now() + 3600000;
+      await this.userRepository.save(user);
       return generateToken;
     } catch (err) {
       return Promise.reject(
@@ -114,14 +110,18 @@ export class AccountService {
       }
       const user : any = await this.userRepository.findOne({
         passwordResetToken: token,
-        passwordResetExpires: Date.now()
+        passwordResetExpires: Date.now(),
       });
       if (!user) {
-        return Promise.reject('Password reset token is invalid or has expired.',);
+        return Promise.reject(
+          'Password reset token is invalid or has expired.',
+        );
       }
       return user;
     } catch (err) {
-      return Promise.reject('There was a problem when we try to reset password');
+      return Promise.reject(
+        'There was a problem when we try to reset password',
+      );
     }
   }
 
@@ -132,9 +132,12 @@ export class AccountService {
    */
   public async resetPassword(data : ResetPasswordDto) : Promise<void> {
     try {
-      if (!data.password) return Promise.reject('No password');
-      const user : User = await this.findUserByResetToken(data.token);
-      await user.resetPassword(data.password);
+      const { password, token } = data;
+      const user = await this.findUserByResetToken(token);
+      user.password = await user.encryptPassword(password);
+      user.passwordResetToken = undefined;
+      user.passwordResetExpires = undefined;
+      await user.resetPassword(password);
     } catch (err) {
       return Promise.reject(
         'There was a problem when we try to reset password',
@@ -160,15 +163,16 @@ export class AccountService {
     }
   }
 
-
   /**
    * Get user by email
    * @param {string} email
    * @returns {Promise<User | undefined>}
    */
-  public async findByEmail(email : string) : Promise<User>{
+  public async findByEmail(email : string) : Promise<User> {
     try {
-      const user : User = await this.userRepository.findOne({ email: email.toLowerCase() });
+      const user : User = await this.userRepository.findOne({
+        email: email.toLowerCase(),
+      });
       if (!user) return Promise.reject('User not found');
       return user;
     } catch (err) {
