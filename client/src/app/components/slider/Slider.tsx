@@ -1,6 +1,5 @@
 
 import { default as ReactSlider } from 'rc-slider';
-import 'rc-slider/assets/index.css';
 import { ISliderProps } from './Props';
 
 

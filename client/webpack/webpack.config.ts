@@ -20,8 +20,8 @@ export class WebpackConfig {
 		this.devtool = devtool;
 
 		if (isProd) {
-			this.plugins.push( 
-				new ExtractTextPlugin('style.css'), 
+			this.plugins.push(
+				new ExtractTextPlugin('style.css'),
 				new CleanWebpackPlugin(['dist'], { root: process.cwd() }),
 				new webpack.optimize.CommonsChunkPlugin({
 					name: 'vendor',
@@ -38,7 +38,7 @@ export class WebpackConfig {
 				WebpackConfig.uglifyJsPlugin(),
 				new Visualizer()
 			);
-			
+
 		}
 
 		if (isServer) {
@@ -97,7 +97,7 @@ export class WebpackConfig {
 	/**
 	 * Style rules
 	 */
-	private static styleRule = (isProd : boolean) => {
+	private static styleRule = (isProd: boolean) => {
 		// Minimize if prod, use sourcemap if dev
 		const cssLoader = {
 			loader: 'css-loader',
@@ -109,13 +109,23 @@ export class WebpackConfig {
 			options: { browsers: ['last 5 versions'] }
 		};
 
-		const use = [
+		let use = [
 			cssLoader,
 			autoprefixer,
-			'sass-loader'
+			'sass-loader',
+			'style-loader'
 		];
+		if (isProd) {
+			use = ExtractTextPlugin['extract']({
+				fallback: 'style-loader',
+				use: [
+					cssLoader,
+					autoprefixer,
+					'sass-loader'
+				]
+			});
+		}
 
-		if (!isProd) use.unshift('style-loader');
 
 		return {
 			test: /\.(css|scss)$/,
@@ -151,11 +161,11 @@ export class WebpackConfig {
 		publicPath: '/',
 	};
 
-	
+
 	/**
 	 * Devtool mode
 	 */
-	public devtool : string =  '#cheap-module-eval-source-map';
+	public devtool: string = '#cheap-module-eval-source-map';
 
 	/**
 	 * Entry 
@@ -213,7 +223,7 @@ export class WebpackConfig {
 	public plugins = [
 		// Inject global variables in every file, but not files provided with this plugin	
 		new webpack.ProvidePlugin({
-			React : 'react',
+			React: 'react',
 			ReactDOM: 'react-dom'
 		}),
 		// Generates html in output dir based on template in public dir
