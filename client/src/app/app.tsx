@@ -1,13 +1,8 @@
 import { Root } from "./routes/Root";
 import { Provider } from 'mobx-react';
-import { routingService } from './services/routing/routing';
 import { Router } from 'react-router-dom';
 import { useStrict } from 'mobx';
-import { uiService } from './services/ui/ui';
-import { accountService } from './services/account/account';
-import { authService } from './services/auth/auth';
 import './styles/main.scss';
-import { investmentService } from "./services/investment/investment";
 import { services } from './services/index';
 
 // restrict store state changes out of @actions
@@ -20,7 +15,7 @@ const render = (Component, services) => {
 		<Provider
 			{...services}
 		>
-			<Router history={routingService.history} >
+			<Router history={services.routing.history} >
 				<Component />
 			</Router>
 		</Provider>,

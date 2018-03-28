@@ -6,8 +6,10 @@
   "scripts": {
     "start": "npm run start:watch",
     "start:watch": "nodemon",
-    "build": "tsc",
-    "start:prod": "node dist/server.js",
+    "build": "npm run clean:dist && npm run transpile",
+    "clean:dist": "rimraf './dist'",
+    "transpile": "tsc",
+    "serve:dist": "node dist/server.js",
     "postinstall": "npm run build"
   },
   "dependencies": {
@@ -76,6 +78,7 @@
     "codelyzer": "^4.0.2",
     "nodemon": "^1.14.11",
     "ts-node": "^4.1.0",
-    "tslint": "^5.9.1"
+    "tslint": "^5.9.1",
+    "rimraf": "^2.6.2"
   }
 }

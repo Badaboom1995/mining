@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "cross-env TS_NODE_PROJECT=\"tsconfig-webpack.json\" PORT=8288 LOCAL=false DEV=true NODE_ENV=development webpack-dev-server --config webpack/webpack.server.ts",
     "dev:local": "cross-env TS_NODE_PROJECT=\"tsconfig-webpack.json\"  PORT=8288 NODE_ENV=development LOCAL=true DEV=true  webpack-dev-server --config webpack/webpack.server.ts",
-    "build": "cross-env TS_NODE_PROJECT=\"tsconfig-webpack.json\" NODE_ENV=production LOCAL=false DEV_=false webpack --watch --config webpack/webpack.prod.ts"
+    "build": "cross-env TS_NODE_PROJECT=\"tsconfig-webpack.json\" NODE_ENV=production LOCAL=false DEV=false webpack --watch --config webpack/webpack.prod.ts"
   },
   "author": "",
   "license": "ISC",

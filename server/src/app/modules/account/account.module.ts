@@ -8,10 +8,6 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import * as passport from 'passport';
 import { AccountController } from './controllers';
 import {
-  GoogleStrategy,
-  GoogleStrategyConnect,
-  FacebookStrategy,
-  FacebookStrategyConnect,
   LocalLoginStrategy,
   LocalRegisterStrategy,
 } from './passport';
@@ -25,13 +21,8 @@ import { User } from "../../entity/user.entity";
   imports: [TypeOrmModule.forFeature([User])],
   controllers: [AccountController],
   components: [
-    GoogleStrategy,
-    GoogleStrategyConnect,
-    FacebookStrategy,
-    FacebookStrategyConnect,
     LocalLoginStrategy,
     LocalRegisterStrategy,
-    EnsureLoggedInMiddleware,
     SecretKey,
     AccountService,
     MailgunService,

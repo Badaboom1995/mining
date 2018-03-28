@@ -1,9 +1,9 @@
-import { accountService } from './account/account';
-import { authService } from './auth/auth';
-import { investmentService } from './investment/investment';
-import { routingService } from './routing/routing';
-import { uiService } from './ui/ui';
-import { validationService } from './validation/validation';
+import { accountService } from './account/account.service';
+import { authService } from './auth/auth.service';
+import { investmentService } from './investment/investment.service';
+import { routingService } from './routing/routing.service';
+import { uiService } from './ui/ui.service';
+import { validationService } from './validation/validation.service';
 
 
 

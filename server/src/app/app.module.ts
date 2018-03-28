@@ -4,8 +4,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { RouterModule, Routes } from "nest-router";
 
 import { AccountModule } from './modules/account/account.module';
-import { ContactsModule } from './modules/contacts/contacts.module';
-import { NotificationsModule } from './modules/notifications/notifications.module';
 import { InvestmentModule } from './modules/investment/investment.module';
 import { AdminModule } from "./modules/admin/admin.module";
 import { ShoppingRequestsModule } from "./modules/admin/modules/shopping-requests/shopping-requests.module";
@@ -36,10 +34,7 @@ const adminRoutes: Routes = [
   imports: [
     MongooseModule.forRoot(MONGODB_URI),
     TypeOrmModule.forRoot(),
-    TypeOrmModule.forFeature([User]),
     AccountModule,
-    ContactsModule,
-    NotificationsModule,
     InvestmentModule,
     RouterModule.forRoutes(adminRoutes),
     AdminModule,

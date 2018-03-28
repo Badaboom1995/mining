@@ -1,22 +1,20 @@
 import { Component, Inject } from '@nestjs/common';
 import { changeUserAddressDto, changeUserRoleDto } from '../dto/users.dto';
-import { Users } from '../../../../account/schemas/user.schema';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { User } from '../../../../../entity/user.entity';
+import { AccountService } from '../../../../account/services';
 
 @Component()
 export class UsersListService {
-  constructor() {}
-  async changeUserAddress(dto: changeUserAddressDto) {
+  constructor(
+    @InjectRepository(User) private userRepository: Repository<User>,
+    private accountService: AccountService,
+  ) {}
+  async findAll() {
     try {
-      await Users.findOneAndUpdate(
-        { _id: dto.user },
-        {
-          address: {
-            eth: dto.eth,
-            zcash: dto.zcash,
-          },
-        },
-      );
-      return Promise.resolve();
+      const data = await this.accountService.findAllUsers();
+      return Promise.resolve(data);
     } catch (err) {
       return Promise.reject(`Can't change user address ===> ${err}`);
     }
@@ -24,8 +22,9 @@ export class UsersListService {
 
   async changeUserRole(dto: changeUserRoleDto) {
     try {
-      await Users.findOneAndUpdate({ _id: dto.user }, { role: dto.role });
-      return Promise.resolve();
+      const user = await this.accountService.findById(dto.user);
+      user.roles = dto.role;
+      await this.userRepository.save(user);
     } catch (err) {
       return Promise.reject(err);
     }

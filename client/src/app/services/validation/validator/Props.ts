@@ -1,5 +1,5 @@
 import { IValidatorRule } from './Rule';
-import { ValidationService } from '../validation';
+import { ValidationService } from '../validation.service';
 
 
 export interface IValidatorProps {

@@ -1,6 +1,5 @@
 import ReactSelect from 'react-select';
 import { ISelectProps } from './Props';
-import 'react-select/dist/react-select.css';
 import * as classNames from 'classnames';
 
 

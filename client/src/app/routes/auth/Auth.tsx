@@ -5,7 +5,7 @@ import { Registration } from './registration/Registration';
 import { SendReset } from './send-reset/SendReset';
 import { ResetPassword } from './reset-password/ResetPassword';
 import { Card } from '../../components/card/Card';
-import { withRouter } from '../../services/index';
+import { withRouter } from '../../services';
 
 
 @withRouter
@@ -18,7 +18,7 @@ export class Auth extends React.Component<IAuthProps> {
 		return (
 			<div className='auth' >
 				<Card className='auth-form' >
-					<Switch >
+					<Switch>
 						<Route path='/auth/login'  			component={Login} />
 						<Route path='/auth/registration' 	component={Registration} />
 						<Route path='/auth/send-reset' 		component={SendReset} />
