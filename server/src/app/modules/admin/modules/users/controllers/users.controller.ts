@@ -45,7 +45,7 @@ export class UsersListController {
     @Body() dto: changeUserAddressDto,
   ) {
     try {
-      await this.userListService.changeUserAddress(dto);
+      //TODO: Add service
       return res.send(new APISuccess());
     } catch (err) {
       return res.send(new APIError(err));

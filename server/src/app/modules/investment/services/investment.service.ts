@@ -3,7 +3,6 @@ import { Component, Inject } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { AccountService } from '../../account/services';
-import { Users } from '../../account/schemas/user.schema';
 import {
   InvestmentSchema,
   IInvestment,
@@ -22,6 +21,9 @@ import {
   ADVCASH_ORGANIZATION,
   ADVCASH_SECRET,
 } from '../../../config/environments.config';
+import { Repository } from "typeorm";
+import { User } from "../../../entity/user.entity";
+import { InjectRepository } from "@nestjs/typeorm";
 
 @Component()
 export class InvestmentService {
@@ -32,6 +34,7 @@ export class InvestmentService {
     private readonly transactionsModel: Model<ITransactions>,
     @InjectModel(ShoppingRequestsSchema)
     private readonly shoppingRequestsModel: Model<IShoppingRequest>,
+    @InjectRepository(User) private userRepository : Repository<User>,
     private readonly accountService: AccountService,
   ) {}
 
@@ -144,15 +147,9 @@ export class InvestmentService {
       const stt_hash = `${data.ac_transfer}:${data.ac_start_date}:${data.ac_sci_name}:${data.ac_src_wallet}:${data.ac_dest_wallet}:${data.ac_order_id}:${data.ac_amount}:${data.ac_merchant_currency}:${ADVCASH_SECRET}`;
       const hash = crypto.createHash('sha256').update(stt_hash).digest();
       if (hash === data.hash) {
-        const user: any = await Users.findOne({ _id: data.userId });
-        if (user) {
-          await Users.update(
-            { _id: data.userId },
-            { balance: +data.ac_amount + user.balance },
-          );
-        } else {
-          return Promise.reject('User has been not found');
-        }
+        const user: any = await this.accountService.findById(data.userId);
+        user.balance = +data.ac_amount + user.balance;
+        this.userRepository.save(user)
       } else {
         return Promise.reject('Wrong hash');
       }

@@ -8,13 +8,16 @@ import { Redirect } from 'react-router';
 import { Wallet } from '../wallet/Wallet';
 import { MyTeam } from '../my-team/MyTeam';
 import { Footer } from '../../components/footer/Footer';
+import { inject, observer } from "mobx-react";
+import { IAccountSettingsProps } from "../account-settings/Props";
 
 
 
 
 
-
-export class MainPage extends React.Component {
+@inject('account')
+@observer
+export class MainPage extends React.Component<IAccountSettingsProps> {
 	/**
 	 * Top bar block
 	 */
@@ -33,6 +36,7 @@ export class MainPage extends React.Component {
 	 * render main page
 	 */
 	public render() {
+	  const { account } = this.props;
 		const { TopBar } = this;
 		return (
 			<div className='main-page' >
@@ -48,19 +52,14 @@ export class MainPage extends React.Component {
 								<Route path='/account' component={AccountSettings} />
 								<Route path='/wallet' component={Wallet} />
 								<Route path='/my-team' component={MyTeam} />
-								
+
 								<Route exact path='/' component={Home} />
 
 								<Redirect to='/' />
 							</Switch>
 						</div>
 						<Footer />
-
-
-
 					</div>
-
-
 				</div>
 			</div>
 		)

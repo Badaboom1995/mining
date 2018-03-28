@@ -25,7 +25,7 @@ export class Menu extends React.Component<IMenuProps> {
 	 */
 	public render() {
 		const { auth } = this.props;
-
+    console.log(this.props);
 		return (
 			<aside className='menu' >
 				<div className='menu__logo'  >
@@ -39,12 +39,12 @@ export class Menu extends React.Component<IMenuProps> {
 					<div className='menu__user-name' >Nick taylor</div>
 					<div className='menu__user-position' >CEO</div>
 				</div>
-				
+
 				<ul className='menu__list' >
 					{this.menu.map(item => (
 						<NavLink exact activeClassName='menu__list-link--active' className='menu__list-link' key={item.to} to={item.to} >
 							{item.name}
-						</NavLink>	
+						</NavLink>
 					))}
 				</ul>
 

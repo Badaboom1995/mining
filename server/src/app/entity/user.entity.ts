@@ -81,7 +81,7 @@ export class User {
 
   @Column() public passwordResetToken: string;
 
-  @Column() public passwordResetExpires: Date;
+  @Column() public passwordResetExpires: number;
 
   @Column() public referrals: string[];
 
@@ -177,17 +177,6 @@ export class User {
   public async encryptPassword(password) {
     const salt = await bcrypt.genSalt(10);
     return await bcrypt.hash(password, salt);
-  }
-
-  /**
-   * Set new password, add remove resetPasswordToken, and passwordResetExpires
-   * @param password
-   * @returns {Promise<void>}
-   */
-  public async resetPassword(password) {
-    await this.encryptPassword(this.password);
-    this.passwordResetToken = undefined;
-    this.passwordResetExpires = undefined;
   }
 
   /**
