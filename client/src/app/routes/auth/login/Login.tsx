@@ -5,20 +5,22 @@ import { Button } from '../../../components/button/Button';
 import { inject, observer } from 'mobx-react';
 import { withRouter } from '../../../services/index';
 import { Validator } from '../../../services/validation/validator/Validator';
+import { ValidationError } from "../../../services/validation/models/validation-error";
 
 @withRouter
 @inject('auth')
 @observer
 export class Login extends React.Component<ILoginProps> {
 	/**
-	 * Renders 
+	 * Renders
 	 */
 	public render() {
 
-		
+
 		const { auth } = this.props;
 		const model = auth.getForm('login');
-
+		const emailError = ValidationError.getMessage(model.errors, 'email');
+		const passwordError = ValidationError.getMessage(model.errors, 'password');
 
 		return (
 			<form onSubmit={e => {
@@ -26,11 +28,11 @@ export class Login extends React.Component<ILoginProps> {
 				auth.login();
 			}} className='login-form' >
 				<div className="auth-form__title">Вход в систему</div>
-				<Validator rules={[{name: 'required'}]} >
-					<Field name='email' onChange={model.set}  value={model.email} tabIndex={1} label='Email' />
+				<Validator permanentError={emailError} rules={[{ name: 'required' }]} >
+					<Field name='email' onChange={model.set} value={model.email} tabIndex={1} label='Email' />
 				</Validator>
-				<Validator rules={[{name: 'required'}]} >
-					<Field name='password' onChange={model.set}  value={model.password} tabIndex={2} type='password' label='Пароль' />
+				<Validator permanentError={passwordError} rules={[{ name: 'required' }]} >
+					<Field name='password' onChange={model.set} value={model.password} tabIndex={2} type='password' label='Пароль' />
 				</Validator>
 				<div className='login-form__footer' >
 					<Button type='submit' tabIndex={3}  >Войти</Button>

@@ -174,7 +174,7 @@ export class User {
    * @param {string} password
    * @returns {PromiseLike<string>}
    */
-  public async encryptPassword(password) {
+  public async encryptPassword(password) : Promise<string> {
     const salt = await bcrypt.genSalt(10);
     return await bcrypt.hash(password, salt);
   }

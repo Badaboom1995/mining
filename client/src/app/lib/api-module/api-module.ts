@@ -58,21 +58,16 @@ export class ApiModule {
 			return axios(config).then(async response => {
 				this.checkIsAutorized(response);
 				const res = response.data || {};
-				
 				if (res.success) return resolve(res);
-				reject({
+				const rejectResult : any = {
 					success: false,
 					content: res.content || {},
 					message: res.message || ''
-				});
-			}).catch(async response => {
-				this.checkIsAutorized(response);
-				console.log(response.data)
-				reject({
-					success: false,
-					content: {},
-					message: response.message
-				});
+				};
+				if (res.errors) rejectResult.errors = res.errors;
+				reject(rejectResult);
+			}).catch(error => {
+				console.log('FATAL REQUEST ERROR', error);
 			});
 		});
 	}

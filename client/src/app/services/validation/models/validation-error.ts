@@ -5,10 +5,11 @@
 export class ValidationError {
 
 	/**
-	 * Get error by name from list
+	 * Get error message by name from list
 	 */
-	public static get (list, name) : ValidationError {
-		return list.find(item => item.name == name);
+	public static getMessage(list, name) : any {
+		const error = list.find(item => item.name == name);
+		return error ? error.message : '';
 	}
 	/**
 	 * Name of field realtive to error

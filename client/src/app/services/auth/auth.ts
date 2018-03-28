@@ -6,6 +6,7 @@ import { routingService } from '../routing/routing';
 import { api } from '../../api/api';
 import { accountService } from '../account/account';
 import { validationService } from '../validation/validation';
+import { extractQueryParam } from '../../utils/extract-query-param';
 
 
 
@@ -28,7 +29,7 @@ export class AuthService {
 		return this.forms[name] as AuthModel;
 	}
 
-	
+
 	/**
 	 * Authorize user
 	 */
@@ -37,6 +38,24 @@ export class AuthService {
 		localStorage.setItem('authToken', token);
 		await accountService.get();
 		routingService.push(`/`);
+	}
+
+	/**
+	 * Calls validation services and resets errors
+	 */
+	@autobind
+	private validateForm (form : AuthModel) : boolean {
+		form.errors = [];
+		return validationService.validate();
+	}
+
+	/**
+	 * Set form errors
+	 */
+	@autobind
+	private setFormErrors (form : AuthModel, response, singleFieldName : string = 'email') {
+		console.log(response)
+		form.errors = Array.isArray(response.errors) ? response.errors : [{ name: singleFieldName, message: response.message }];
 	}
 
 	/**
@@ -57,14 +76,12 @@ export class AuthService {
 	@action
 	public async login() {
 		const { login } = this.forms;
-		login.errors = [];
-		if (!validationService.validate()) return;
-
+		if (!this.validateForm(login)) return;
 		try {
 			const response = await api.account.login(login.email, login.password);
 			await this.authorize(response.content.token);
 		} catch(error) {
-			login.errors = [{ name: 'email', message: error.message }];
+			this.setFormErrors(login, error);
 		}
 	}
 
@@ -75,17 +92,48 @@ export class AuthService {
 	@action
 	public async register() {
 		const { registration } = this.forms;
-		registration.errors = [];
-		if (!validationService.validate()) return;
+		if (!this.validateForm(registration)) return;
 		try {
 			const response = await api.account.register(registration.email, registration.password);
 			await this.authorize(response.content.token);
 		} catch(error) {
-			console.log(error)
-			registration.errors = [{ name: 'email', message: error.message,  }];
+			this.setFormErrors(registration, error);
 		}
 	}
 
+
+	/**
+	 * Send reset email if email valid
+	 */
+	@autobind
+	@action
+	public async sendReset () {
+		const { sendReset } = this.forms;
+		if (!this.validateForm(sendReset)) return;
+		try {
+			const response = await api.account.forgotPassword(sendReset.email);
+		} catch(error) {
+			this.setFormErrors(sendReset, error);
+		}
+	}
+
+	/**
+	 * Save new password
+	 */
+	@autobind
+	@action
+	public async savePassword () {
+		const { savePassword } = this.forms;
+		if (!this.validateForm(savePassword)) return;
+
+		try {
+			const token = extractQueryParam(window.location.hash, 'token');
+			const response = await api.account.resetPassword(savePassword.password, token);
+			routingService.push('/auth/login');
+		} catch (error) {
+			this.setFormErrors(savePassword, error, 'password');
+		}	
+	}
 
 }
 

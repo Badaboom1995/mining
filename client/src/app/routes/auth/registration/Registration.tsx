@@ -12,22 +12,24 @@ import { ValidationError } from '../../../services/validation/models/validation-
 @observer
 export class Registration extends React.Component<IRegistrationProps> {
 	/**
-	 * Renders 
+	 * Renders
 	 */
 	public render() {
 		const { auth } = this.props;
 		const model = auth.getForm('registration');
-		const emailError = ValidationError.get(model.errors, 'email');
+		const emailError = ValidationError.getMessage(model.errors, 'email');
+    const passwordError = ValidationError.getMessage(model.errors, 'password');
+
 		return (
-			<form onSubmit={e => { 
-				e.preventDefault(); 
+			<form onSubmit={e => {
+				e.preventDefault();
 				auth.register();
 			}} className='registration-form' >
 				<div className='auth-form__title' >Регистрация</div>
-				<Validator permanentError={emailError ? emailError.message : ''} rules={[{name: 'required'}, {name: 'email', message: 'Неверный формат'}]} >
+				<Validator permanentError={emailError} rules={[{name: 'required'}, {name: 'email', message: 'Неверный формат'}]} >
 					<Field onChange={model.set}  name='email' value={model.email} tabIndex={1} label='Email' />
 				</Validator>
-				<Validator rules={[{name: 'required' }, { name: 'isLonger', value: 5, message: 'Минимальная длина - 6 символов' }]} >
+				<Validator permanentError={passwordError} rules={[{name: 'required' }, { name: 'isLonger', value: 5, message: 'Минимальная длина - 6 символов' }]} >
 					<Field onChange={model.set}  name='password' value={model.password} tabIndex={2} type='password' label='Пароль' />
 				</Validator>
 				<Validator rules={[{name: 'isEqual', value: model.password, message: 'Пароли не совпадают'}]} >
