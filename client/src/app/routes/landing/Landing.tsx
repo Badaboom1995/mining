@@ -78,7 +78,7 @@ export class Landing extends React.Component<ILandingProps> {
                         <div className='calculator__block'>
                             <h3 className='calculator__block-title'>ОБЕРІТЬ ОДИН З ДВОХ НАЙКРАЩИХ МАЙНЕРІВ</h3>
                             <div className='calculator__block-controls'>
-                                <span className='calculator__radio-button calculator__radio-button--type active'>Тип 1</span>
+                                <span className='calculator__radio-button calculator__radio-button--active calculator__radio-button--type active'>Тип 1</span>
                                 <span className='calculator__radio-button calculator__radio-button--type'>Тип 2</span>
                             </div>
                         </div>
@@ -86,7 +86,7 @@ export class Landing extends React.Component<ILandingProps> {
                             <h3 className='calculator__block-title'>ТАРИФ НА ЕЛЕКТРОЕНЕРГІЮ</h3>
                             <div className='calculator__block-controls--small'>
                                 <span className='calculator__radio-button calculator__radio-button--stars calculator__radio-button--one-star'>Звичайний</span>
-                                <span className='calculator__radio-button calculator__radio-button--stars calculator__radio-button--two-stars'>Двозонний</span>
+                                <span className='calculator__radio-button calculator__radio-button--active calculator__radio-button--stars calculator__radio-button--two-stars'>Двозонний</span>
                                 <span className='calculator__radio-button calculator__radio-button--stars calculator__radio-button--three-stars'>Трьохзонний</span>
                             </div>
                         </div>
@@ -160,7 +160,7 @@ export class Landing extends React.Component<ILandingProps> {
                                     <button className="benefits__item-more"></button>
                                 </div>
                                 <div className="benefits__item">
-                                    <h3 className="benefits__item-title">З НАШОЮ ДОПОМОГОЮ</h3>
+                                    <h3 className="benefits__item-title benefits__item-title--short">З НАШОЮ ДОПОМОГОЮ</h3>
                                     <ul className="benefits__item-list">
                                         <li className="benefits__list-item">Вам доведеться вкласти дуже багато часу щоб навчитися на цьому заробляти. </li>
                                         <li className="benefits__list-item">Вам доведеться вкласти дуже багато часу щоб навчитися на цьому заробляти. </li>
@@ -181,19 +181,23 @@ export class Landing extends React.Component<ILandingProps> {
                             <a href="#" className="landing-button landing-button--big benefits__more-options">Больше вариантов</a>
                         </div>
                         <div className="call-to-action">
-                            <p className="call-to-action__text">Ми допоможемо вам заробляти на майнингу абсолютно без досвіду та без прикладання жодних зусиль. </p>
-                            <a href="#" className="landing-button landing-button--big">Почати зробляти з нами</a>
+                            <div className="call-to-action__wrapper">
+                                <p className="call-to-action__text">Ми допоможемо вам заробляти на майнингу абсолютно без досвіду та без прикладання жодних зусиль. </p>
+                                <a href="#" className="landing-button landing-button--big">Почати зробляти з нами</a>
+                            </div>
                         </div>
-                    <div className="reviews">
+                         <div className="reviews">
+                            <div className="title">
+                                <h2 className="title__main-title">Відгуки</h2>
+                                <p className="title__subtitle">ПОСЛУХАЙТЕ ЩО КАЖУТЬ ТІ ХТО ПОВІРИЛИ В НАС</p>
+                            </div>
                             <ul className="reviews__list">
                                 <li className="reviews__list-item">
-                                    <div className="title">
-                                        <h2 className="title__main-title">Відгуки</h2>
-                                        <p className="title__subtitle">ПОСЛУХАЙТЕ ЩО КАЖУТЬ ТІ ХТО ПОВІРИЛИ В НАС</p>
-                                    </div>
-                                    <div className="reviews__item-photo"></div>
+                                    <div className="reviews__item-photo"><img src="#" alt=""/></div>
                                     <p className="reviews__item-text">Це так вигідно, я просто хуїю, я вклала $2600 10 місяців назад і вже відбила їх. Зараз я маю $300 прибутку щомісяця. А могла б зберігати грощі в банку і ніколи їх не примножити. Також якщо я захочу продати установку то завжди можу повернути не меньше $2000</p>
                                     <span className="reviews__item-author">ОЛЕКСАНДРА</span>
+                                    <span className="reviews__slider-control reviews__slider-control--prev"></span>
+                                    <span className="reviews__slider-control reviews__slider-control--next"></span>
                                 </li>
                             </ul>
                         </div>
@@ -202,27 +206,28 @@ export class Landing extends React.Component<ILandingProps> {
                                 <h2 className="title__main-title">Станьте учасником команди</h2>
                                 <p className="title__subtitle">МЕРЕЖА СТАЄ ТІЛЬКИ БІЛЬШОЮ, НІ ХТО НЕ ДОЗВОЛИТЬ ЦІЙ ТЕХНОЛОГІЇ ПРОСТО ПЕРЕСТАТИ ІСНУВАТИ.</p>
                              </div>
-                             <a className="button">Почати</a>
-                             <div className="call-to-action__link"></div>
+                             <a className="landing-button landing-button--big">Почати</a>
+                             <a className="call-to-action__link">Увійдіть, якщо вже є акаунт</a>
                         </div>
-                        
-                    <header className='landing-header'>
-                        <a href='#' className='landing-logo'></a>
-                        <nav className='landing-header__navigation'>
-                            <ul className='landing-header__navigation-list'>
-                                <li className='landing-header__navigation-item'><a href='#' className='landing-header__navigation-link'>Головна</a></li>
-                                <li className='landing-header__navigation-item'><a href='#' className='landing-header__navigation-link'>Про проект</a></li>
-                                <li className='landing-header__navigation-item'><a href='#' className='landing-header__navigation-link'>Історія успіху</a></li>
-                                <li className='landing-header__navigation-item'><a href='#' className='landing-header__navigation-link'>Реферальна програма</a></li>
-                                <li className='landing-header__navigation-item'><a href='#' className='landing-header__navigation-link'>Новини</a></li>
-                                <li className='landing-header__navigation-item'><a href='#' className='landing-header__navigation-link'>FAQ</a></li>
-                            </ul>
-                        </nav>
-                        <div className='landing-header__buttons'>
-                            <a href='' className='button button--empty'>Вхід</a>
-                            <a href='' className='button'>Реєстрація</a>
+                    <footer className='landing-header landing-header--footer'>
+                            <div className='landing__container landing__container-flex'>
+                            <a href='#' className='landing-logo'>Mining LOGO</a>
+                            <nav className='landing-header__navigation'>
+                                <ul className='landing-header__navigation-list'>
+                                    <li className='landing-header__navigation-item'><a href='#' className='landing-header__navigation-link'>Головна</a></li>
+                                    <li className='landing-header__navigation-item'><a href='#' className='landing-header__navigation-link'>Про проект</a></li>
+                                    <li className='landing-header__navigation-item'><a href='#' className='landing-header__navigation-link'>Історія успіху</a></li>
+                                    <li className='landing-header__navigation-item'><a href='#' className='landing-header__navigation-link'>Реферальна програма</a></li>
+                                    <li className='landing-header__navigation-item'><a href='#' className='landing-header__navigation-link'>Новини</a></li>
+                                    <li className='landing-header__navigation-item'><a href='#' className='landing-header__navigation-link'>FAQ</a></li>
+                                </ul>
+                            </nav>
+                            <div className='landing-header__buttons'>
+                                <a href='' className='landing-button landing-button--empty'>Вхід</a>
+                                <a href='' className='landing-button'>Реєстрація</a>
+                            </div>
                         </div>
-                    </header>
+                    </footer>
 			</div>
 		)
 	}
