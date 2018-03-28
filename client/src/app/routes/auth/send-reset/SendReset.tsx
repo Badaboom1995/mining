@@ -30,7 +30,7 @@ export class SendReset extends React.Component<ISendResetProps> {
 					<Button type='submit' tabIndex={2}  >Отправить письмо</Button>
 					<div>
 						<Link tabIndex={3} to='/auth/login' >Вернуться ко входу</Link>
-						<Link tabIndex={4} to='/auth/send-reset' >Нет аккаунта?</Link>
+						<Link tabIndex={4} to='/auth/registration' >Нет аккаунта?</Link>
 					</div>
 				</div>
 			</form>
