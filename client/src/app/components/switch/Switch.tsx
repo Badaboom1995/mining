@@ -11,7 +11,10 @@ export class Switch extends React.Component<ISwitchProps> {
 	public static defaultProps = {
 		label : '',
 		value: false,
-		name: ''
+		name: '',
+		onChange: () => {},
+		onBlur: () => {},
+		onFocus: () => {}
 	};
 
 
@@ -28,7 +31,7 @@ export class Switch extends React.Component<ISwitchProps> {
 
 		return (
 			<div className={ classNames('switch', className)} >
-				<div onClick={this.onSwitch} className={classNames('switch__bar', { 'switch__bar--on': value  } )} >
+				<div tabIndex={tabIndex} onClick={this.onSwitch} className={classNames('switch__bar', { 'switch__bar--on': value  } )} >
 					<div className={ classNames('switch__toggle', `switch__toggle--${value ? 'on' : 'off'}` )  } ></div>
 				</div>
 				{label && <div onClick={this.onSwitch} className='switch__label' >{label}</div>}

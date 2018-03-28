@@ -34,12 +34,9 @@ export class LocalLoginStrategy extends Strategy {
 
     passport.deserializeUser(async (id, done) => {
       console.log(id, 'DESERIALIZE');
-
       try {
-        const user : User = await this.userRepository.findOneById({ id });
-        if (user) {
-          return done(null, user);
-        }
+        const user : User = await this.accountService.findById(id as string);
+        return done(null, user || false);
       } catch {
         return done(null, false);
       }

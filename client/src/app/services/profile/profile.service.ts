@@ -2,6 +2,8 @@ import { User } from '../account/models/user';
 import { observable, action } from 'mobx';
 import { autobind } from 'core-decorators';
 import { api } from '../../api/api';
+import { validationService } from '../validation/validation.service';
+import { accountService } from '../account/account.service';
 
 
 
@@ -32,8 +34,7 @@ export class ProfileService {
 	/**
 	 * Setter for user model
 	 */
-	@autobind
-	@action
+	@action.bound
 	public userSet ({name, value}) {
 		this.user[name] = value;
 	}
@@ -42,9 +43,9 @@ export class ProfileService {
 	 * Save profile
 	 * @memberof ProfileService
 	 */
-	@autobind
-	@action
+	@action.bound
 	public async save () {
+		if (!validationService.validate()) return;
 		try {
 			await api.account.settings(this.user);
 		} catch (error) { }
@@ -53,15 +54,36 @@ export class ProfileService {
 	 * Get profile
 	 * @memberof ProfileService
 	 */
-	@autobind
-	@action
+	@action.bound
 	public async get () {
 		try {
 			const response = await api.account.profile();
 			this.user = Object.assign(this.user, response.content);
+			this.isLoaded = true;
  		} catch (error) { }
 	}
+	/**
+	 * unload profile
+	 */
+	@action.bound
+	public async unload() {
+		this.isLoaded = false;
+		this.isSaving = false;
+	}
 
+
+
+	@action.bound
+	public async uploadPhoto(file : File) {
+		const uri = URL.createObjectURL(file);
+		try {
+			this.user.photo = uri;
+			accountService.user.photo = uri;
+			await api.account.uploadAvatar(file);
+		} catch(error) {
+
+		}
+	}
 }
 
 export const profileService = new ProfileService();

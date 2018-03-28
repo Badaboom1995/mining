@@ -30,7 +30,7 @@ app.use(
     secret: SESSION_SECRET,
     resave: true,
     saveUninitialized: false,
-    // cookie: { secure: fals },
+    cookie: { httpOnly: true },
     store: new MongoStore({
       mongooseConnection: MongoConnect,
     })

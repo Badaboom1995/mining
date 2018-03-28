@@ -7,6 +7,12 @@
 		padding: 19px;
 		padding-bottom: 29px;
 		margin-right: 29px;
+		&-save {
+			margin-right: 20px;
+		}
+		&-buttons {
+			justify-content: flex-end;
+		}
 	}
 	&__content {
 		display: flex;
@@ -72,10 +78,12 @@
 	@include size(100px);
 	margin-bottom: 10px;
 	background: #bdeafc;
-	border: 2px solid #1e8dc3;
+	// border: 2px solid #1e8dc3;
 	border-radius: 50%;
 	img {
 		display: block;
+		@include size(100px);
+		border-radius: 50%;
 	}
 }
 

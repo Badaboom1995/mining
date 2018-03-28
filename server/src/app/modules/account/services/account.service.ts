@@ -11,6 +11,7 @@ import {
   UpdateProfileDto,
 } from '../dto/account.dto';
 import { APIError } from '../../../helpers';
+import { MongoRepository } from 'typeorm/repository/MongoRepository';
 
 @Component()
 export class AccountService {
@@ -56,9 +57,10 @@ export class AccountService {
   public async updateProfile(id : string, data : UpdateProfileDto) : Promise<any> {
     try {
       const user = await this.findById(id);
-      const newData = Object.assign(user, data);
-      await this.userRepository.save(newData);
+
+      await this.userRepository.save(Object.assign(user, data));
     } catch (err) {
+      console.log(err);
       return Promise.reject(
         'There was a problem when we try to save user data after registration',
       );

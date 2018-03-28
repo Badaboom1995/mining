@@ -5,7 +5,7 @@ import { withRouter } from "../../../services/index";
 
 
 @withRouter
-@inject('auth')
+@inject('auth', 'account')
 @observer
 export class Menu extends React.Component<IMenuProps> {
 	/**
@@ -24,20 +24,20 @@ export class Menu extends React.Component<IMenuProps> {
 	 * render
 	 */
 	public render() {
-		const { auth } = this.props;
-    console.log(this.props);
+		const { auth, account } = this.props;
+
 		return (
 			<aside className='menu' >
 				<div className='menu__logo'  >
 					Mining Logo
 				</div>
 				<div className='menu__avatar' >
-					<img src='http://via.placeholder.com/80x80' className='menu__avatar-image' />
+					<img src={account.user.photo ||  'http://via.placeholder.com/80x80'} className='menu__avatar-image' />
 				</div>
 
 				<div className='menu__user-info' >
-					<div className='menu__user-name' >Nick taylor</div>
-					<div className='menu__user-position' >CEO</div>
+					<div className='menu__user-name' >{account.user.firstName} {account.user.lastName}</div>
+					<div className='menu__user-position' >{account.user.position}</div>
 				</div>
 
 				<ul className='menu__list' >

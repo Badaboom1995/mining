@@ -31,7 +31,6 @@ export class MainPage extends React.Component<IMainPageProps> {
 			</header>
 		);
 	}
-
 	/**
 	 * render main page
 	 */
