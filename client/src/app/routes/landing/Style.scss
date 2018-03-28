@@ -1,3 +1,12 @@
+.big-back{
+    width: 1350px;
+    height: 1450px;
+    background-image: url(../../public/icons/land/big-back.png);
+    position: absolute;
+    z-index: -1;
+}
+
+
 .landing{
     background-color: #102132;
     &__container{
@@ -8,6 +17,21 @@
         display: flex;
         flex-wrap: wrap;
     }
+    &::before{
+        content: '';
+        position: absolute;
+        display: inline-block;
+        background-image: url(../../public/icons/land/benefits-square.png);
+        background-position: 0 0;
+        right: 0px;
+        top: 2000px;
+        background-repeat: no-repeat;
+        width: 260px;
+        height: 600px;
+    }
+    &--referal::before{
+        display: none;
+    }
 }
 .landing-header{
     display: flex;
@@ -15,7 +39,6 @@
     align-items: end;
     padding-top: 31px;
     position: relative;
-    padding-bottom:350px;
     background-image: linear-gradient(-1deg, rgba(37,69,97,0.00) 11%, #102132 100%);
     &__navigation-list{
         display: flex;
@@ -39,6 +62,9 @@
     }
     &--footer{
         padding-bottom: 50px;
+    }
+    &--main-page{
+        padding-bottom:350px;
     }
 }
 
@@ -433,25 +459,11 @@
     align-items: center;
     margin-bottom: 50px;
     position: relative;
-   
-    &::before{
-        content: '';
-        position: absolute;
-        display: inline-block;
-        background-image: url(../../public/icons/land/benefits-square.png);
-        background-position: 0 0;
-        right: -270px;
-        top: -300px;
-        background-repeat: no-repeat;
-        width: 260px;
-        height: 600px;
-    }
     &::after{
         content: '';
         position: absolute;
         display: inline-block;
         background-image: url(../../public/icons/land/footer-square.png);
-        // right: -308px;
         top: 0px;
         background-repeat: no-repeat;
         width: 1160px;

@@ -7,6 +7,10 @@ import { inject, observer } from 'mobx-react';
 import { withRouter } from '../services/index';
 import { Requests } from './requests/Requests';
 import { Landing } from './landing/Landing';
+import { About } from './landing/about/About';
+import { Questions } from './landing/questions/Questions';
+import { Referal } from './landing/referal/Referal';
+import { Reviews } from './landing/reviews/Reviews';
 
 @withRouter
 @inject('account')
@@ -17,7 +21,7 @@ export class Root extends React.Component<IRootProps> {
 	 */
 	public componentDidMount() {
 		const { account } = this.props;
-		// account.get();
+		account.get();
 	}
 
 	/**
@@ -26,11 +30,15 @@ export class Root extends React.Component<IRootProps> {
 	public render() {
 		const { account } = this.props;
 
-		// if (!account.isAppLoaded) return null;
+		if (!account.isAppLoaded) return null;
 
 		return (
 			<div>
 				<Switch>
+					<Route component={Reviews} path='/reviews' />
+					<Route component={Questions} path='/questions' />
+					<Route component={Referal} path='/referal' />
+					<Route component={About} path='/about' />
 					<Route component={Landing} path='/landing' />
 					<Route component={Auth} path='/auth' />
 					<Route component={Uikit} path='/uikit' />

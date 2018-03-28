@@ -1,17 +1,13 @@
 import { Route, Switch } from 'react-router-dom';
 import { Redirect } from 'react-router';
 import { ILandingProps } from './Props';
-
-
-
-
+import { About } from './about/About';
 
 export class Landing extends React.Component<ILandingProps> {
 	public render() {
 		return (
-            
 			<div className='landing'>
-                    <header className='landing-header'>
+                    <header className='landing-header landing-header--main-page'>
                         <div className='landing__container landing__container-flex'>
                             <a href='#' className='landing-logo'>Mining LOGO</a>
                             <nav className='landing-header__navigation'>
@@ -205,7 +201,7 @@ export class Landing extends React.Component<ILandingProps> {
                             <div className="title">
                                 <h2 className="title__main-title">Станьте учасником команди</h2>
                                 <p className="title__subtitle">МЕРЕЖА СТАЄ ТІЛЬКИ БІЛЬШОЮ, НІ ХТО НЕ ДОЗВОЛИТЬ ЦІЙ ТЕХНОЛОГІЇ ПРОСТО ПЕРЕСТАТИ ІСНУВАТИ.</p>
-                             </div>
+                            </div>
                              <a className="landing-button landing-button--big">Почати</a>
                              <a className="call-to-action__link">Увійдіть, якщо вже є акаунт</a>
                         </div>
