@@ -2,8 +2,13 @@ import { IAccountSettingsProps } from './Props';
 import { Card } from '../../components/card/Card';
 import { Switch } from '../../components/switch/Switch';
 import { Field } from '../../components/field/Field';
+import { observer, inject } from 'mobx-react';
 
+
+@inject('profile')
+@observer
 export class AccountSettings extends React.Component<IAccountSettingsProps> {
+
   /**
    * Side bar with extra options and sponsor info
    */
@@ -53,6 +58,9 @@ export class AccountSettings extends React.Component<IAccountSettingsProps> {
    * Data form with primary fields
    */
   public DataForm = ({}) => {
+
+    const { profile } = this.props;
+    
     return (
       <Card className="account-settings__data-form">
         <h3 className="account-settings__section-title">Основная информация</h3>

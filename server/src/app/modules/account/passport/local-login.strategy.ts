@@ -4,10 +4,15 @@ import { InjectRepository } from "@nestjs/typeorm";
 import * as passport from 'passport';
 import { Strategy } from 'passport-local';
 import { User } from "../../../entity/user.entity";
+import { AccountService } from '../services/index';
+
 
 @Component()
 export class LocalLoginStrategy extends Strategy {
-  constructor(@InjectRepository(User) private userRepository : Repository<User>) {
+  constructor(
+     @InjectRepository(User) private userRepository : Repository<User>,
+     private accountService : AccountService
+  ) {
     super(
       {
         usernameField: 'email',
@@ -42,7 +47,7 @@ export class LocalLoginStrategy extends Strategy {
   }
 
   async logIn(email, password, done) {
-    const user : User = await this.userRepository.findOne({ email });
+    const user : User = await this.accountService.findByEmail(email);
     if (!user) {
       return done(
         new HttpException('Invalid credentials',
@@ -52,6 +57,7 @@ export class LocalLoginStrategy extends Strategy {
       );
     }
     const isMatch : boolean = await user.comparePassword(password);
+    
     if (!isMatch) {
       return done(
         new HttpException( 'Invalid credentials',

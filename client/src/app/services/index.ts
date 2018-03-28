@@ -4,6 +4,7 @@ import { investmentService } from './investment/investment.service';
 import { routingService } from './routing/routing.service';
 import { uiService } from './ui/ui.service';
 import { validationService } from './validation/validation.service';
+import { ProfileService, profileService } from './profile/profile.service';
 
 
 
@@ -13,6 +14,7 @@ export const withRouter : any = require('react-router').withRouter;
 
 
 export const services = {
+	profile: profileService,
 	account: accountService,
 	auth: authService,
 	investment: investmentService,

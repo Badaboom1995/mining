@@ -26,6 +26,7 @@ import { AccountService } from '../services';
 import { APISuccess, APIError } from '../../../helpers';
 import { MailgunService } from '../../../services/mailgun.service';
 import { ProfileModel } from '../../../models/profile-model';
+import { ApiSuccess } from '../../../helpers/ApiResponse';
 
 @ApiUseTags('account')
 @Controller('account')
@@ -167,7 +168,7 @@ export class AccountController {
       const id =
         profileId == 'undefined' || !profileId ? req.user.id : profileId;
       const user = await this.accountService.findById(id);
-      return user;
+      return new ApiSuccess(user);
     } catch (err) {
       return new APIError(err);
     }

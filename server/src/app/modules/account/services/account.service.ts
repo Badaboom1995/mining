@@ -33,6 +33,7 @@ export class AccountService {
         );
       }
       const newUser = User.create(email, password, 'local');
+      newUser.password = await newUser.encryptPassword(newUser.password);
       await this.userRepository.save(newUser);
       return done(null, newUser);
     } catch (err) {
