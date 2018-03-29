@@ -1,0 +1,20 @@
+.reviews{
+    &__author-name{
+        top: 100px;
+        width: 125px;
+        text-align: center;
+    }
+    &__author-photo{
+        position: absolute;
+        left: 18px;
+        top: 0px;
+        width: 90px;
+        height: 90px;
+        background-color: #ccc;
+        border-radius: 50%;
+        overflow: hidden;
+        img{
+            position: absolute;
+        }
+    }
+}

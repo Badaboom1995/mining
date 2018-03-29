@@ -1,0 +1,12 @@
+@import './balance-row/Style.scss';
+
+
+.balance-page {
+	padding-top: 10px;
+	&__list {
+		display: grid;
+		grid-template-columns: 350px 350px 350px;
+		grid-gap: 40px;
+		grid-row-gap: 25px;
+	}
+}

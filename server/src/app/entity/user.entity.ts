@@ -26,7 +26,7 @@ import { ApiModelProperty } from '@nestjs/swagger';
 
 @Entity('user-balance')
 export class UserBalance {
-  public constructor(@Column() public userId: string) {
+  public constructor( @Column() public userId: string) {
     // this.userId = userId;
   }
 
@@ -42,7 +42,7 @@ export class UserBalance {
 
 @Entity('user-earnings')
 export class UserEarnings {
-  public constructor(@Column() public userId: string) {
+  public constructor( @Column() public userId: string) {
     // this.userId = userId;
   }
 
@@ -55,74 +55,111 @@ export class UserEarnings {
 
 @Entity('users')
 export class User {
-  @ObjectIdColumn() public id: string;
 
-  @Column() public nickname: string;
+  @ObjectIdColumn() 
+  public id: string;
 
-  @Column() public firstName: string;
+  @Column({ default: '' })
+  public nickname: string;
 
-  @Column() public secondName: string;
+  @Column({ default: '' })
+  public firstName: string;
 
-  @Column() public skype: string;
+  @Column({ default: '' })
+  public secondName: string;
 
-  @Column() public phone: string;
+  @Column({ default: '' })
+  public lastName: string;
 
-  @Column() public companyUrl: string;
+  @Column({ default: '' })
+  public skype: string;
 
-  @Column() public companyName: string;
+  @Column({ default: '' })
+  public phone: string;
 
-  @Column() public position: string;
+  @Column({ default: '' })
+  public companyUrl: string;
 
-  @Column() public photo: string;
+  @Column({ default: '' })
+  public companyName: string;
 
-  @Column() public invitedBy: string;
+  @Column({ default: '' })
+  public position: string;
 
-  @Column() public password: string;
+  @Column({ default: '' })
+  public photo: string;
 
-  @Column() public passwordResetToken: string;
+  @Column({ default: '' })
+  public invitedBy: string;
 
-  @Column() public passwordResetExpires: number;
+  @Column({ default: '' })
+  public password: string;
 
-  @Column() public referrals: string[];
+  @Column({ default: '' })
+  public passwordResetToken: string;
+
+  @Column({ default: 0 })
+  public passwordResetExpires: number;
+
+  @Column({ default: [] })
+  public referrals: string[];
+  @Column({ default: '' })
+  public contry : string;
+  @Column({ default: '' })
+  public city : string;
+  @Column({ default: '' })
+  public bitcoin: string;
+  @Column({ default: '' })
+  public cardNumber: string = '';
+  @Column({ default: '' })
+  public ethWithdraw: string = '';
+  @Column({ default: '' })
+  public zcashWithdraw: string = '';
+
+  @Column({ default: '' })
+  public advcash: string;
+
+  @Column({ default: '' })
+  public privat24: string;
+
+  @Column({ default: '' })
+  public eth: string;
+
+  @Column({ default: '' })
+  public visa: string;
 
 
-  @Column() public bitcoin: string;
+  @Column({ default: false })
+  public reciveNotificationOnNewPartner: boolean;
 
-  @Column() public advcash: string;
+  @Column({ default: false })
+  public reciveNotificationOnNewTeamPartner: boolean;
 
-  @Column() public privat24: string;
+  @Column({ default: false })
+  public reciveNotificationOnNewPartnerInvestment: boolean;
 
-  @Column() public eth: string;
+  @Column({ default: false })
+  public reciveNotificationOnNewTeamPartnerInvestment: boolean;
 
-  @Column() public visa: string;
+  @Column({ default: false })
+  public reciveNotificationsEveryWeek: boolean;
 
+  @Column({ default: false })
+  public reciveNotificationsEveryMonth: boolean;
 
-  @Column() public reciveNotificationOnNewPartner: boolean;
-
-  @Column() public reciveNotificationOnNewTeamPartner: boolean;
-
-  @Column() public reciveNotificationOnNewPartnerInvestment: boolean;
-
-  @Column() public reciveNotificationOnNewTeamPartnerInvestment: boolean;
-
-  @Column() public reciveNotificationsEveryWeek: boolean;
-
-  @Column() public reciveNotificationsEveryMonth: boolean;
-
-  @Column()
+  @Column({ default: '' })
   public contactEmail: string;
 
-  @Column({
-    unique: true,
-  })
+  @Column({ unique: true, })
   public email: string;
 
-  @Column({
-    default: false,
-  })
+  @Column({ default: false, })
   public registrationComplete: boolean;
 
-  @Column({
+  @Column()
+  public birthDate : string;
+
+  @Column({ 
     default: 'en',
     enum: ['en', 'ru', 'ua'],
   })
@@ -174,7 +211,7 @@ export class User {
    * @param {string} password
    * @returns {PromiseLike<string>}
    */
-  public async encryptPassword(password) : Promise<string> {
+  public async encryptPassword(password): Promise<string> {
     const salt = await bcrypt.genSalt(10);
     return await bcrypt.hash(password, salt);
   }

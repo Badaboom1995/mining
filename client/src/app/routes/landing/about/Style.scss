@@ -1,0 +1,42 @@
+.about{
+    width: 1040px;
+    margin: 0 auto;
+    margin-top: 100px;
+    margin-bottom: 150px;
+   &__item{
+    padding-left: 335px;
+    margin-bottom: 50px;
+    color: #fff;
+    position: relative;
+   }
+   &__item-title{
+    font-size: 45px;
+    line-height: 55px;
+    font-weight: 300;
+    margin: 0;
+    margin-bottom: 30px;
+   }
+   &__item-subtitle{
+    font-size: 22px;
+    color: #45ADAA;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+   }
+   &__item-text{
+    font-size: 15px;
+    line-height: 20px;
+   }
+   &__short-title{
+    position: absolute;
+    font-size: 15px;
+    font-weight: 300;
+    left: 0;
+    top: 15px;
+    padding: 15px;
+    text-transform: uppercase;
+    background-image: url(../../public/icons/land/horizontal-line.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: 100% 2px;
+   }
+}

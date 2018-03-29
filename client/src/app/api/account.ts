@@ -46,4 +46,9 @@ export class AccountApi extends ApiModule {
 	 * Logout from account
 	 */
 	public logout = () => this.request('/account/logout');
+	/**
+	 * Get user balance
+	 * @memberof AccountApi
+	 */
+	public balance = () => this.request('/account/balance')
 }

@@ -1,0 +1,66 @@
+.referal{
+    width: 1140px;
+    margin: 0 auto;
+    tr{
+        padding: 20px 50px;
+    }
+    &__title{
+        padding: 0 230px;
+        padding-top: 50px;
+        padding-bottom: 75px;
+    }
+    &__table{
+        color: #fff;
+        min-width: 900px;
+        margin: 0 auto;
+        border-spacing: 0 10px;
+        width: 920px;
+        margin-top: -100px;
+        margin-bottom: 100px;
+    }
+    &__table-head{
+        // display: flex;
+        
+    }
+    &__table-row{
+        // display: flex;
+        background-color: #1A2D3E;
+        box-shadow: 5px 5px 17px 0 #000000;
+    }
+    &__table-head-cell{
+        font-size: 22px;
+        text-transform: uppercase;
+        font-weight: bold;
+        padding: 30px;
+    }
+    &__table-body-cell{
+        position: relative;
+        vertical-align: baseline;
+        font-size: 22px;
+        padding: 30px 10px;
+        span{
+            font-size: 45px;
+            color: #45ADAA;
+            padding: 0px 3px;
+        }
+        &:nth-child(1){
+            border-radius: 8px 0 0 8px;
+            text-align: right;
+            padding-left: 30px;  
+        }
+        &:nth-child(3){
+            border-radius: 0 8px 8px 0;   
+            padding-right: 30px;    
+        }
+    }
+    &__star{
+        display: inline-block;
+        width: 27px;
+        height: 25px;
+        margin: -5px;
+        margin-right: 10px;
+        background-image: url(../../public/icons/land/star.svg);
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+}

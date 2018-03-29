@@ -9,7 +9,7 @@ import { Wallet } from '../wallet/Wallet';
 import { MyTeam } from '../my-team/MyTeam';
 import { Footer } from '../../components/footer/Footer';
 import { inject, observer } from "mobx-react";
-import { IAccountSettingsProps } from "../account-settings/Props";
+import { IMainPageProps } from './Props';
 
 
 
@@ -17,7 +17,7 @@ import { IAccountSettingsProps } from "../account-settings/Props";
 
 @inject('account')
 @observer
-export class MainPage extends React.Component<IAccountSettingsProps> {
+export class MainPage extends React.Component<IMainPageProps> {
 	/**
 	 * Top bar block
 	 */
@@ -31,12 +31,10 @@ export class MainPage extends React.Component<IAccountSettingsProps> {
 			</header>
 		);
 	}
-
 	/**
 	 * render main page
 	 */
 	public render() {
-	  const { account } = this.props;
 		const { TopBar } = this;
 		return (
 			<div className='main-page' >

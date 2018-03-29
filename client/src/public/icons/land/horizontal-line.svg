@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="164px" height="2px" viewBox="0 0 164 2" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>Line 3</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <radialGradient cx="50%" cy="52.3716518%" fx="50%" fy="52.3716518%" r="4109.15577%" gradientTransform="translate(0.500000,0.523717),scale(1.000000,0.011111),rotate(90.000000),translate(-0.500000,-0.523717)" id="radialGradient-1">
+            <stop stop-color="#389A9D" offset="0%"></stop>
+            <stop stop-color="#349699" stop-opacity="0" offset="100%"></stop>
+        </radialGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square">
+        <g id="CM_main_1440-Copy" transform="translate(-243.000000, -470.000000)" stroke="url(#radialGradient-1)" stroke-width="2">
+            <g id="About-2" transform="translate(239.000000, 463.000000)">
+                <g id="Просто-про-складне" transform="translate(0.000000, 7.000000)">
+                    <g id="About">
+                        <path d="M90.5,-89 L90.5,91" id="Line-3" transform="translate(90.500000, 1.000000) rotate(-270.000000) translate(-90.500000, -1.000000) "></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

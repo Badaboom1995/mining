@@ -56,26 +56,26 @@ export class UpdateProfileDto {
   @ApiModelProperty()
   nickname: string;
   @ApiModelProperty()
-  @MinLength(10)
+  // @MinLength(10)
   @MaxLength(16)
   phone: string;
   @ApiModelProperty()
   @MinLength(2)
   @MaxLength(30)
   firstName: string;
-  @MinLength(2)
+  // @MinLength(2)
   @MaxLength(30)
   @ApiModelProperty()
   lastName: string;
   @ApiModelProperty()
-  @IsISO8601()
+  // @IsISO8601()
   birthday: Date;
   @ApiModelProperty()
-  @MinLength(2)
+  // @MinLength(2)
   @MaxLength(30)
   country: string;
   @ApiModelProperty()
-  @MinLength(2)
+  // @MinLength(2)
   @MaxLength(30)
   city: string;
 
@@ -92,7 +92,7 @@ export class UpdateProfileDto {
   @IsString()
   eth: string;
   @ApiModelProperty()
-  @IsNotEmpty()
+  // @IsNotEmpty()
   visa: string;
 
   @ApiModelProperty({ type: Boolean })
@@ -116,7 +116,7 @@ export class UpdateProfileDto {
   reciveNotificationsEveryMonth: boolean;
 
   @ApiModelProperty()
-  @IsFQDN()
+  // @IsFQDN()
   companyUrl: string;
   @ApiModelProperty()
   @MaxLength(30)

@@ -26,6 +26,10 @@ import { AccountService } from '../services';
 import { APISuccess, APIError } from '../../../helpers';
 import { MailgunService } from '../../../services/mailgun.service';
 import { ProfileModel } from '../../../models/profile-model';
+import { SessionUser } from '../../common/decorators/user.decorator';
+import { User } from '../../../entity/user.entity';
+import { APISuccess } from '../../../helpers/APISuccess';
+import { APIError } from '../../../helpers/APIError';
 
 @ApiUseTags('account')
 @Controller('account')
@@ -167,7 +171,7 @@ export class AccountController {
       const id =
         profileId == 'undefined' || !profileId ? req.user.id : profileId;
       const user = await this.accountService.findById(id);
-      return user;
+      return new APISuccess(user);
     } catch (err) {
       return new APIError(err);
     }
@@ -187,4 +191,17 @@ export class AccountController {
       return new APIError(err);
     }
   }
+
+
+
+  @Post('balance')
+  public async getBalance (@Req() req) {
+    try {
+      const balance  = await this.accountService.getBalances(req.user.id);
+      return new APISuccess(balance);
+    } catch(error) {
+      return new APIError('There was a problem while retrieving balance', 200, error);
+    }
+  }
+  
 }

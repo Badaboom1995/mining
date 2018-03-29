@@ -1,14 +1,34 @@
 
-@import './stats/Style.scss';
-@import './status/Style.scss';
-@import './withdraw/Style.scss';
+// @import './stats/Style.scss';
+// @import './status/Style.scss';
+// @import './withdraw/Style.scss';
+@import './balance/Style.scss';
+@import './history/Style.scss';
+
 .wallet {
 	&__content {
-		display: flex;
-		align-items: flex-start;
-	}
-	&__form {
-		margin-right: 37px;
+
 	}
 }
 
+.wallet-section {
+	margin-bottom: 30px;
+	&__title {
+		font-size: 22px;
+		color: $blue;
+	}
+}
+
+
+
+.wallet-tabs {
+	&__tab {
+		font-size: 18px;
+		&--active {
+			border-bottom: 3px solid $blue;
+		}
+		&:not(:last-of-type) {
+			margin-right: 25px;
+		}
+	}
+}

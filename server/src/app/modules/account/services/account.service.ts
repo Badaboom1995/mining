@@ -2,7 +2,7 @@ import { Component, HttpException, HttpStatus, Inject } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { randomBytes } from 'crypto';
-import { User } from '../../../entity/user.entity';
+import { User, UserBalance } from '../../../entity/user.entity';
 import {
   ChangePasswordDto,
   ForgetPasswordDto,
@@ -11,10 +11,17 @@ import {
   UpdateProfileDto,
 } from '../dto/account.dto';
 import { APIError } from '../../../helpers';
+import { MongoRepository } from 'typeorm/repository/MongoRepository';
+import { mergeByKeys } from '../../../../utils/merge-by-keys';
+import { SessionUser } from '../../common/decorators/user.decorator';
 
 @Component()
 export class AccountService {
-  constructor(@InjectRepository(User) private userRepository : Repository<User>) {}
+  constructor(
+    @InjectRepository(User) private userRepository : Repository<User>,
+    @InjectRepository(User) private userBalanceRepository : Repository<UserBalance>,
+    
+  ) {}
 
   /***
    * Local registration with user save if email not used
@@ -33,6 +40,7 @@ export class AccountService {
         );
       }
       const newUser = User.create(email, password, 'local');
+      newUser.password = await newUser.encryptPassword(newUser.password);
       await this.userRepository.save(newUser);
       return done(null, newUser);
     } catch (err) {
@@ -55,8 +63,8 @@ export class AccountService {
   public async updateProfile(id : string, data : UpdateProfileDto) : Promise<any> {
     try {
       const user = await this.findById(id);
-      const newData = Object.assign(user, data);
-      await this.userRepository.save(newData);
+      mergeByKeys(user, data)
+      await this.userRepository.save(user);
     } catch (err) {
       return Promise.reject(
         'There was a problem when we try to save user data after registration',
@@ -206,4 +214,14 @@ export class AccountService {
       return Promise.reject("Can't get users list");
     }
   }
+  /**
+   * Get user balance by id
+   * @memberof AccountService
+   */
+  public async getBalances(userId : any) : Promise<UserBalance> {
+    const balance =  await this.userBalanceRepository.findOne({ where: { userId }});
+    return balance;
+  }
+
+
 }
