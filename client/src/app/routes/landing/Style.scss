@@ -1,3 +1,6 @@
+@import './common/team-part/Style.scss';
+
+@import './home/Style.scss';
 .big-back{
     width: 1350px;
     height: 1450px;
@@ -18,7 +21,7 @@
         flex-wrap: wrap;
     }
     &::before{
-        content: '';
+        // content: '';
         position: absolute;
         display: inline-block;
         background-image: url(../../public/icons/land/benefits-square.png);
@@ -109,7 +112,7 @@
    padding:233px 0px;
    padding-bottom: 207px;
    text-align: center;
-   margin-top: -420px;
+   margin-top: -71px;
    &__content{
        width: 536px;
        margin-left: 331px;
