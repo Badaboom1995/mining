@@ -21,7 +21,15 @@ app.set('layout', '_layout');
 app.set('layout extractScripts', true);
 app.use(expressLayouts);
 app.use(express.static(path.join(__dirname, '../../public')));
+app.use(express.static(path.join(__dirname, '../../../../client/dist')));
 
+app.use((req,res, next) => {
+  if (req.method.toUpperCase() == 'GET') {
+    if (req.url.includes('account/callback')) return next();
+    return res.sendFile(path.join(__dirname, '../../../../client/dist/index.html'));
+  }
+  next();
+});
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
