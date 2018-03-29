@@ -8,6 +8,13 @@ import * as classNames from 'classnames';
 @observer
 export class Calculator extends React.Component<ICalculatorProps> {
 	/**
+	 * Initial calculation
+	 */
+	public componentWillMount() {
+		const { miningCalculator } = this.props;
+		miningCalculator.calculate();
+	}
+	/**
 	 * render
 	 */
 	public render() {

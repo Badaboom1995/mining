@@ -12,6 +12,7 @@ import { MONGODB_URI } from './config/environments.config';
 import { User } from "./entity/user.entity";
 import { MinerModule } from "./modules/miner/miner.module";
 import { TransactionModule } from './modules/transaction/transaction.module';
+import { CalculatorModule } from './modules/calculator/calculator.module';
 
 
 const adminRoutes: Routes = [
@@ -42,7 +43,8 @@ const adminRoutes: Routes = [
     ShoppingRequestsModule,
     UsersListModule,
     MinerModule,
-    TransactionModule
+    TransactionModule,
+    CalculatorModule
   ],
 })
 export class ApplicationModule {}

@@ -25,7 +25,20 @@ export class MinerType {
 	 */
 	@observable
 	public power : number = 0;
-
+	/**
+	 * Hash power
+	 * @type {number}
+	 * @memberof MinerType
+	 */
+	@observable
+	public hash : number = 0;
+	/**
+	 * Price 
+	 * @type {number}
+	 * @memberof MinerType
+	 */
+	@observable
+	public price : number;
 	/**
 	 * Initialize with data
 	 * @param {CalculatorCurrency} payload 

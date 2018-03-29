@@ -2,12 +2,13 @@ import { observable, action } from 'mobx';
 import { CalculatorCurrency } from './models/calculator-currency';
 import { MinerType } from './models/miner-type';
 import { EnergyTariff } from './models/energy-tariff';
+import { api } from '../../../api/api';
 
 
 
 
 
-export class CalculatorService {
+export class CalculatorService  {
 
 	/**
 	 * Miner types list
@@ -18,12 +19,16 @@ export class CalculatorService {
 		new MinerType({
 			name: 'Type 1',
 			displayName: 'Майнер 1',
-			power: 240
+			power: 240,
+			price: 2000,
+			hash: 230
 		}),
 		new MinerType({
 			name: 'Type 2',
 			displayName: 'Майнер 2',
-			power: 190
+			power: 190,
+			price: 2000,
+			hash: 400
 		})
 	];
 
@@ -118,6 +123,22 @@ export class CalculatorService {
 	@action.bound
 	public selectTariff (tariff : EnergyTariff) {
 		this.selectedTariff = tariff;
+	}
+	
+
+	/**
+	 * Recalculate revenue 
+	 * @memberof CalculatorService
+	 */
+	@action.bound
+	public async calculate() {
+		const { power, hash, price } = this.selectedMinerType;
+		try {
+			const response = await api.calculator.calculate(this.selectCurrency.name, hash, power, price);
+
+		} catch (error) {
+
+		}
 	}
 }
 

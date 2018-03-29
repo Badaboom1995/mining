@@ -1,5 +1,6 @@
 import { AccountApi } from './account';
 import { TransactionApi } from './transaction';
+import { CalculatorApi } from './calculator';
 
 
 
@@ -15,6 +16,12 @@ export class Api {
 	 * Transactions api calls
 	 */
 	public transactions = new TransactionApi();
+
+	/**
+	 * Calculator api
+	 * @memberof Api
+	 */
+	public calculator = new CalculatorApi();
 }
 
 

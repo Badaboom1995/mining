@@ -2,6 +2,7 @@ import { Component } from "@nestjs/common";
 import axios from 'axios';
 
 import * as moment from 'moment';
+import { APISuccess } from '../../../helpers/APISuccess';
 
 
 
@@ -19,7 +20,7 @@ export class CalculatorService {
 	 * @private
 	 * @memberof CalculatorService
 	 */
-	private async getUAH()  : any {
+	private async getUAH()  : Promise<any> {
 		await axios
 			.get('https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11')
 			.then(res => {
@@ -95,10 +96,19 @@ export class CalculatorService {
 			const { revenue, profit } = (await axios.get(`http://whattomine.com/coins/${code}.json?hr=${hash}&p=${power}&fee=0.0&cost=0.1&`)).data;
 			const priceUAH : number = await this.getUAH();
 			const electricityPerDay = this.getElectricityPerDay(power, priceUAH);
-			const paybackInMonth = (price / priceUAH / profit).toFixed(0);
-			
+			const monthesToPayback = (price / priceUAH / profit).toFixed(0);
+			const totalRevenue =  {
+				day: revenue,
+				month: revenue * 30,
+				year: (revenue * 30 ) * 12
+			};
+			return {
+				priceUAH,
+				electricityPerDay,
+				monthesToPayback
+			};
 		} catch (error) {
-
+			console.log(error);
 		}
 	}
 }

@@ -18,11 +18,17 @@ export class CalculatorController {
 	 * Calculate revenue by params
 	 */
 	@Post('calculate')
-	public async calculate (@Body('currency') currency : string, @Body('hash') hash : number, @Body('power') power : number) {
+	public async calculate (
+		@Body('currency') currency : string, 
+		@Body('hash') hash : number, 
+		@Body('power') power : number, 
+		@Body('price') price : number
+	) {
 		try {
-			const result = await this.calculatorService.calculate(currency, hash, power);
+			const result = await this.calculatorService.calculate(currency, hash, power, price);
 			return new APISuccess(result);
 		} catch (error) {
+			console.log(error);
 			return new APIError('OOps!', 200, error);
 		}
 	}
