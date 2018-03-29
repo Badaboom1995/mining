@@ -15,10 +15,10 @@ import { SecretKey } from './passport/secretKeys';
 import { AccountService } from './services';
 import { MailgunService } from '../../services/mailgun.service';
 import { ImageUploadMiddleware, EnsureLoggedInMiddleware} from './middlewares';
-import { User } from "../../entity/user.entity";
+import { User, UserBalance } from "../../entity/user.entity";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User])],
+  imports: [TypeOrmModule.forFeature([User, UserBalance])],
   controllers: [AccountController],
   components: [
     LocalLoginStrategy,

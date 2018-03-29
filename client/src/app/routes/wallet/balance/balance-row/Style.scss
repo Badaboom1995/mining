@@ -1,0 +1,29 @@
+
+
+.balance-row {
+	@extend .flex-row;
+	padding: 12px 6px;
+	width: 350px;
+	border-bottom: 1px dashed $blue;
+	// border-top: 1px dashed $blue;
+	
+	&__info {
+		@extend .flex-row;
+	}
+	&__name {
+		min-width: 60px;
+		font-size: 14px;
+	}
+	&__amount {
+		max-width: 140px;
+		margin-right: auto;
+		font-size: 14px;
+		font-weight: 500;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	&__icon {
+		@include size(20px);
+		margin-right: 10px;
+	}
+}

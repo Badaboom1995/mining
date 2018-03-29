@@ -9,7 +9,6 @@ import { services } from './services/index';
 // useStrict(true);
 
 
-
 const render = (Component, services) => {
 	ReactDOM.render(
 		<Provider
