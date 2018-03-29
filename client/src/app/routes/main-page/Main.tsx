@@ -32,10 +32,19 @@ export class MainPage extends React.Component<IMainPageProps> {
 		);
 	}
 	/**
+	 * Get profile to check is logged
+	 */
+	public componentDidMount() {
+		const { account } = this.props;
+		account.get();
+	}
+	/**
 	 * render main page
 	 */
 	public render() {
-		const { TopBar } = this;
+		const { TopBar, props } = this;
+		if (!props.account.isAppLoaded) return null;
+		
 		return (
 			<div className='main-page' >
 				<Menu />
