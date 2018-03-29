@@ -25,11 +25,6 @@ import {
 import { AccountService } from '../services';
 import { APISuccess, APIError } from '../../../helpers';
 import { MailgunService } from '../../../services/mailgun.service';
-import { ProfileModel } from '../../../models/profile-model';
-import { SessionUser } from '../../common/decorators/user.decorator';
-import { User } from '../../../entity/user.entity';
-import { APISuccess } from '../../../helpers/APISuccess';
-import { APIError } from '../../../helpers/APIError';
 
 @ApiUseTags('account')
 @Controller('account')
@@ -203,5 +198,5 @@ export class AccountController {
       return new APIError('There was a problem while retrieving balance', 200, error);
     }
   }
-  
+
 }

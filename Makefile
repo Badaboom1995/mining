@@ -6,7 +6,6 @@ prod-dockerfile = -f docker-compose.yml
 .PHONY: build-prod
 build-prod:
 	docker-compose $(prod-dockerfile) build
-	$(MAKE) install-backend-dependencies
 
 .PHONY: prod
 prod:

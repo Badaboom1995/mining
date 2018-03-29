@@ -9,6 +9,6 @@ RUN npm install -g http-server
 RUN npm run build
 WORKDIR ./dist
 
-CMD hs -p 3000
+CMD hs -p 3333
 
-EXPOSE 3000
+EXPOSE 3333

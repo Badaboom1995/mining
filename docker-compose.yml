@@ -11,29 +11,30 @@ services:
     env_file:
       - ./.env
 
-#  backend:
-#    build: ./server
-#    restart: always
-#    networks:
-#      - webnet
-#    volumes:
-#      - ./server:/server
-#    env_file:
-#      - ./.env
-#
-#  nginx:
-#    build: ./nginx
-#    networks:
-#      - webnet
-#    volumes:
-#      - ./server/public:/public
-#    env_file:
-#      - ./.env
-#    restart: always
-#    depends_on:
-#      - backend
-#    ports:
-#      - 80:80
+  backend:
+    build: ./server
+    restart: always
+    networks:
+      - webnet
+    volumes:
+      - ./server:/server
+    env_file:
+      - ./.env
+
+  nginx:
+    build: ./nginx
+    networks:
+      - webnet
+    volumes:
+      - ./server/public:/public
+    env_file:
+      - ./.env
+    restart: always
+    depends_on:
+      - backend
+      - frontend
+    ports:
+      - 80:80
 
 networks:
   webnet:
