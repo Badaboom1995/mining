@@ -125,7 +125,7 @@ export class CalculatorService  {
 		this.selectedTariff = tariff;
 	}
 	
-
+	
 	/**
 	 * Recalculate revenue 
 	 * @memberof CalculatorService
@@ -135,7 +135,6 @@ export class CalculatorService  {
 		const { power, hash, price } = this.selectedMinerType;
 		try {
 			const response = await api.calculator.calculate(this.selectCurrency.name, hash, power, price);
-
 		} catch (error) {
 
 		}
@@ -146,3 +145,4 @@ export class CalculatorService  {
 
 
 export const calculatorService = new CalculatorService();
+
