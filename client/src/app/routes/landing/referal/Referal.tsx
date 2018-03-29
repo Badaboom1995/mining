@@ -7,7 +7,6 @@ export class Referal extends React.Component<IReferalProps> {
 	public render() {
 		return (
 			<div className='landing landing--referal'>
-                   
                     <div className="referal">
                         <div className="big-back"></div>
                         <div className="title referal__title">

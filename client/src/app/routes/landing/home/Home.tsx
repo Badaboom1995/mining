@@ -1,5 +1,6 @@
 import { IHomeProps } from "./Props";
 import { TeamPart } from '../common/team-part/TeamPart';
+import { Calculator } from './calculator/Calculator';
 
 
 
@@ -54,79 +55,8 @@ export class Home extends React.Component<IHomeProps> {
 						<span className="how-it-works__play-video"></span>
 					</div>
 				</div>
-				<div className='calculator'>
-					<h2 className="calculator__title">Калькулятор окупності</h2>
-					<div className='calculator__block'>
-						<h3 className='calculator__block-title'>ОБЕРІТЬ ОДИН З ДВОХ НАЙКРАЩИХ МАЙНЕРІВ</h3>
-						<div className='calculator__block-controls'>
-							<span className='calculator__radio-button calculator__radio-button--active calculator__radio-button--type active'>Тип 1</span>
-							<span className='calculator__radio-button calculator__radio-button--type'>Тип 2</span>
-						</div>
-					</div>
-					<div className='calculator__block'>
-						<h3 className='calculator__block-title'>ТАРИФ НА ЕЛЕКТРОЕНЕРГІЮ</h3>
-						<div className='calculator__block-controls--small'>
-							<span className='calculator__radio-button calculator__radio-button--stars calculator__radio-button--one-star'>Звичайний</span>
-							<span className='calculator__radio-button calculator__radio-button--active calculator__radio-button--stars calculator__radio-button--two-stars'>Двозонний</span>
-							<span className='calculator__radio-button calculator__radio-button--stars calculator__radio-button--three-stars'>Трьохзонний</span>
-						</div>
-					</div>
-					<div className='calculator__block'>
-						<h3 className='calculator__block-title'>ОБЕРІТЬ МОНЕТУ ЯКУ ВИ БУДЕТЕ МАЙНИТИ</h3>
-						<div className='calculator__block-controls'>
-							<ul className="calculator__tabs">
-								<li className="calculator__tabs-item">Ethereum</li>
-								<li className="calculator__tabs-item active">Etherum classic</li>
-								<li className="calculator__tabs-item">Zcash</li>
-								<li className="calculator__tabs-item">Bitcoin gold</li>
-							</ul>
-							<ul className="calculator__tabs-content">
-								<li className="calculator__tab-content"></li>
-								<li className="calculator__tab-content active">
-									Ethereum Classic — блокчейн-криптоплатформа з відкритим вихідним кодом, для розробки децентралізованих додатків на базі «розумних контрактів
-                                    </li>
-								<li className="calculator__tab-content"></li>
-								<li className="calculator__tab-content"></li>
-							</ul>
-						</div>
-					</div>
-					<div className='calculator__block'>
-						<h3 className='calculator__block-title'>ВАШ ПРИБУТОК </h3>
-						<div className='calculator__block-controls--small'>
-							<table className="calculator__table">
-								<tr>
-									<th className="calculator__table-head">На добу</th>
-									<th className="calculator__table-head">В мiсяц</th>
-									<th className="calculator__table-head">В рiк</th>
-								</tr>
-								<tr >
-									<td className="calculator__table-row">3375 гривень</td>
-									<td className="calculator__table-row">21000 гривень</td>
-									<td className="calculator__table-row">90000 гривень</td>
-								</tr>
-								<tr>
-									<td className="calculator__table-row">1775 гривень</td>
-									<td className="calculator__table-row">6000 гривень</td>
-									<td className="calculator__table-row">20000 гривень</td>
-								</tr>
-								<tr className="calculator__table-row--active">
-									<td className="calculator__table-row">3375 гривень</td>
-									<td className="calculator__table-row">21000 гривень</td>
-									<td className="calculator__table-row">90000 гривень</td>
-								</tr>
-								<tr>
-									<td className="calculator__table-row">3375 гривень</td>
-									<td className="calculator__table-row">9000 гривень</td>
-									<td className="calculator__table-row">190000 гривень</td>
-								</tr>
-							</table>
-						</div>
-					</div>
-					<div className="calculator__motivate-text">
-						<p>ВАША УСТАНОВКА ОКУПИТЬСЯ ЧЕРЕЗ <span>~9 МІСЯЦІВ </span></p>
-						<p>І БУДЕ ДАЛІ ПРИНОСИТИ <span>~300$</span> ЧИСТОГО ПРИБУТКУ КОЖЕН МІСЯЦЬ.</p>
-					</div>
-				</div>
+				<Calculator />
+				
 				<div className="benefits">
 					<h2 className="benefits__title">Чому з нами найкраще?</h2>
 					<p className="benefits__subtitle">ПОРІВНЯЄМО УСІ ВАРІАНТИ</p>

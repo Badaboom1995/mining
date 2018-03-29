@@ -127,7 +127,6 @@ export class WebpackConfig {
 			});
 		}
 
-		console.log(use);
 
 		return {
 			test: /\.(css|scss)$/,
