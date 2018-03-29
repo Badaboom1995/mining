@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@nestjs/common@^4.5.0", "@nestjs/common@^4.6.6":
+"@nestjs/common@^4.6.6":
   version "4.6.6"
   resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-4.6.6.tgz#c1043647a05824a4d950f12743fb4e1107bf60cc"
   dependencies:
@@ -58,14 +58,6 @@
   dependencies:
     iterare "0.0.8"
     socket.io "^2.0.3"
-
-"@types/@nestjs/typeorm":
-  version "2.0.0"
-  resolved "https://codeload.github.com/nestjs/typeorm/tar.gz/8ba96ae05e008ed75c4a013637ec866a9197a7d6"
-  dependencies:
-    "@nestjs/common" "^4.5.0"
-    typeorm "^0.1.9"
-    typescript "^2.4.2"
 
 "@types/agenda@^1.0.2":
   version "1.0.2"
@@ -132,6 +124,18 @@
 "@types/mime@*":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@types/mime/-/mime-2.0.0.tgz#5a7306e367c539b9f6543499de8dd519fac37a8b"
+
+"@types/moment-range@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@types/moment-range/-/moment-range-3.1.0.tgz#7bc082aeb754d56a5de0ba1bd8e539d9f40f7af0"
+  dependencies:
+    moment "^2.18.1"
+
+"@types/moment@^2.13.0":
+  version "2.13.0"
+  resolved "https://registry.yarnpkg.com/@types/moment/-/moment-2.13.0.tgz#604ebd189bc3bc34a1548689404e61a2a4aac896"
+  dependencies:
+    moment "*"
 
 "@types/mongodb@*", "@types/mongodb@^3.0.2":
   version "3.0.7"
@@ -1323,6 +1327,12 @@ class-validator@0.8.1:
   dependencies:
     validator "9.2.0"
 
+class-validator@^0.8.5:
+  version "0.8.5"
+  resolved "https://registry.yarnpkg.com/class-validator/-/class-validator-0.8.5.tgz#484785acda98f68549c3a84dc1bb2f77b736dc58"
+  dependencies:
+    validator "9.2.0"
+
 cli-boxes@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/cli-boxes/-/cli-boxes-1.0.0.tgz#4fa917c3e59c94a004cd61f8ee509da651687143"
@@ -1873,7 +1883,7 @@ es6-shim@^0.33.13:
   version "0.33.13"
   resolved "https://registry.yarnpkg.com/es6-shim/-/es6-shim-0.33.13.tgz#894fb83d2c2e9378c8ec23659f2b62b28f994225"
 
-es6-symbol@^3.1.1, es6-symbol@~3.1.1:
+es6-symbol@^3.1.0, es6-symbol@^3.1.1, es6-symbol@~3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/es6-symbol/-/es6-symbol-3.1.1.tgz#bf00ef4fdab6ba1b46ecb7b629b4c7ed5715cc77"
   dependencies:
@@ -3332,13 +3342,19 @@ mixin-deep@^1.2.0:
   dependencies:
     minimist "0.0.8"
 
+moment-range@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/moment-range/-/moment-range-3.1.1.tgz#5c52cf9fab29db9dd9bcd86d37e52b04a7a7271a"
+  dependencies:
+    es6-symbol "^3.1.0"
+
 moment-timezone@^0.5.x, moment-timezone@~0.5.0:
   version "0.5.14"
   resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.5.14.tgz#4eb38ff9538b80108ba467a458f3ed4268ccfcb1"
   dependencies:
     moment ">= 2.9.0"
 
-moment@2.x.x, "moment@>= 2.9.0":
+moment@*, moment@2.x.x, "moment@>= 2.9.0", moment@^2.18.1, moment@^2.21.0:
   version "2.21.0"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.21.0.tgz#2a114b51d2a6ec9e6d83cf803f838a878d8a023a"
 
@@ -4161,7 +4177,7 @@ redis@^2.7.1:
     redis-commands "^1.2.0"
     redis-parser "^2.6.0"
 
-reflect-metadata@^0.1.10, reflect-metadata@^0.1.12, reflect-metadata@^0.1.2:
+reflect-metadata@^0.1.10, reflect-metadata@^0.1.2:
   version "0.1.12"
   resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.12.tgz#311bf0c6b63cd782f228a81abe146a2bfa9c56f2"
 
@@ -4371,7 +4387,7 @@ ret@~0.1.10:
   version "0.1.15"
   resolved "https://registry.yarnpkg.com/ret/-/ret-0.1.15.tgz#b8a4825d5bdb1fc3f6f53c2bc33f81388681c7bc"
 
-rimraf@2, rimraf@^2.5.1, rimraf@^2.6.1:
+rimraf@2, rimraf@^2.5.1, rimraf@^2.6.1, rimraf@^2.6.2:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.6.2.tgz#2ed8150d24a16ea8651e6d6ef0f47c4158ce7a36"
   dependencies:
@@ -5028,9 +5044,9 @@ typeforce@^1.0.0:
   version "1.12.0"
   resolved "https://registry.yarnpkg.com/typeforce/-/typeforce-1.12.0.tgz#ca40899919f1466d7819e37be039406beb912a2e"
 
-typeorm@^0.1.16:
-  version "0.1.16"
-  resolved "https://registry.yarnpkg.com/typeorm/-/typeorm-0.1.16.tgz#52a9251f4394c07ce1f4e14d2c8b6cfca89535fc"
+typeorm@^0.1.18:
+  version "0.1.19"
+  resolved "https://registry.yarnpkg.com/typeorm/-/typeorm-0.1.19.tgz#7a6b43f120f055942799c2af044f1e2f297a7aa4"
   dependencies:
     app-root-path "^2.0.1"
     chalk "^2.0.1"
@@ -5045,24 +5061,7 @@ typeorm@^0.1.16:
     yargonaut "^1.1.2"
     yargs "^9.0.1"
 
-typeorm@^0.1.9:
-  version "0.1.18"
-  resolved "https://registry.yarnpkg.com/typeorm/-/typeorm-0.1.18.tgz#94ad9574845dc6877da853115ef36dcb47100412"
-  dependencies:
-    app-root-path "^2.0.1"
-    chalk "^2.0.1"
-    cli-highlight "^1.1.4"
-    debug "^3.1.0"
-    dotenv "^4.0.0"
-    glob "^7.1.2"
-    js-yaml "^3.8.4"
-    mkdirp "^0.5.1"
-    reflect-metadata "^0.1.10"
-    xml2js "^0.4.17"
-    yargonaut "^1.1.2"
-    yargs "^9.0.1"
-
-typescript@^2.4.2, typescript@^2.6.2:
+typescript@^2.6.2:
   version "2.7.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.7.2.tgz#2d615a1ef4aee4f574425cdff7026edf81919836"
 
