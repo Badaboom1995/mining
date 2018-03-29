@@ -1,5 +1,4 @@
 import { IInvestment, Transactions } from "../../../services/schemas";
-import { IUserModel, Users } from "../../../modules/account/schemas/user.schema";
 import { ICurrencyTransaction } from "../currency-api/models/currency-transaction";
 import { EthApi, ZcashApi } from "../currency-api/currencies";
 import { CurrencyApi } from "../currency-api/currency-api";

@@ -169,7 +169,7 @@ export class WebpackConfig {
 	public devtool: string = '#cheap-module-eval-source-map';
 
 	/**
-	 * Entry 
+	 * Entry
 	 */
 	public entry = [
 		WebpackConfig.root('src/app/vendor.ts'),
@@ -205,7 +205,7 @@ export class WebpackConfig {
 		extensions: ['.ts', '.css', '.scss', '.tsx', '.js', '.json', '.pug', '.png', '.svg', '.jpg', '.*']
 	}
 	/**
-	 * 
+	 *
 	 * @memberof WebpackConfig
 	 */
 	public module = {
@@ -219,10 +219,10 @@ export class WebpackConfig {
 
 
 	/**
-	 * Configuration plugins 
+	 * Configuration plugins
 	 */
 	public plugins = [
-		// Inject global variables in every file, but not files provided with this plugin	
+		// Inject global variables in every file, but not files provided with this plugin
 		new webpack.ProvidePlugin({
 			React: 'react',
 			ReactDOM: 'react-dom'
@@ -254,12 +254,12 @@ export class WebpackConfig {
 			// variable to determine which api use
 			'LOCAL': process.env.LOCAL
 		}),
-		// Need to cut moment locales 
+		// Need to cut moment locales
 		new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /ru|en/),
 		// Show pretty message in terminal
-		new FriendlyErrorsWebpackPlugin(),
+		// new FriendlyErrorsWebpackPlugin(),
 		// Show progress bar in terminal during build
-		new SimpleProgressPlugin({ progressOptions: { clear: true } })
+		// new SimpleProgressPlugin({ progressOptions: { clear: true } })
 	];
 
 }
