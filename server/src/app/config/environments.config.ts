@@ -27,4 +27,32 @@ export const ADVCASH_EMAIL = process.env.ADVCASH_EMAIL || '5014-0ec6-d237-d28d';
 export const ADVCASH_ORGANIZATION = process.env.ADVCASH_ORGANIZATION || 'newbabylon';
 export const ADVCASH_SECRET = process.env.ADVCASH_SECRET || 2;
 
-export const ETH_APIKEY = process.env.ETH_APIKEY || 'NA23E58FGS35PG5UV2IZI3DKGVWFSXW5GV';
+export const ETH_APIKEY =
+  process.env.ETH_APIKEY || 'NA23E58FGS35PG5UV2IZI3DKGVWFSXW5GV';
+
+const ormconfig = {
+  development: {
+    type: 'mongodb',
+    host: 'ds251277.mlab.com',
+    port: 51277,
+    username: 'delphit',
+    password: 'm12345zxcv',
+    database: 'cardholder',
+    entities: ['src/**/**.entity{.ts,.js}'],
+    subscribers: ['src/**/**.subscriber{.ts,.js}'],
+    synchronize: true,
+  },
+  production: {
+    type: 'mongodb',
+    host: 'ds251277.mlab.com',
+    port: 51277,
+    username: 'delphit',
+    password: 'm12345zxcv',
+    database: 'cardholder',
+    entities: ['dist/**/**.entity{.ts,.js}'],
+    subscribers: ['dist/**/**.subscriber{.ts,.js}'],
+    synchronize: false,
+  },
+};
+
+export const DB_CONFIG = ormconfig[process.env.NODE_ENV || 'development'];
