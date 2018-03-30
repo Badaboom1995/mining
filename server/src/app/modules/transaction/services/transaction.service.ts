@@ -26,6 +26,12 @@ export class TransactionService {
 	 * @memberof TransactionService
 	 */
 	public async getTransactionsByUserId(userId : any) : Promise<Transaction[]> {
+		// await this.transactionRepository.save(Object.assign(new Transaction(), {
+		// 	userId,
+		// 	currency: 'ZCASH',
+		// 	transactionType: 'bonus',
+		// 	amount: 100
+		// }));
 		const transactions = await this.transactionRepository.find({
 			where: { userId }
 		});

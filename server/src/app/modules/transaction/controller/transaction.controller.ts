@@ -1,6 +1,7 @@
 import { Controller, Post, Req } from '@nestjs/common';
 import { TransactionService } from '../services/transaction.service';
 import { APIError } from '../../../helpers/index';
+import { APISuccess } from '../../../helpers/APISuccess';
 
 
 
@@ -24,7 +25,8 @@ export class TransactionController {
 	@Post('/list')
 	public async getUserTransactions(@Req() req : any) {
 		try {
-			return await this.transactionService.getTransactionsByUserId(req.user.id);
+			const transactions = await this.transactionService.getTransactionsByUserId(req.user.id);
+			return new APISuccess(transactions);
 		} catch (error) {
 			return new APIError('There was an error getting transactions', 200, error);
 		}

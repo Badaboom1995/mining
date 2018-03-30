@@ -257,9 +257,9 @@ export class WebpackConfig {
 		// Need to cut moment locales
 		new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /ru|en/),
 		// Show pretty message in terminal
-		// new FriendlyErrorsWebpackPlugin(),
+		new FriendlyErrorsWebpackPlugin(),
 		// Show progress bar in terminal during build
-		// new SimpleProgressPlugin({ progressOptions: { clear: true } })
+		new SimpleProgressPlugin({ progressOptions: { clear: true } })
 	];
 
 }

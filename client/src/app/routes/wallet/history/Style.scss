@@ -1,0 +1,26 @@
+@import './transaction/Style.scss';
+
+
+.wallet-history {
+	padding-top: 20px;
+}
+
+.wallet-history-header {
+	@extend .flex-row;
+	max-width: 600px;
+	margin-bottom: 20px;
+	font-size: 18px;
+	color: $blue;
+	&__currency {
+		width: 140px;
+	}
+	&__amount {
+		width: 115px;
+	}
+	&__type {
+		margin-right: auto;
+	}
+	&__date {
+		padding-right: 60px;
+	}
+}
