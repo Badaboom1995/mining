@@ -13,10 +13,6 @@ export class Transaction {
   @ObjectIdColumn()
   public id: string;
 
-  @Column({
-    enum: ['mining', 'pool'],
-  })
-  public investmentType: string;
 
   @Column({
     enum: ['investment', 'withdraw', 'miner-reward', 'bonus'],

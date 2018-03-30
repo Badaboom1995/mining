@@ -43,8 +43,9 @@ export class WalletService {
 	@action.bound
 	public async getTransactions () { 
 		try {
-			const transactions = await api.transactions.list();
-			this.transactions 
+			const response = await api.transactions.list();
+			this.transactions = response.content.map(transaction => Object.assign(new Transaction(), transaction));
+			console.log(this.transactions.length)
 		} catch { }
 	}
 }

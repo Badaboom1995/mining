@@ -12,13 +12,13 @@ export class Menu extends React.Component<IMenuProps> {
 	 * Menu items
 	 */
 	public menu = [
-		{ name: 'Главная', to: '/' },
-		{ name: 'Инвестиции', to: '/investment' },
-		{ name: 'Моя команда', to: '/my-team' },
-		{ name: 'Карьера', to: '/career' },
-		{ name: 'Кошелек', to: '/wallet' },
-		{ name: 'Документы', to: '/documents' },
-		{ name: 'Настройки', to: '/account' }
+		{ name: 'Главная', to: '/lk' },
+		{ name: 'Инвестиции', to: '/lk/investment' },
+		{ name: 'Моя команда', to: '/lk/my-team' },
+		{ name: 'Карьера', to: '/lk/career' },
+		{ name: 'Кошелек', to: '/lk/wallet' },
+		{ name: 'Документы', to: '/lk/documents' },
+		{ name: 'Настройки', to: '/lk/account' }
 	];
 	/**
 	 * render
