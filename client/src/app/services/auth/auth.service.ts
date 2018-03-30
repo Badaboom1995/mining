@@ -37,7 +37,7 @@ export class AuthService {
 	public async authorize (token : string) {
 		localStorage.setItem('authToken', token);
 		await accountService.get();
-		routingService.push(`/`);
+		routingService.push(`/lk`);
 	}
 
 	/**

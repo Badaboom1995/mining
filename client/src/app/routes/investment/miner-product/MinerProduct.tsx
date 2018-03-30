@@ -41,7 +41,7 @@ export class MinerProduct extends React.Component<IMinerProductProps> {
 					<div className='investment-miner-product__header-row investment-miner-product__header-bottom-content' >
 						<div onClick={this.toggleModal} className='investment-miner-product__header-more' >Подробнее</div>
 						<div className='investment-miner-product__header-buy-button' onClick={() => {
-							routing.push('/investment/methods')
+							routing.push('/lk/investment/methods')
 						}} >Купить</div>
 					</div>
 

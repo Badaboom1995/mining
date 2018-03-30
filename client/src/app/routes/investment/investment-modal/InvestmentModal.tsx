@@ -45,7 +45,7 @@ export class InvestmentModal extends React.Component<IInvestmentModalProps> {
 					<div className='investment-pool-participation__price' >${investment.investmentParams.amount.toFixed(2)}</div>
 					<Slider value={investment.investmentParams.amount} onChange={event => investment.investmentParams.setAmount(event.value)} />
 				</div>
-				<Button onClick={() => routing.push('/investment/methods')} className='investment-pool-participation__button' >Инвестировать</Button>
+				<Button onClick={() => routing.push('/lk/investment/methods')} className='investment-pool-participation__button' >Инвестировать</Button>
 			</Card>
 		)
 	}

@@ -19,10 +19,10 @@ export class Auth extends React.Component<IAuthProps> {
 			<div className='auth' >
 				<Card className='auth-form' >
 					<Switch>
-						<Route path='/auth/login'  			component={Login} />
-						<Route path='/auth/registration' 	component={Registration} />
-						<Route path='/auth/send-reset' 		component={SendReset} />
-						<Route path='/auth/reset-password' 	component={ResetPassword} />
+						<Route path='/lk/auth/login'  			component={Login} />
+						<Route path='/lk/auth/registration' 	component={Registration} />
+						<Route path='/lk/auth/send-reset' 		component={SendReset} />
+						<Route path='/lk/auth/reset-password' 	component={ResetPassword} />
 					</Switch>
 				</Card>
 			</div>

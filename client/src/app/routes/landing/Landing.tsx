@@ -16,20 +16,20 @@ export class Landing extends React.Component<ILandingProps> {
         return (
             <header className='landing-header '>
                 <div className='landing__container landing__container-flex'>
-                    <Link to='/landing' className='landing-logo'>Mining LOGO</Link>
+                    <Link to='/' className='landing-logo'>Mining LOGO</Link>
                     <nav className='landing-header__navigation'>
                         <ul className='landing-header__navigation-list'>
-                            <li className='landing-header__navigation-item'><Link to='/landing' className='landing-header__navigation-link'>Головна</Link></li>
-                            <li className='landing-header__navigation-item'><Link to='/landing/about' className='landing-header__navigation-link'>Про проект</Link></li>
-                            <li className='landing-header__navigation-item'><Link to='/landing/reviews' className='landing-header__navigation-link'>Історія успіху</Link></li>
-                            <li className='landing-header__navigation-item'><Link to='/landing/referal' className='landing-header__navigation-link'>Реферальна програма</Link></li>
+                            <li className='landing-header__navigation-item'><Link to='/' className='landing-header__navigation-link'>Головна</Link></li>
+                            <li className='landing-header__navigation-item'><Link to='/about' className='landing-header__navigation-link'>Про проект</Link></li>
+                            <li className='landing-header__navigation-item'><Link to='/reviews' className='landing-header__navigation-link'>Історія успіху</Link></li>
+                            <li className='landing-header__navigation-item'><Link to='/referal' className='landing-header__navigation-link'>Реферальна програма</Link></li>
                             <li className='landing-header__navigation-item'><Link to='/' className='landing-header__navigation-link'>Новини</Link></li>
-                            <li className='landing-header__navigation-item'><Link to='/landing/faq' className='landing-header__navigation-link'>FAQ</Link></li>
+                            <li className='landing-header__navigation-item'><Link to='/faq' className='landing-header__navigation-link'>FAQ</Link></li>
                         </ul>
                     </nav>
                     <div className='landing-header__buttons'>
-                        <Link to='/auth/login' className='landing-button landing-button--empty'>Вхід</Link>
-                        <Link to='/auth/registration' className='landing-button'>Реєстрація</Link>
+                        <Link to='/lk/auth/login' className='landing-button landing-button--empty'>Вхід</Link>
+                        <Link to='/lk/auth/registration' className='landing-button'>Реєстрація</Link>
                     </div>
                 </div>
             </header>
@@ -46,17 +46,17 @@ export class Landing extends React.Component<ILandingProps> {
                     <a href='#' className='landing-logo'>Mining LOGO</a>
                     <nav className='landing-header__navigation'>
                         <ul className='landing-header__navigation-list'>
-                            <li className='landing-header__navigation-item'><Link to='/landing' className='landing-header__navigation-link'>Головна</Link></li>
-                            <li className='landing-header__navigation-item'><Link to='/landing/about' className='landing-header__navigation-link'>Про проект</Link></li>
-                            <li className='landing-header__navigation-item'><Link to='/landing/reviews' className='landing-header__navigation-link'>Історія успіху</Link></li>
-                            <li className='landing-header__navigation-item'><Link to='/landing/referal' className='landing-header__navigation-link'>Реферальна програма</Link></li>
+                            <li className='landing-header__navigation-item'><Link to='/' className='landing-header__navigation-link'>Головна</Link></li>
+                            <li className='landing-header__navigation-item'><Link to='/about' className='landing-header__navigation-link'>Про проект</Link></li>
+                            <li className='landing-header__navigation-item'><Link to='/reviews' className='landing-header__navigation-link'>Історія успіху</Link></li>
+                            <li className='landing-header__navigation-item'><Link to='/referal' className='landing-header__navigation-link'>Реферальна програма</Link></li>
                             <li className='landing-header__navigation-item'><Link to='/' className='landing-header__navigation-link'>Новини</Link></li>
-                            <li className='landing-header__navigation-item'><Link to='/landing/faq' className='landing-header__navigation-link'>FAQ</Link></li>
+                            <li className='landing-header__navigation-item'><Link to='/faq' className='landing-header__navigation-link'>FAQ</Link></li>
                         </ul>
                     </nav>
                     <div className='landing-header__buttons'>
-                        <Link to='/auth/login'  className='landing-button landing-button--empty'>Вхід</Link>
-                        <Link to='/auth/registration' className='landing-button'>Реєстрація</Link>
+                        <Link to='/lk/auth/login'  className='landing-button landing-button--empty'>Вхід</Link>
+                        <Link to='/lk/auth/registration' className='landing-button'>Реєстрація</Link>
                     </div>
                 </div>
             </footer>
@@ -69,11 +69,11 @@ export class Landing extends React.Component<ILandingProps> {
             <div className='landing'>
                 <Header />
                 <Switch>
-                    <Route component={Reviews} path='/landing/reviews' />
-					<Route component={Questions} path='/landing/faq' />
-					<Route component={Referal} path='/landing/referal' />
-					<Route component={About} path='/landing/about' />
-                    <Route component={Home} path='/landing' />
+                    <Route component={Reviews} path='/reviews' />
+					<Route component={Questions} path='/faq' />
+					<Route component={Referal} path='/referal' />
+					<Route component={About} path='/about' />
+                    <Route component={Home} path='/' />
                 </Switch>
                 <Footer />
             </div>
