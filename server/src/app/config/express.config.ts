@@ -7,13 +7,13 @@ import * as bodyParser from 'body-parser';
 import * as cookieParser from 'cookie-parser';
 import * as expressDevice from 'express-device';
 import * as connect from 'connect-mongo';
-import { connection as MongoConnect } from 'mongoose';
 import * as cors from 'cors';
+import { connection as MongoConnect } from 'mongoose';
 import { SESSION_SECRET } from './environments.config';
 
 const MongoStore = connect(expressSession);
-
 const app = express();
+
 app.use(cors({ credentials: true, origin: 'http://localhost:8288' }));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -21,15 +21,6 @@ app.set('layout', '_layout');
 app.set('layout extractScripts', true);
 app.use(expressLayouts);
 app.use(express.static(path.join(__dirname, '../../public')));
-app.use(express.static(path.join(__dirname, '../../../../client/dist')));
-
-app.use((req,res, next) => {
-  if (req.method.toUpperCase() == 'GET') {
-    if (req.url.includes('account/callback')) return next();
-    return res.sendFile(path.join(__dirname, '../../../../client/dist/index.html'));
-  }
-  next();
-});
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));

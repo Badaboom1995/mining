@@ -55,4 +55,4 @@ const ormconfig = {
   },
 };
 
-export const DB_CONFIG = ormconfig[process.env.NODE_ENV || 'development'];
+export const DB_CONFIG = ormconfig[process.env.NODE_ENV || 'production'];

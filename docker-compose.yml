@@ -2,6 +2,7 @@ version: '3.5'
 
 services:
   frontend:
+    container_name: frontend
     build: ./client
     restart: always
     networks:
@@ -10,18 +11,22 @@ services:
       - ./client:/client
     env_file:
       - ./.env
+    ports:
+      - 8080:8080
 
   backend:
+    container_name: backend
     build: ./server
     restart: always
     networks:
       - webnet
     volumes:
-      - ./server:/server
-    env_file:
-      - ./.env
+      - ./server
+    environment:
+      - NODE_ENV=production
 
   nginx:
+    container_name: nginx
     build: ./nginx
     networks:
       - webnet
@@ -32,9 +37,10 @@ services:
     restart: always
     depends_on:
       - backend
-      - frontend
+#      - frontend
     ports:
       - 80:80
+
 
 networks:
   webnet:
