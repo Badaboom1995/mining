@@ -38,8 +38,8 @@ export class Registration extends React.Component<IRegistrationProps> {
 				<div className='registration-form__footer' >
 					<Button type='submit' tabIndex={4}  >Создать аккаунт</Button>
 					<div>
-						<Link tabIndex={5} to='/auth/login' >Уже зарегестрированны?</Link>
-						<Link tabIndex={6} to='/auth/send-reset' >Забыли пароль?</Link>
+						<Link tabIndex={5} to='/lk/auth/login' >Уже зарегестрированны?</Link>
+						<Link tabIndex={6} to='/lk/auth/send-reset' >Забыли пароль?</Link>
 					</div>
 				</div>
 			</form>
