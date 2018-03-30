@@ -22,7 +22,7 @@ export class ApiModule {
 	 */
 	protected checkIsAutorized(response) {
 		if (response.status == 401) {
-			routingService.push('/auth/login');
+			routingService.push('/lk/auth/login');
 		}
 	}
 

@@ -21,7 +21,7 @@ export class InfoModal extends React.Component<IInfoModalProps> {
 				<div className='miner-info-modal-banner__price' >
 					${miner.price}
 				</div>
-				<div onClick={routing.push.bind(null, '/investment/methods')} className='miner-info-modal-banner__button' >Купити</div>
+				<div onClick={routing.push.bind(null, '/lk/investment/methods')} className='miner-info-modal-banner__button' >Купити</div>
 				<div className='miner-info-modal-banner__close' >
 					<i onClick={onClose} className="icon-close-button"></i>
 				</div>

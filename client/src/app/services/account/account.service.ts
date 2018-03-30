@@ -33,10 +33,10 @@ export class AccountService {
 			const response = await api.account.profile();
 			this.user = Object.assign(new User(), response.content);
 			if (routingService.history.location.pathname.startsWith('/auth')) {
-				routingService.push('/');
+				routingService.push('/lk');
 			}
 		} catch(err) {
-			routingService.push('/auth/login');
+			routingService.push('/lk/auth/login');
 		}
 		this.isAppLoaded = true;
 	}

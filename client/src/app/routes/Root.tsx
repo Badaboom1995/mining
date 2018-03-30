@@ -30,13 +30,10 @@ export class Root extends React.Component<IRootProps> {
 				<Switch>
 					{/* Put into landing routing */}
 					<Route component={Requests} path='/requests' />
-					
-					<Route component={Landing} path='/landing' />
-
 					<Route component={Uikit} path='/uikit' />
-
-					<Route component={Auth} path='/auth' />
-					<Route component={MainPage} path='/' />
+					<Route component={Auth} path='/lk/auth' />
+					<Route component={MainPage} path='/lk' />
+					<Route component={Landing} path='/' />
 				</Switch>
 			</div>
 		);

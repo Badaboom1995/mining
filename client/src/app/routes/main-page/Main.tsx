@@ -49,20 +49,17 @@ export class MainPage extends React.Component<IMainPageProps> {
 			<div className='main-page' >
 				<Menu />
 				<div>
-
 					<TopBar />
 					<div className='main-page__content' >
 						<div className='main-page__content-inner' >
 							<Switch>
-								<Route path='/investment/methods' component={InvestmentMethods} />
-								<Route path='/investment' component={Investment} />
-								<Route path='/account' component={AccountSettings} />
-								<Route path='/wallet' component={Wallet} />
-								<Route path='/my-team' component={MyTeam} />
-
-								<Route exact path='/' component={Home} />
-
-								<Redirect to='/' />
+								<Route path='/lk/investment/methods' component={InvestmentMethods} />
+								<Route path='/lk/investment' component={Investment} />
+								<Route path='/lk/account' component={AccountSettings} />
+								<Route path='/lk/wallet' component={Wallet} />
+								<Route path='/lk/my-team' component={MyTeam} />
+								<Route exact path='/lk' component={Home} />
+								<Redirect to='/lk' />
 							</Switch>
 						</div>
 						<Footer />
