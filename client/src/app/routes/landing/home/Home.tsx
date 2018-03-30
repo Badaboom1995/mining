@@ -1,9 +1,7 @@
 import { IHomeProps } from "./Props";
 import { TeamPart } from '../common/team-part/TeamPart';
 import { Calculator } from './calculator/Calculator';
-
-
-
+import { default as Slider } from 'react-slick';
 
 export class Home extends React.Component<IHomeProps> {
 	/**
@@ -56,7 +54,7 @@ export class Home extends React.Component<IHomeProps> {
 					</div>
 				</div>
 				<Calculator />
-				
+
 				<div className="benefits">
 					<h2 className="benefits__title">Чому з нами найкраще?</h2>
 					<p className="benefits__subtitle">ПОРІВНЯЄМО УСІ ВАРІАНТИ</p>
@@ -97,21 +95,43 @@ export class Home extends React.Component<IHomeProps> {
 						<a href="#" className="landing-button landing-button--big">Почати зробляти з нами</a>
 					</div>
 				</div>
+
+
+
+
 				<div className="reviews">
 					<div className="title">
 						<h2 className="title__main-title">Відгуки</h2>
 						<p className="title__subtitle">ПОСЛУХАЙТЕ ЩО КАЖУТЬ ТІ ХТО ПОВІРИЛИ В НАС</p>
 					</div>
 					<ul className="reviews__list">
-						<li className="reviews__list-item">
-							<div className="reviews__item-photo"><img src="#" alt="" /></div>
-							<p className="reviews__item-text">Це так вигідно, я просто хуїю, я вклала $2600 10 місяців назад і вже відбила їх. Зараз я маю $300 прибутку щомісяця. А могла б зберігати грощі в банку і ніколи їх не примножити. Також якщо я захочу продати установку то завжди можу повернути не меньше $2000</p>
-							<span className="reviews__item-author">ОЛЕКСАНДРА</span>
-							<span className="reviews__slider-control reviews__slider-control--prev"></span>
-							<span className="reviews__slider-control reviews__slider-control--next"></span>
-						</li>
+						<Slider slidesToShow={1} slidesToScroll={1} arrows={true}
+							nextArrow={<span className="reviews__slider-control reviews__slider-control--next"></span>}
+							prevArrow={<span className="reviews__slider-control reviews__slider-control--prev"></span>}
+						>
+							<li className="reviews__list-item">
+								<div className="reviews__item-photo"><img src="#" alt="" /></div>
+								<p className="reviews__item-text">Це так вигідно, я просто хуїю, я вклала $2600 10 місяців назад і вже відбила їх. Зараз я маю $300 прибутку щомісяця. А могла б зберігати грощі в банку і ніколи їх не примножити. Також якщо я захочу продати установку то завжди можу повернути не меньше $2000</p>
+								<span className="reviews__item-author">ОЛЕКСАНДРА</span>
+
+							</li>
+
+							<li className="reviews__list-item">
+								<div className="reviews__item-photo"><img src="#" alt="" /></div>
+								<p className="reviews__item-text">Це так вигідно, я просто хуїю, я вклала $2600 10 місяців назад і вже відбила їх. Зараз я маю $300 прибутку щомісяця. А могла б зберігати грощі в банку і ніколи їх не примножити. Також якщо я захочу продати установку то завжди можу повернути не меньше $2000</p>
+								<span className="reviews__item-author">ОЛЕКСАНДРА</span>
+							</li>
+
+							<li className="reviews__list-item">
+								<div className="reviews__item-photo"><img src="#" alt="" /></div>
+								<p className="reviews__item-text">Це так вигідно, я просто хуїю, я вклала $2600 10 місяців назад і вже відбила їх. Зараз я маю $300 прибутку щомісяця. А могла б зберігати грощі в банку і ніколи їх не примножити. Також якщо я захочу продати установку то завжди можу повернути не меньше $2000</p>
+								<span className="reviews__item-author">ОЛЕКСАНДРА</span>
+							</li>
+						</Slider>
 					</ul>
 				</div>
+
+
 				<TeamPart />
 			</div>
 		);
