@@ -4,8 +4,8 @@
   "description": "Nest TypeScript starter repository",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon",
-    "prestart:prod": "tsc",
+    "start": "cross-env NODE_ENV=development nodemon",
+    "build": "tsc",
     "start:prod": "node ./dist/server.js"
   },
   "dependencies": {
@@ -26,7 +26,7 @@
     "@types/moment-range": "^3.1.0",
     "@types/mongodb": "^3.0.2",
     "@types/mongoose": "^5.0.7",
-    "@types/node": "^9.4.7",
+    "@types/node": "^9.6.1",
     "@types/passport": "^0.4.2",
     "@types/passport-facebook": "^2.1.7",
     "@types/passport-github": "^1.1.2",
@@ -42,6 +42,7 @@
     "connect-mongo": "^2.0.1",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
+    "cross-env": "^5.1.4",
     "crypto": "^1.0.1",
     "ejs": "^2.5.7",
     "express-device": "^0.4.2",
@@ -80,7 +81,7 @@
     "codelyzer": "^4.2.1",
     "nodemon": "^1.14.11",
     "rimraf": "^2.6.2",
-    "ts-node": "^4.1.0",
+    "ts-node": "^5.0.1",
     "tslint": "^5.9.1"
   }
 }

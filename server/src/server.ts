@@ -11,6 +11,7 @@ import { NestApplicationOptions } from "@nestjs/common/interfaces/nest-applicati
 
 async function bootstrap() {
   const app = await NestFactory.create(ApplicationModule, <NestApplicationOptions>expressApp);
+  app.setGlobalPrefix("/api/");
   const options = new DocumentBuilder()
     .setTitle('Cardholder')
     .setDescription('The cardholder API description')
@@ -19,7 +20,7 @@ async function bootstrap() {
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('/api/docs', app, document);
+  SwaggerModule.setup('/docs', app, document);
 
   app.useGlobalFilters(
     new AnyExceptionFilter(),

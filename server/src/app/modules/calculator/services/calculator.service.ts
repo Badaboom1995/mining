@@ -1,8 +1,11 @@
 import { Component } from "@nestjs/common";
 import axios from 'axios';
 
-import * as moment from 'moment';
+import * as Moment from 'moment';
+import { extendMoment } from 'moment-range';
 import { APISuccess } from '../../../helpers/APISuccess';
+
+const moment = extendMoment(Moment);
 
 
 
@@ -16,7 +19,7 @@ export class CalculatorService {
 
 	/**
 	 * Get UAH price in usd
-	 * 
+	 *
 	 * @private
 	 * @memberof CalculatorService
 	 */
@@ -85,9 +88,9 @@ export class CalculatorService {
 
 	/**
 	 * Calculate revenue and other stuff
-	 * @param {string} currency 
-	 * @param {number} hash 
-	 * @param {number} power 
+	 * @param {string} currency
+	 * @param {number} hash
+	 * @param {number} power
 	 * @memberof CalculatorService
 	 */
 	public async calculate(currency: string, hash: number, power: number, price : number) {

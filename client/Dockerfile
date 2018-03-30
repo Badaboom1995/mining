@@ -1,14 +1,21 @@
-FROM node:carbon
+FROM node:carbon as node
 
-WORKDIR /client
-COPY . .
+RUN mkdir -p /frontend
+WORKDIR /frontend
+
+COPY package.json /frontend
 
 RUN npm install
 
-RUN npm install -g http-server
+COPY . /frontend
+
 RUN npm run build
-WORKDIR ./dist
 
-CMD hs -p 3333
+FROM nginx
 
-EXPOSE 3333
+ENV NGINX_PATH /nginx
+WORKDIR ${NGINX_PATH}
+
+RUN rm /etc/nginx/conf.d/*
+COPY --from=node /frontend/dist/ /usr/share/nginx/html
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
