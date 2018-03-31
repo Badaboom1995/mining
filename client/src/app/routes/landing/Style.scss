@@ -43,6 +43,9 @@
   padding-top: 31px;
   position: relative;
   background-image: linear-gradient(-1deg, rgba(37, 69, 97, 0.00) 11%, #102132 100%);
+  &__navigation {
+    margin-right: auto;
+  }
   &__navigation-list {
     display: flex;
     margin-right: 32px;

@@ -23,7 +23,7 @@ export class Landing extends React.Component<ILandingProps> {
                             <li className='landing-header__navigation-item'><Link to='/about' className='landing-header__navigation-link'>Про проект</Link></li>
                             <li className='landing-header__navigation-item'><Link to='/reviews' className='landing-header__navigation-link'>Історія успіху</Link></li>
                             <li className='landing-header__navigation-item'><Link to='/referal' className='landing-header__navigation-link'>Реферальна програма</Link></li>
-                            <li className='landing-header__navigation-item'><Link to='/' className='landing-header__navigation-link'>Новини</Link></li>
+                            {/* <li className='landing-header__navigation-item'><Link to='/' className='landing-header__navigation-link'>Новини</Link></li> */}
                             <li className='landing-header__navigation-item'><Link to='/faq' className='landing-header__navigation-link'>FAQ</Link></li>
                         </ul>
                     </nav>
@@ -50,7 +50,7 @@ export class Landing extends React.Component<ILandingProps> {
                             <li className='landing-header__navigation-item'><Link to='/about' className='landing-header__navigation-link'>Про проект</Link></li>
                             <li className='landing-header__navigation-item'><Link to='/reviews' className='landing-header__navigation-link'>Історія успіху</Link></li>
                             <li className='landing-header__navigation-item'><Link to='/referal' className='landing-header__navigation-link'>Реферальна програма</Link></li>
-                            <li className='landing-header__navigation-item'><Link to='/' className='landing-header__navigation-link'>Новини</Link></li>
+                            {/* <li className='landing-header__navigation-item'><Link to='/' className='landing-header__navigation-link'>Новини</Link></li> */}
                             <li className='landing-header__navigation-item'><Link to='/faq' className='landing-header__navigation-link'>FAQ</Link></li>
                         </ul>
                     </nav>
