@@ -629,6 +629,7 @@
     position: relative;
   }
   &__item-photo {
+    margin: 0 auto;
     margin-bottom: 20px;
     width: 85px;
     height: 85px;
@@ -663,6 +664,8 @@
     margin-bottom: 30px;
   }
   &__item-author {
+    display: block;
+    text-align: center;
     font-size: 18px;
     color: #45ADAA;
     text-transform: uppercase;
@@ -670,11 +673,19 @@
   }
   &__slider-control {
     position: absolute;
+    z-index: 50;
     display: inline-block;
     width: 55px;
     height: 25px;
     background-image: url(../../public/icons/land/arrow.svg);
     top: 40px;
+    &:hover {
+      background: url(../../public/icons/land/arrow.svg);
+      opacity: 1;
+    }
+    &::before {
+      content: '';
+    }
   }
   &__slider-control--prev {
     left: 0;
