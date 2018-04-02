@@ -2,8 +2,12 @@ import { IHomeProps } from "./Props";
 import { TeamPart } from '../common/team-part/TeamPart';
 import { Calculator } from './calculator/Calculator';
 import { default as Slider } from 'react-slick';
+import { Link } from "react-router-dom";
+import { Reviews } from "./reviews/Reviews";
 
 export class Home extends React.Component<IHomeProps> {
+
+
 	/**
 	 * render
 	 */
@@ -15,7 +19,7 @@ export class Home extends React.Component<IHomeProps> {
 						<div className='promo__content'>
 							<h1 className='promo__title'><span>Майнинг</span> не прикладаючи зусиль</h1>
 							<p className='promo__description'>Пасивний дохід від 300 $ в місяць без технічних навичок, без досвіду в фінансах і трейдингу.</p>
-							<a href='#' className='landing-button landing-button--big promo__button'>Почати заробляти</a>
+							<Link to='/lk/auth/registration' href='#' className='landing-button landing-button--big promo__button'>Почати заробляти</Link>
 						</div>
 					</div>
 				</div>
@@ -45,7 +49,7 @@ export class Home extends React.Component<IHomeProps> {
 								<p className='how-it-works__description-text-paragraph'>
 									Ми допоможемо вам заробляти на майнингу абсолютно без досвіду та без прикладання жодних зусиль. В середньому у людини займає 8 місяців щоб в усьому розібратися, але з нами ви одразу заробляєте не гаючи вашого дорогоцінного часу.
                                     </p>
-								<a href='#' className='landing-button landing-button--big'>Дiзнатис бiльше</a>
+								<Link to='/about' href='#' className='landing-button landing-button--big'>Дiзнатис бiльше</Link>
 							</div>
 						</div>
 					</div>
@@ -87,50 +91,19 @@ export class Home extends React.Component<IHomeProps> {
 							<button className="benefits__item-more"></button>
 						</div>
 					</div>
-					<a href="#" className="landing-button landing-button--big benefits__more-options">Больше вариантов</a>
+					<Link to='/faq' className="landing-button landing-button--big benefits__more-options">Больше вариантов</Link>
 				</div>
 				<div className="call-to-action">
 					<div className="call-to-action__wrapper">
 						<p className="call-to-action__text">Ми допоможемо вам заробляти на майнингу абсолютно без досвіду та без прикладання жодних зусиль. </p>
-						<a href="#" className="landing-button landing-button--big">Почати зробляти з нами</a>
+						<Link to='/lk/auth/registration' className="landing-button landing-button--big">Почати зробляти з нами</Link>
 					</div>
 				</div>
 
 
+				<Reviews />
 
-
-				<div className="reviews">
-					<div className="title">
-						<h2 className="title__main-title">Відгуки</h2>
-						<p className="title__subtitle">ПОСЛУХАЙТЕ ЩО КАЖУТЬ ТІ ХТО ПОВІРИЛИ В НАС</p>
-					</div>
-					<ul className="reviews__list">
-						<Slider slidesToShow={1} slidesToScroll={1} arrows={true}
-							nextArrow={<span className="reviews__slider-control reviews__slider-control--next"></span>}
-							prevArrow={<span className="reviews__slider-control reviews__slider-control--prev"></span>}
-						>
-							<li className="reviews__list-item">
-								<div className="reviews__item-photo"><img src="#" alt="" /></div>
-								<p className="reviews__item-text">Це так вигідно, я просто хуїю, я вклала $2600 10 місяців назад і вже відбила їх. Зараз я маю $300 прибутку щомісяця. А могла б зберігати грощі в банку і ніколи їх не примножити. Також якщо я захочу продати установку то завжди можу повернути не меньше $2000</p>
-								<span className="reviews__item-author">ОЛЕКСАНДРА</span>
-
-							</li>
-
-							<li className="reviews__list-item">
-								<div className="reviews__item-photo"><img src="#" alt="" /></div>
-								<p className="reviews__item-text">Це так вигідно, я просто хуїю, я вклала $2600 10 місяців назад і вже відбила їх. Зараз я маю $300 прибутку щомісяця. А могла б зберігати грощі в банку і ніколи їх не примножити. Також якщо я захочу продати установку то завжди можу повернути не меньше $2000</p>
-								<span className="reviews__item-author">ОЛЕКСАНДРА</span>
-							</li>
-
-							<li className="reviews__list-item">
-								<div className="reviews__item-photo"><img src="#" alt="" /></div>
-								<p className="reviews__item-text">Це так вигідно, я просто хуїю, я вклала $2600 10 місяців назад і вже відбила їх. Зараз я маю $300 прибутку щомісяця. А могла б зберігати грощі в банку і ніколи їх не примножити. Також якщо я захочу продати установку то завжди можу повернути не меньше $2000</p>
-								<span className="reviews__item-author">ОЛЕКСАНДРА</span>
-							</li>
-						</Slider>
-					</ul>
-				</div>
-
+				
 
 				<TeamPart />
 			</div>

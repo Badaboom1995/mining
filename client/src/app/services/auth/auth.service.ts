@@ -65,7 +65,7 @@ export class AuthService {
 	public async logout () {
 		try {
 			await api.account.logout();
-			routingService.push('/auth/login');
+			routingService.push('/lk/auth/login');
 		} catch {}
 	}
 
@@ -129,7 +129,7 @@ export class AuthService {
 		try {
 			const token = extractQueryParam(window.location.hash, 'token');
 			const response = await api.account.resetPassword(savePassword.password, token);
-			routingService.push('/auth/login');
+			routingService.push('/lk/auth/login');
 		} catch (error) {
 			this.setFormErrors(savePassword, error, 'password');
 		}	

@@ -77,7 +77,7 @@ export class AccountModule implements NestModule {
         }),
       )
       .forRoutes({
-        path: '/account/google/callback',
+        path: '/api/account/google/callback',
         method: RequestMethod.GET,
       });
 
