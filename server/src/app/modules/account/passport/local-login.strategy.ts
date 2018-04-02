@@ -44,7 +44,9 @@ export class LocalLoginStrategy extends Strategy {
   }
 
   async logIn(email, password, done) {
-    const user : User = await this.accountService.findByEmail(email);
+    const user : User = await this.userRepository.findOne({
+      email: email.toLowerCase(),
+    });
     if (!user) {
       return done(
         new HttpException('Invalid credentials',
@@ -54,7 +56,7 @@ export class LocalLoginStrategy extends Strategy {
       );
     }
     const isMatch : boolean = await user.comparePassword(password);
-    
+
     if (!isMatch) {
       return done(
         new HttpException( 'Invalid credentials',

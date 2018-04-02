@@ -259,7 +259,7 @@ export class WebpackConfig {
 		// Show pretty message in terminal
 		new FriendlyErrorsWebpackPlugin(),
 		// Show progress bar in terminal during build
-		new SimpleProgressPlugin({ progressOptions: { clear: true } })
+		// new SimpleProgressPlugin({ progressOptions: { clear: true } })
 	];
 
 }

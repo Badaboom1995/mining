@@ -37,8 +37,8 @@ export class Login extends React.Component<ILoginProps> {
 				<div className='login-form__footer' >
 					<Button type='submit' tabIndex={3}  >Войти</Button>
 					<div>
-						<Link tabIndex={4} to='/auth/registration' >Нет аккаунта?</Link>
-						<Link tabIndex={5} to='/auth/send-reset' >Забыли пароль?</Link>
+						<Link tabIndex={4} to='/lk/auth/registration' >Нет аккаунта?</Link>
+						<Link tabIndex={5} to='/lk/auth/send-reset' >Забыли пароль?</Link>
 					</div>
 				</div>
 			</form>

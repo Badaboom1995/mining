@@ -73,7 +73,7 @@ export class AccountModule implements NestModule {
       .forRoutes({ path: '/account/google', method: RequestMethod.GET })
       .apply(
         passport.authenticate('google-login', {
-          successRedirect: '/account/callback?oauth="true"',
+          successRedirect: '/api/account/callback?oauth="true"',
         }),
       )
       .forRoutes({
@@ -112,7 +112,7 @@ export class AccountModule implements NestModule {
       .forRoutes({ path: '/account/facebook', method: RequestMethod.ALL })
       .apply(
         passport.authenticate('facebook-login', {
-          successRedirect: '/account/callback?oauth="true"',
+          successRedirect: '/api/account/callback?oauth="true"',
         }),
       )
       .forRoutes({
@@ -129,7 +129,7 @@ export class AccountModule implements NestModule {
       .forRoutes({ path: '/account/connect/facebook', method: RequestMethod.ALL })
       .apply(
         passport.authenticate('facebook-connect', {
-          successRedirect: '/account/connect/callback',
+          successRedirect: '/api/account/connect/callback',
         }),
       )
       .forRoutes({
@@ -141,7 +141,7 @@ export class AccountModule implements NestModule {
     consumer
       .apply(
         passport.authenticate('local-login', {
-          successRedirect: '/account/callback',
+          successRedirect: '/api/account/callback',
         }),
       )
       .forRoutes({ path: '/account/login', method: RequestMethod.POST });
@@ -150,7 +150,7 @@ export class AccountModule implements NestModule {
     consumer
       .apply(
         passport.authenticate('local-register', {
-          successRedirect: '/account/callback',
+          successRedirect: '/api/account/callback',
         }),
       )
       .forRoutes({ path: '/account/register', method: RequestMethod.POST });

@@ -6,8 +6,7 @@ export class EnsureLoggedInMiddleware implements NestMiddleware {
   resolve(...args: any[]): ExpressMiddleware {
     return (req: Request, res: Response, next: NextFunction) => {
       if (!req.isAuthenticated()) {
-        throw new HttpException(
-          { success: false, message: 'Unauthorized' },
+        throw new HttpException('Unauthorized',
           HttpStatus.UNAUTHORIZED,
         );
       }
