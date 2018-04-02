@@ -1,46 +1,28 @@
-version: '3.5'
-
+version: '2'
 services:
+  nginx:
+    container_name: nginx
+    image: 279123992655.dkr.ecr.us-west-2.amazonaws.com/backend_nginx:latest
+    build: ./nginx
+    restart: always
+    ports:
+      - 80:80
+    links:
+      - backend
+      - frontend
+
   frontend:
     container_name: frontend
+    image: 279123992655.dkr.ecr.us-west-2.amazonaws.com/backend_frontend:latest
     build: ./client
     restart: always
-    networks:
-      - webnet
-    volumes:
-      - ./client:/client
-    env_file:
-      - ./.env
     ports:
       - 8080:8080
 
   backend:
     container_name: backend
+    image: 279123992655.dkr.ecr.us-west-2.amazonaws.com/backend_backend:latest
     build: ./server
     restart: always
-    networks:
-      - webnet
-    volumes:
-      - ./server
     environment:
       - NODE_ENV=production
-
-  nginx:
-    container_name: nginx
-    build: ./nginx
-    networks:
-      - webnet
-    volumes:
-      - ./server/public:/public
-    env_file:
-      - ./.env
-    restart: always
-    depends_on:
-      - backend
-#      - frontend
-    ports:
-      - 80:80
-
-
-networks:
-  webnet:
