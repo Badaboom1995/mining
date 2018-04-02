@@ -1,10 +1,8 @@
 version: '2'
 services:
   nginx:
-    container_name: nginx
     image: 279123992655.dkr.ecr.us-west-2.amazonaws.com/backend_nginx:latest
     build: ./nginx
-    restart: always
     ports:
       - 80:80
     links:
@@ -12,17 +10,13 @@ services:
       - frontend
 
   frontend:
-    container_name: frontend
     image: 279123992655.dkr.ecr.us-west-2.amazonaws.com/backend_frontend:latest
     build: ./client
-    restart: always
     ports:
       - 8080:8080
 
   backend:
-    container_name: backend
     image: 279123992655.dkr.ecr.us-west-2.amazonaws.com/backend_backend:latest
     build: ./server
-    restart: always
     environment:
       - NODE_ENV=production
