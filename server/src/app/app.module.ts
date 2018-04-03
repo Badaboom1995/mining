@@ -12,6 +12,7 @@ import { MONGODB_URI, DB_CONFIG } from './config/environments.config';
 import { MinerModule } from "./modules/miner/miner.module";
 import { TransactionModule } from './modules/transaction/transaction.module';
 import { CalculatorModule } from './modules/calculator/calculator.module';
+import { MinerTypesModule } from "./modules/admin/modules/miner-types/miner-types.module";
 
 const adminRoutes: Routes = [
   {
@@ -25,6 +26,10 @@ const adminRoutes: Routes = [
       {
         path: '/users',
         module: UsersListModule,
+      },
+      {
+        path: '/miner-types',
+        module: MinerTypesModule,
       },
     ],
   },
@@ -40,6 +45,7 @@ const adminRoutes: Routes = [
     AdminModule,
     ShoppingRequestsModule,
     UsersListModule,
+    MinerTypesModule,
     MinerModule,
     TransactionModule,
     CalculatorModule

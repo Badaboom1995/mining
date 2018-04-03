@@ -19,9 +19,9 @@ export class CalculatorController {
 	 */
 	@Post('calculate')
 	public async calculate (
-		@Body('currency') currency : string, 
-		@Body('hash') hash : number, 
-		@Body('power') power : number, 
+		@Body('currency') currency : string,
+		@Body('hash') hash : number,
+		@Body('power') power : number,
 		@Body('price') price : number
 	) {
 		try {
@@ -32,5 +32,16 @@ export class CalculatorController {
 			return new APIError('OOps!', 200, error);
 		}
 	}
-
+  @Post('create')
+  public async createMinerType (
+    @Body() dto : s,
+  ) {
+    try {
+      const result = await this.calculatorService.createMiner(createMiner);
+      return new APISuccess(result);
+    } catch (error) {
+      console.log(error);
+      return new APIError('OOps!', 200, error);
+    }
+  }
 }
