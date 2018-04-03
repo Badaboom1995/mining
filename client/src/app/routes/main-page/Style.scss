@@ -5,6 +5,7 @@ $contentLeftPadding: calc(229px + 43px);
 .main-page {
 	min-width: 1280px;
 	min-height: 100vh;
+	background: #fff;
 	&__content {
 		display: flex;
 		flex-direction: column;
