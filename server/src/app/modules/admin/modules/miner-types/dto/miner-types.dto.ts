@@ -9,9 +9,11 @@ import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
 
 export class createMinerTypeDto {
   @MaxLength(30)
+  @IsNotEmpty()
   @ApiModelProperty()
   name: string;
   @ApiModelProperty()
+  @IsNotEmpty()
   @MaxLength(16)
   price: string;
   @ApiModelProperty()
@@ -26,4 +28,16 @@ export class createMinerTypeDto {
   @ApiModelProperty()
   @MaxLength(30)
   cpu: string;
+  @ApiModelProperty()
+  @IsNotEmpty()
+  @MaxLength(4)
+  hashRate: string;
+  @ApiModelProperty()
+  @IsNotEmpty()
+  @MaxLength(4)
+  solsRate: string;
+  @ApiModelProperty()
+  @IsNotEmpty()
+  @MaxLength(4)
+  power: string;
 }

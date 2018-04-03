@@ -24,7 +24,6 @@ export class MinerTypesController {
     }
   }
 
-  @Roles('admin')
   @Post('/create')
   async createTransaction(@Req() req, @Body() data: createMinerTypeDto) {
     try {

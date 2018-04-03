@@ -1,7 +1,7 @@
 import { Component, Inject } from '@nestjs/common';
-import { Repository } from "typeorm";
-import { InjectRepository } from "@nestjs/typeorm";
-import { MinerType } from "../../../../../entity/miner-type.entity";
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { MinerType } from '../../../../../entity/miner-type.entity';
 
 @Component()
 export class MinerTypesService {
@@ -21,7 +21,17 @@ export class MinerTypesService {
 
   public async createMinerType(dto) {
     try {
-      const { name, price, description, ram, gpu, cpu } = dto;
+      const {
+        name,
+        price,
+        description,
+        ram,
+        gpu,
+        cpu,
+        hashRate,
+        solsRate,
+        power,
+      } = dto;
       const miner = Object.assign(new MinerType(), {
         name,
         price,
@@ -29,6 +39,9 @@ export class MinerTypesService {
         ram,
         gpu,
         cpu,
+        hashRate,
+        solsRate,
+        power,
       });
       return await this.minerTypeRepository.save(miner);
     } catch (e) {

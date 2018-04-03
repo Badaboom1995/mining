@@ -1,19 +1,21 @@
 import {
   IsNotEmpty,
   MinLength,
-  MaxLength,
+  MaxLength, IsEnum,
 } from 'class-validator';
 
-import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
+import { ApiModelProperty } from '@nestjs/swagger';
 
-
-export class ChangePasswordDto {
+export class CalcProfitabilityDto {
   @IsNotEmpty()
+  @IsEnum(['162-etc-ethash', '151-eth-ethash', '166-zec-equihash', '214-btg-equihash'])
   @ApiModelProperty()
-  oldPassword: string;
+  currency: string;
+  @MaxLength(5)
+  @ApiModelProperty()
+  hash: string;
   @IsNotEmpty()
-  @MinLength(8)
-  @MaxLength(35)
+  @MaxLength(4)
   @ApiModelProperty()
-  newPassword: string;
+  power: string;
 }

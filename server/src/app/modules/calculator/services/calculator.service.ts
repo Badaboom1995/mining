@@ -1,23 +1,13 @@
 import { Component } from '@nestjs/common';
 import axios from 'axios';
-
 import * as Moment from 'moment';
 import { extendMoment } from 'moment-range';
-import { MinerType } from '../../../entity/miner-type.entity';
-import { APISuccess } from '../../../helpers/APISuccess';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Miner } from '../../../entity/miner.entity';
-import { MinerUser } from '../../../entity/miner-user.entity';
 
 const moment = extendMoment(Moment);
 
 @Component()
 export class CalculatorService {
-  constructor(
-    @InjectRepository(MinerType)
-    public minerTypeRepository: Repository<MinerType>,
-  ) {}
+  constructor() {}
   private priceUAH = 0;
 
   /**
@@ -35,23 +25,9 @@ export class CalculatorService {
         return currency.buy;
       })
       .catch(() => {
-        console.log('Error, cannot fetch API');
+        return Promise.reject('Error, cannot fetch API')
       });
   }
-  /**
-   * Currencies for calculations
-   * @static
-   * @memberof CalculatorService
-   */
-  public static currencies = {
-    zcash: {
-      code: '166-zec-equihash',
-    },
-    eth: {
-      code: '151-eth-ethash',
-    },
-  };
-
   /**
    * Get electricity per day buy build power
    */
@@ -94,17 +70,11 @@ export class CalculatorService {
 
   /**
    * Calculate revenue and other stuff
-   * @param {string} currency
-   * @param {number} hash
-   * @param {number} power
-   * @memberof CalculatorService
+   * @param data<{currency, hash, power, price}>
+   * @returns {Promise<{priceUAH : number; electricityPerDay : number; monthesToPayback : string}>}
    */
-  public async calculate(
-    currency: string,
-    hash: number,
-    power: number,
-    price: number,
-  ) {
+  public async calculate(data) {
+    const { currency, hash, power, price } = data;
     const { code } = CalculatorService[currency];
     try {
       const { revenue, profit } = (await axios.get(
@@ -124,7 +94,7 @@ export class CalculatorService {
         monthesToPayback,
       };
     } catch (error) {
-      console.log(error);
+      return Promise.reject(error)
     }
   }
 }

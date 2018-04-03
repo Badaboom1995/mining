@@ -38,5 +38,20 @@ export class MinerType {
    */
   @Column()
   public cpu: string;
+  /**
+   * Miner hashRate
+   */
+  @Column()
+  public hashRate: string;
+  /**
+   * Miner solsRate
+   */
+  @Column()
+  public solsRate: string;
+  /**
+   * Power
+   */
+  @Column()
+  public power: string;
 }
 
