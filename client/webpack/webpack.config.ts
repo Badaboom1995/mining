@@ -243,7 +243,8 @@ export class WebpackConfig {
 				minifyJS: true,
 				minifyCSS: true,
 				minifyURLs: true,
-			}
+			},
+			defer: ['main','vendor']
 		}),
 		// Global env variables ( to use it with ts declare it in d.ts  )
 		new webpack.DefinePlugin({
