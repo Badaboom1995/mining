@@ -1,19 +1,13 @@
 version: '2'
-services:
-  nginx:
-    image: 279123992655.dkr.ecr.us-west-2.amazonaws.com/backend_nginx:latest
-    build: ./nginx
-    ports:
-      - 80:80
-    links:
-      - backend
-      - frontend
 
+services:
   frontend:
     image: 279123992655.dkr.ecr.us-west-2.amazonaws.com/backend_frontend:latest
     build: ./client
     ports:
-      - 8080:8080
+      - 80:80
+    links:
+      - backend
 
   backend:
     image: 279123992655.dkr.ecr.us-west-2.amazonaws.com/backend_backend:latest

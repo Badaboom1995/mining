@@ -11,7 +11,8 @@ COPY . /frontend
 
 RUN npm run build
 
-FROM nginx
+FROM wernight/alpine-nginx-pagespeed
 
 COPY --from=node /frontend/dist/ /usr/share/nginx/html
 COPY ./nginx.conf /etc/nginx/nginx.conf
+CMD ["nginx", "-g", "daemon off;"]
