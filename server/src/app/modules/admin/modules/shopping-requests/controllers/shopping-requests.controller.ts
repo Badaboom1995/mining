@@ -44,7 +44,7 @@ export class ShoppingRequestsController {
       await this.shoppingRequestsService.createShoppingRequests(data);
       return new APISuccess();
     } catch (err) {
-      return new APIError('Ti pidor', err);
+      return new APIError(err);
     }
   }
 }
