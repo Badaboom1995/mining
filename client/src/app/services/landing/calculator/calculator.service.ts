@@ -50,7 +50,14 @@ export class CalculatorService  {
 	 * Selected result
 	 */
 	@observable
-	public selectedResult;
+	public selectedResult = {
+		daysToPayback: 0,
+		totalProfit: {
+			day: 0,
+			month: 0,
+			year: 0
+		}
+	};
 
 	/**
 	 * Selected miner type
