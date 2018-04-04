@@ -4,6 +4,8 @@ import { Miner } from "../../../entity/miner.entity";
 import {Repository} from 'typeorm';
 import { MinerUser } from "../../../entity/miner-user.entity";
 import { User } from "../../../entity/user.entity";
+
+
 @Component()
 export class MinerService {
     public constructor(

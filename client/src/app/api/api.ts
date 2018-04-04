@@ -1,6 +1,7 @@
 import { AccountApi } from './account';
 import { TransactionApi } from './transaction';
 import { CalculatorApi } from './calculator';
+import { OrderApi } from './order';
 
 
 
@@ -22,6 +23,10 @@ export class Api {
 	 * @memberof Api
 	 */
 	public calculator = new CalculatorApi();
+	/**
+	 * Order api calls
+	 */
+	public order = new OrderApi();
 }
 
 
