@@ -1,6 +1,7 @@
 import { AccountApi } from './account';
 import { TransactionApi } from './transaction';
 import { CalculatorApi } from './calculator';
+import { MinerApi } from './miner';
 
 
 
@@ -22,6 +23,11 @@ export class Api {
 	 * @memberof Api
 	 */
 	public calculator = new CalculatorApi();
+
+	/**
+	 * Miner api calls
+	 */
+	public miner = new MinerApi();
 }
 
 

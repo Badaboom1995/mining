@@ -9,28 +9,13 @@ import { api } from '../../../api/api';
 
 
 export class CalculatorService  {
-
+	
 	/**
 	 * Miner types list
 	 * @memberof CalculatorService
 	 */
 	@observable
-	public minerTypes = [
-		new MinerType({
-			name: 'Type 1',
-			displayName: 'Майнер 1',
-			power: 240,
-			price: 2000,
-			hash: 230
-		}),
-		new MinerType({
-			name: 'Type 2',
-			displayName: 'Майнер 2',
-			power: 190,
-			price: 2000,
-			hash: 400
-		})
-	];
+	public minerTypes = [];
 
 	/**
 	 * Tariff list
@@ -56,32 +41,17 @@ export class CalculatorService  {
 		}),
 	];
 
-
 	/**
-	 * Currency 
-	 * 
-	 * @memberof CalculatorService
+	 * Calculation results
 	 */
 	@observable
-	public currencies = [
-		new CalculatorCurrency({
-			name: 'eth',
-			displayName: 'ETHEREUM',
-			description: 'Ethereum Classic — блокчейн-криптоплатформа з відкритим вихідним кодом, для розробки децентралізованих додатків на базі «розумних контрактів'
-		}),
-		new CalculatorCurrency({
-			name: 'zcash',
-			displayName: 'ZCASH',
-			description: 'Децентрализованная криптовалюта с открытым исходным кодом, обеспечивающая высокий уровень конфиденциальности.'
-		})
-	];
-
+	public results = [];
 	/**
-	 * Selected currency
-	 * @memberof CalculatorService
+	 * Selected result
 	 */
 	@observable
-	public selectedCurrency : CalculatorCurrency = this.currencies[0];
+	public selectedResult;
+
 	/**
 	 * Selected miner type
 	 * @type {MinerType}
@@ -98,22 +68,14 @@ export class CalculatorService  {
 	@observable
 	public selectedTariff : EnergyTariff = this.tariffs[0];
 	/**
-	 * Select currency
-	 * @param {CalculatorCurrency} currency 
-	 * @memberof CalculatorService
-	 */
-	@action.bound
-	public selectCurrency (currency : CalculatorCurrency) {
-		this.selectedCurrency = currency;
-	}
-	/**
 	 * Select miner type for calculations
 	 * @param {MinerType} minerType 
 	 * @memberof CalculatorService
 	 */
 	@action.bound
-	public selectdMinerType ( minerType : MinerType) {
+	public selectMinerType ( minerType : MinerType) {
 		this.selectedMinerType = minerType;
+		this.calculate();
 	}
 	/**
 	 * Selected tariff for calculations
@@ -132,13 +94,32 @@ export class CalculatorService  {
 	 */
 	@action.bound
 	public async calculate() {
-		const { power, hash, price } = this.selectedMinerType;
+		const { id } = this.selectedMinerType;
 		try {
-			const response = await api.calculator.calculate(this.selectCurrency.name, hash, power, price);
-		} catch (error) {
-
-		}
+			const response = await api.calculator.calculate(id);
+			this.results = response.content.data;
+			this.selectedResult = this.results[0];
+		} catch (error) {  }
 	}
+	/**
+	 * Get miner types
+	 */
+	@action.bound
+	public async getTypes() {
+		try {
+			const response = await api.miner.getTypes();
+			this.minerTypes = response.content;
+		} catch(error) { }
+	}
+
+	/**
+	 * Select result
+	 */
+	@action.bound
+	public selectResult(result) {
+		this.selectedResult = result;
+	}
+
 }
 
 

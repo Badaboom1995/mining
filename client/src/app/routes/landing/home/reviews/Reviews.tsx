@@ -46,9 +46,9 @@ export class Reviews extends React.Component<IReviewsProps> {
 						nextArrow={<SliderArrow dir='next' />}
 						prevArrow={<SliderArrow dir='prev' />}
 					>
-						{this.reviews.map(item => {
+						{this.reviews.map((item, index) => {
 							return (
-								<div className="reviews__list-item">
+								<div key={index} className="reviews__list-item">
 									<div className="reviews__item-photo"><img src={item.photo || '#'} /></div>
 									<p className="reviews__item-text">{item.content}</p>
 									<span className="reviews__item-author">{item.name}</span>

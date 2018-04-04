@@ -4,47 +4,42 @@ import { observable } from 'mobx';
 
 
 export class MinerType {
-	/**
-	 * Mienr name
-	 * @type {string}
-	 * @memberof MinerType
-	 */
 	@observable
-	public name : string = '';
-	/**
-	 * Mienr displayName
-	 * @type {string}
-	 * @memberof MinerType
-	 */
+	public cpu: string;
+
 	@observable
-	public displayName : string = '';
-	/**
-	 * Miner power
-	 * @type {number}
-	 * @memberof MinerType
-	 */
+	public description: string;
+
 	@observable
-	public power : number = 0;
-	/**
-	 * Hash power
-	 * @type {number}
-	 * @memberof MinerType
-	 */
+	public gpu: string;
+
 	@observable
-	public hash : number = 0;
-	/**
-	 * Price 
-	 * @type {number}
-	 * @memberof MinerType
-	 */
+	public hashRate: string;
+
 	@observable
-	public price : number;
+	public id: string;
+
+	@observable
+	public name: string;
+
+	@observable
+	public power: string;
+
+	@observable
+	public price: string;
+
+	@observable
+	public ram: string;
+
+	@observable
+	public solsRate: string;
+	
 	/**
 	 * Initialize with data
 	 * @param {CalculatorCurrency} payload 
 	 * @memberof CalculatorCurrency
 	 */
-	public constructor(payload : MinerType) {
+	public constructor(payload: MinerType) {
 		Object.assign(this, payload);
 	}
 }

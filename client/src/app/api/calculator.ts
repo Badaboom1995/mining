@@ -9,5 +9,5 @@ export class CalculatorApi extends ApiModule {
 	/**
 	 * Calculate revenue request
 	 */
-	public calculate = (currency : string,hash : number, power : number, price : number) => this.request('/calculator/calculate', { currency, hash, power, price });
+	public calculate = (id : string) => this.request('/calculator/calculate', { id });
 }

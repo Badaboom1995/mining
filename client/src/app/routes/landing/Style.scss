@@ -299,8 +299,12 @@
     color: #fff;
     font-weight: lighter;
   }
+  
   &__block {
-    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
     padding: 30px;
     padding-left: 65px;
     box-sizing: border-box;
@@ -390,6 +394,7 @@
       box-shadow: 0 1px 5px 1px #45ADAA;
     }
   }
+  
   &__tabs-content {
     padding-top: 7px;
     width: 225px;
@@ -412,6 +417,12 @@
     margin-left: -13px;
     margin-top: -10px;
     border-spacing: 0;
+    tr {
+      cursor: pointer;
+    }
+    &-selected-result {
+      box-shadow: 0 1px 5px 1px #45ADAA;
+    }
   }
   &__table-row {
     padding: 15px;
@@ -448,15 +459,15 @@
     top: 48%;
     background-color: #fff;
   }
-  &::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 125px;
-    height: 555px;
-    width: 1px;
-    background-color: #fff;
-  }
+  // &::after {
+  //   content: '';
+  //   position: absolute;
+  //   left: 50%;
+  //   top: 125px;
+  //   height: 555px;
+  //   width: 1px;
+  //   background-color: #fff;
+  // }
 }
 
 .benefits {

@@ -10,9 +10,12 @@ export class Calculator extends React.Component<ICalculatorProps> {
 	/**
 	 * Initial calculation
 	 */
-	public componentWillMount() {
+	public async componentWillMount() {
 		const { miningCalculator } = this.props;
-		miningCalculator.calculate();
+		await miningCalculator.getTypes();
+		miningCalculator.selectMinerType(miningCalculator.minerTypes[0]);
+		console.log(miningCalculator.selectedMinerType)
+		await miningCalculator.calculate();
 	}
 	/**
 	 * render
@@ -33,12 +36,12 @@ export class Calculator extends React.Component<ICalculatorProps> {
 								 { active: minerType == miningCalculator.selectedMinerType }
 							);
 							return (
-								<span onClick={miningCalculator.selectdMinerType.bind(null, minerType)} key={minerType.name} className={className}>{minerType.displayName}</span>
+								<span onClick={miningCalculator.selectMinerType.bind(null, minerType)} key={minerType.name} className={className}>{minerType.name}</span>
 							);
 						})}
 					</div>
 				</div>
-				<div className='calculator__block'>
+				{/* <div className='calculator__block'>
 					<h3 className='calculator__block-title'>ТАРИФ НА ЕЛЕКТРОЕНЕРГІЮ</h3>
 					<div className='calculator__block-controls--small'>
 						{miningCalculator.tariffs.map(tariff => {
@@ -54,8 +57,8 @@ export class Calculator extends React.Component<ICalculatorProps> {
 						})}
 						
 					</div>
-				</div>
-				<div className='calculator__block'>
+				</div> */}
+				{/* <div className='calculator__block'>
 					<h3 className='calculator__block-title'>ОБЕРІТЬ МОНЕТУ ЯКУ ВИ БУДЕТЕ МАЙНИТИ</h3>
 					<div className='calculator__block-controls'>
 						<ul className="calculator__tabs">
@@ -76,23 +79,33 @@ export class Calculator extends React.Component<ICalculatorProps> {
                             </li>
 						</ul>
 					</div>
-				</div>
+				</div> */}
+
 				<div className='calculator__block'>
 					<h3 className='calculator__block-title'>ВАШ ПРИБУТОК </h3>
 					<div className='calculator__block-controls--small'>
 						<table className="calculator__table">
 							<tbody>
 								<tr>
+									<th className="calculator__table-head">Валюта</th>
 									<th className="calculator__table-head">На добу</th>
 									<th className="calculator__table-head">В мiсяц</th>
 									<th className="calculator__table-head">В рiк</th>
 								</tr>
-								<tr >
-									<td className="calculator__table-row">3375 гривень</td>
-									<td className="calculator__table-row">21000 гривень</td>
-									<td className="calculator__table-row">90000 гривень</td>
-								</tr>
-								<tr>
+								{miningCalculator.results.map((result, index) => {
+									const perMonth = (result.profitPerDay * 30).toFixed(0);
+									const perYear = (result.profitPerDay * 365).toFixed(0);
+									const className = classNames({ 'calculator__table-selected-result': result == miningCalculator.selectedResult});
+									return ( 
+										<tr className={className} onClick={miningCalculator.selectResult.bind(null, result)} key={index} >
+											<td className="calculator__table-row">{result.currency.toUpperCase()}</td>
+											<td className="calculator__table-row">{result.profitPerDay.toFixed(0)} гривень</td>
+											<td className="calculator__table-row">{perMonth} гривень</td>
+											<td className="calculator__table-row">{perYear} гривень</td>
+										</tr>
+									);
+								})}
+								{/* <tr>
 									<td className="calculator__table-row">1775 гривень</td>
 									<td className="calculator__table-row">6000 гривень</td>
 									<td className="calculator__table-row">20000 гривень</td>
@@ -107,13 +120,14 @@ export class Calculator extends React.Component<ICalculatorProps> {
 									<td className="calculator__table-row">9000 гривень</td>
 									<td className="calculator__table-row">190000 гривень</td>
 								</tr>
-							</tbody>
+								*/}
+							</tbody> 
 						</table>
 					</div>
 				</div>
 				<div className="calculator__motivate-text">
-					<p>ВАША УСТАНОВКА ОКУПИТЬСЯ ЧЕРЕЗ <span>~9 МІСЯЦІВ </span></p>
-					<p>І БУДЕ ДАЛІ ПРИНОСИТИ <span>~300$</span> ЧИСТОГО ПРИБУТКУ КОЖЕН МІСЯЦЬ.</p>
+					<p>ОКУПАЕМОСТЬ УСТАНОВКИ В МЕСЯЦАХ: <span>~{Math.round(miningCalculator.selectedResult.daysToPayback / 30)}</span></p>
+					<p>І БУДЕ ДАЛІ ПРИНОСИТИ <span>~{miningCalculator.selectedResult.totalProfit.month} UAH</span> ЧИСТОГО ПРИБУТКУ КОЖЕН МІСЯЦЬ.</p>
 				</div>
 			</div>
 		);
