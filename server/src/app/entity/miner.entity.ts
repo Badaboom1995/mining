@@ -2,6 +2,7 @@ import { Column,CreateDateColumn, Entity, ManyToOne, JoinColumn, ObjectIdColumn,
 import { MinerType } from "./miner-type.entity";
 import { MinerUser } from "./miner-user.entity";
 import { BuyOrder } from './buy-order.entity';
+import { mergeByKeys } from "../../utils/merge-by-keys";
 
 
 @Entity('miners')
@@ -20,59 +21,67 @@ export class Miner {
    * Db id
    */
   @ObjectIdColumn()
-  public id : string;
+  public id? : string;
   /**
    * Miner hash address for balance check with transactions
    */
   @Column()
-  public address : string;
+  public address? : string;
   /**
    * Currency mining by miner ( used to define which api use to check transactions )
    */
   @Column({
     enum: Miner.currencyTypes
   })
-  public currency : string;
+  public currency? : string;
   /**
    * Miner type
    */
   @OneToOne(type => MinerType, minerType => minerType.id)
   @JoinColumn()
-  public type : MinerType;
+  public type? : MinerType;
   /**
    * Last checked transactions id
    */
   @Column()
-  public lastTransactionId : string;
+  public lastTransactionId? : string;
   /**
    * Entity creation date
    */
   @CreateDateColumn()
-  public createdAt : Date;
+  public createdAt? : Date;
   /**
    * Miner current status to determine is miner rising money for start or online and mine currency
    */
   @Column({
     enum: Miner.statusTypes
   })
-  public status : string;
+  public status ?: string;
   /**
    * Amount of rised money for miner buy
    */
   @Column()
-  public payedAmount : number;
+  public payedAmount? : number;
   /**
    * Users list payed for this miner
    * @type {any[]}
    */
   @OneToMany(type => MinerUser, user => user.id)
   @JoinColumn()
-  public users : MinerUser[];
+  public users? : MinerUser[];
   /**
    * Miner buy order if it was fully buyed
    */
   @OneToOne(type => BuyOrder)
   @JoinColumn()
   public order? : BuyOrder;
+
+  /**
+   * creates buy order from payload
+   */
+	public static create (source : Miner) : Miner {
+		const order = new BuyOrder();
+		return mergeByKeys(order, source);
+	}
 }
 

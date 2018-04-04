@@ -11,6 +11,7 @@ import { About } from './landing/about/About';
 import { Questions } from './landing/questions/Questions';
 import { Referal } from './landing/referal/Referal';
 import { Reviews } from './landing/reviews/Reviews';
+import { Admin } from './admin/admin.component';
 
 @withRouter
 @inject('account')
@@ -28,7 +29,7 @@ export class Root extends React.Component<IRootProps> {
 		return (
 			<div>
 				<Switch>
-					{/* Put into landing routing */}
+					<Route component={Admin} path='/admin' />
 					<Route component={Requests} path='/requests' />
 					<Route component={Uikit} path='/uikit' />
 					<Route component={Auth} path='/lk/auth' />

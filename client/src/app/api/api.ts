@@ -2,8 +2,7 @@ import { AccountApi } from './account';
 import { TransactionApi } from './transaction';
 import { CalculatorApi } from './calculator';
 import { MinerApi } from './miner';
-
-
+import { OrderApi } from './order';
 
 
 
@@ -28,8 +27,10 @@ export class Api {
 	 * Miner api calls
 	 */
 	public miner = new MinerApi();
+	/**
+	 * Order api calls
+	 */
+	public order = new OrderApi();
 }
-
-
 
 export const api = new Api();
