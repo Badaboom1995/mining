@@ -2,9 +2,9 @@ import {
   Module,
 } from '@nestjs/common';
 import { TypeOrmModule } from "@nestjs/typeorm";
+import { MinerType } from "../../../../entity/miner-type.entity";
 import { MinerTypesController } from './controllers';
 import { MinerTypesService } from './services';
-import { MinerType } from "../../../../entity/miner-type.entity";
 
 @Module({
   imports: [

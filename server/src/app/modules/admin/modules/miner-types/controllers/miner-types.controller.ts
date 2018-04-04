@@ -13,11 +13,10 @@ import { RolesGuard } from '../../../../../services/guards';
 export class MinerTypesController {
   constructor(private readonly miningTypeService: MinerTypesService) {}
 
-  @Roles('admin')
   @Post('/list')
-  async findAllMinerTypes(@Req() req) {
+  async findAll(@Req() req) {
     try {
-      const data = await this.miningTypeService.findAllTypes();
+      const data = await this.miningTypeService.findAll();
       return new APISuccess(data);
     } catch (err) {
       return new APIError(err);
@@ -25,9 +24,9 @@ export class MinerTypesController {
   }
 
   @Post('/create')
-  async createTransaction(@Req() req, @Body() data: createMinerTypeDto) {
+  async create(@Req() req, @Body() data: createMinerTypeDto) {
     try {
-      await this.miningTypeService.createMinerType(data);
+      await this.miningTypeService.create(data);
       return new APISuccess();
     } catch (err) {
       return new APIError(err);

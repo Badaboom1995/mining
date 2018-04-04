@@ -9,17 +9,25 @@ export class MinerTypesService {
     @InjectRepository(MinerType)
     public minerTypeRepository: Repository<MinerType>,
   ) {}
+  async findById(id) {
+    try {
+      const miner = await this.minerTypeRepository.findOneById(id);
+      return Promise.resolve(miner);
+    } catch (err) {
+      return Promise.reject("Can't get miner info");
+    }
+  }
 
-  async findAllTypes() {
+  async findAll() {
     try {
       const miners = await this.minerTypeRepository.find();
       return Promise.resolve(miners);
     } catch (err) {
-      return Promise.reject("Can't get shoppingRequests list");
+      return Promise.reject("Can't get miner-types list");
     }
   }
 
-  public async createMinerType(dto) {
+  public async create(dto) {
     try {
       const {
         name,

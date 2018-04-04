@@ -1,7 +1,7 @@
 import {
   IsNotEmpty,
-  MinLength,
-  MaxLength, IsEnum,
+  IsEnum,
+  IsMongoId,
 } from 'class-validator';
 
 import { ApiModelProperty } from '@nestjs/swagger';
@@ -11,11 +11,7 @@ export class CalcProfitabilityDto {
   @IsEnum(['162-etc-ethash', '151-eth-ethash', '166-zec-equihash', '214-btg-equihash'])
   @ApiModelProperty()
   currency: string;
-  @MaxLength(5)
+  @IsMongoId()
   @ApiModelProperty()
-  hash: string;
-  @IsNotEmpty()
-  @MaxLength(4)
-  @ApiModelProperty()
-  power: string;
+  id: string;
 }
