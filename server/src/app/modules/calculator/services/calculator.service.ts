@@ -32,7 +32,12 @@ export class CalculatorService {
    * @param kwtPerMount
    * @returns {any[]}
    */
-  private costElectricityPerYear(date, settings, kwtPerMount) {
+  private getElectricityCostPerYear(settings, kwtPerMount) {
+    const date = {
+      compareDate: moment(),
+      startDateMax: moment('01/05/2018', 'DD/MM/YYYY'),
+      endDateMax: moment('30/09/2018', 'DD/MM/YYYY'),
+    };
     return Array(12)
       .fill(0)
       .map((_, i) => {
@@ -56,7 +61,7 @@ export class CalculatorService {
    * @param power
    * @returns {number}
    */
-  private getElectricityPerDay(power) {
+  private getElectricityCostPerDay(power) {
     const settings = {
       kwtCostLow: 0.9,
       kwtCostMax: 1.68,
@@ -64,13 +69,11 @@ export class CalculatorService {
       lowKwt: 100,
       maxKwt: 3000,
     };
-    const date = {
-      compareDate: moment(),
-      startDateMax: moment('01/05/2018', 'DD/MM/YYYY'),
-      endDateMax: moment('30/09/2018', 'DD/MM/YYYY'),
-    };
     const kwtPerMount = settings.hoursAtMonth * power / 1000;
-    const costElectricityPerYear = this.costElectricityPerYear(date, settings, kwtPerMount);
+    const costElectricityPerYear = this.getElectricityCostPerYear(
+      settings,
+      kwtPerMount,
+    );
     const costSum = costElectricityPerYear.reduce(
       (previousValue, currentValue) => previousValue + currentValue,
     );
@@ -89,6 +92,7 @@ export class CalculatorService {
       const { revenue, profit } = (await axios.get(
         `http://whattomine.com/coins/${currency}.json?hr=${hashRate}&p=${power}&fee=0.0&cost=0.1&`,
       )).data;
+      console.log(`http://whattomine.com/coins/${currency}.json?hr=${hashRate}&p=${power}&fee=0.0&cost=0.1&`);
       return {
         revenue: revenue.replace('$', ''),
         profit: profit.replace('$', ''),
@@ -103,27 +107,39 @@ export class CalculatorService {
    * @param currency<String>
    * @returns {Promise<any>}
    */
-  public async calculate(data, currency) {
+  public async calculate(data) {
     try {
-      const { hashRate, power, price: minerPrice } = data;
-      const { revenue, profit } = await this.getRevenue(
-        currency,
-        hashRate,
-        power,
-      );
-      const priceUAHToUSD: number = await this.getPriceUAHToUSD();
-      const electricityPerDay: number = this.getElectricityPerDay(power);
-      const monthsToPayback = (minerPrice / priceUAHToUSD / profit).toFixed(0);
-      const totalRevenue = {
-        day: revenue,
-        month: revenue * 31,
-        year: revenue * 31 * 12,
+      const currenciesCodes = {
+        ETC: '162-etc-ethash',
+        ETH: '151-eth-ethash',
+        ZEC: '166-zec-equihash',
+        BTG: '214-btg-equihash',
       };
+      const { hashRate, solsRate, power, price: minerPrice } = data;
+      const priceUAHToUSD = await this.getPriceUAHToUSD();
+      const electricityPerDay = this.getElectricityCostPerDay(power);
+      const revenueList = Object.keys(currenciesCodes).map(async currency => {
+        const rate = currency !== 'ZEC' && currency !== 'BTG' ? hashRate : solsRate;
+        const code = currenciesCodes[currency];
+        const { revenue } = await this.getRevenue(code, rate, power);
+        const profit = ( revenue * priceUAHToUSD ) - electricityPerDay;
+        const daysToPayback = (minerPrice / profit).toFixed(0);
+        const totalProfit = {
+          day: Number(profit).toFixed(2),
+          month: (profit * 31).toFixed(2),
+          year: (profit * 31 * 12).toFixed(2),
+        };
+        return {
+          profitPerDay: profit,
+          currency,
+          daysToPayback,
+          totalProfit
+        };
+      });
       return {
-        priceUAHToUSD,
+        minerPrice,
         electricityPerDay,
-        monthsToPayback,
-        totalRevenue,
+        data: await Promise.all(revenueList)
       };
     } catch (err) {
       return Promise.reject(err);

@@ -11,17 +11,17 @@ export class CalculatorController {
     private minerTypeService: MinerTypesService,
   ) {}
   /**
-   * Calculate profit by minerInfo and currency type
+   * Calculate profit by miner id and crypto currency type
    */
   @Post('calculate')
   public async calculate(@Body() data: CalcProfitabilityDto) {
     try {
-      const { id, currency } = data;
+      const { id } = data;
       const minerInfo = await this.minerTypeService.findById(id);
-      const result = await this.calculatorService.calculate(minerInfo, currency);
+      const result = await this.calculatorService.calculate(minerInfo);
       return new APISuccess(result);
     } catch (error) {
-      return new APIError('Oops!', 200, error);
+      return new APIError(error);
     }
   }
 }
