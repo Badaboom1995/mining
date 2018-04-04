@@ -2,6 +2,7 @@ import { Component } from '@nestjs/common';
 import { BuyOrder } from '../../../../../entity/buy-order.entity';
 import { Repository, FindOneOptions } from 'typeorm';
 import { Miner } from '../../../../../entity/miner.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 
 
@@ -14,7 +15,7 @@ export class OrderService {
 	 * @memberof OrderService
 	 */
 	public constructor(
-		private buyOrderRepository : Repository<BuyOrder>
+		@InjectRepository(BuyOrder) private buyOrderRepository : Repository<BuyOrder>
 	) { }
 	/**
 	 * Creates order in db
