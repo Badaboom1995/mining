@@ -3,6 +3,8 @@ import { OrderService } from './../services/order.service';
 import { BuyOrder } from '../../../../../entity/buy-order.entity';
 import { APIError } from '../../../../../helpers/index';
 import { APISuccess } from '../../../../../helpers/APISuccess';
+import { MinerService } from '../../../../miner/services/miner.service';
+import { Miner } from '../../../../../entity/miner.entity';
 
 @Controller('buy-order')
 export class OrderController  {
@@ -10,7 +12,7 @@ export class OrderController  {
 	 * Initialize controller
 	 */
 	public constructor(
-		private orderService : OrderService
+		private orderService : OrderService,
 	) { }
 
 	/**
@@ -30,12 +32,13 @@ export class OrderController  {
 	 * @param {string} id 
 	 * @memberof OrderController
 	 */
-	@Post('/list/:userId')
-	public async list(@Param('userId') userID : string) {
-		const id = !userID || userID == 'undefined' ? '' : userID;
+	@Post('/list')
+	public async list(@Body('userId') userId : string) {
+		const id = !userId || userId == 'undefined' ? '' : userId;
+		
 		try {
-			const list = await ( id ? this.orderService.getUserOrders(id) : this.orderService.getAll());
-			return new APISuccess(list);
+			// const list = await ( id ? this.orderService.getUserOrders(id) : this.orderService.getAll());
+			// return new APISuccess(list);
 		} catch (error) {
 			return new APIError('Error while getting orders', 200, error);
 		}

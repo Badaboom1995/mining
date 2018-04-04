@@ -7,6 +7,7 @@ import { validationService } from './validation/validation.service';
 import { ProfileService, profileService } from './profile/profile.service';
 import { walletService } from './wallet/wallet.service';
 import { calculatorService } from './landing/calculator/calculator.service';
+import { adminService } from './admin/admin.service';
 
 
 
@@ -16,6 +17,7 @@ export const withRouter : any = require('react-router').withRouter;
 
 
 export const services = {
+	admin: adminService,
 	miningCalculator: calculatorService,
 	wallet: walletService,
 	profile: profileService,

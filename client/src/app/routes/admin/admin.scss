@@ -1,0 +1,33 @@
+@import './orders/orders.scss';
+
+.admin {
+	min-width: 100vw;
+	min-height: 100vh;
+	background: #fff;
+}	
+
+.admin-header {
+	@extend .flex-row;	
+	height: 80px;
+	margin-bottom: 50px;
+	padding: 0 40px;
+	font-size: 18px;
+	font-weight: 300;
+	color: #fff;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+	background-image: linear-gradient(-50deg, #67ebd4 0%, #1a88c1 100%);
+	&__logo {
+	}
+	&__list {
+		@extend .flex-row;
+		margin-right: auto;		
+	}
+	&__link {
+		margin-right: 30px;
+		font-weight: 500;
+		&--active {
+			text-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+			color: $turquoise;
+		}
+	}
+}
