@@ -15,9 +15,9 @@ export class Menu extends React.Component<IMenuProps> {
 		{ name: 'Главная', to: '/lk' },
 		{ name: 'Инвестиции', to: '/lk/investment' },
 		{ name: 'Моя команда', to: '/lk/my-team' },
-		{ name: 'Карьера', to: '/lk/career' },
+		// { name: 'Карьера', to: '/lk/career' },
 		{ name: 'Кошелек', to: '/lk/wallet' },
-		{ name: 'Документы', to: '/lk/documents' },
+		// { name: 'Документы', to: '/lk/documents' },
 		{ name: 'Настройки', to: '/lk/account' }
 	];
 	/**

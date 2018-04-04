@@ -1,6 +1,7 @@
 import { Column,CreateDateColumn, Entity, ManyToOne, JoinColumn, ObjectIdColumn, OneToMany, OneToOne } from "typeorm";
 import { MinerType } from "./miner-type.entity";
 import { MinerUser } from "./miner-user.entity";
+import { BuyOrder } from './buy-order.entity';
 
 
 @Entity('miners')
@@ -67,5 +68,11 @@ export class Miner {
   @OneToMany(type => MinerUser, user => user.id)
   @JoinColumn()
   public users : MinerUser[];
+  /**
+   * Miner buy order if it was fully buyed
+   */
+  @OneToOne(type => BuyOrder)
+  @JoinColumn()
+  public order? : BuyOrder;
 }
 
